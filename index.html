@@ -703,8 +703,6 @@
       height: 3px;
       background: rgba(200,169,122,.1);
       border-radius: 3px;
-      cursor: ew-resize;
-      user-select: none;
       overflow: visible;
     }
     .prog-bar-outer:hover .prog-bar-fill { filter: brightness(1.2); }
@@ -1318,7 +1316,7 @@
 
   <!-- WIP BANNER -->
   <div id="wip-banner">
-    <p><strong>Proyecto en desarrollo</strong> — Este sitio documenta el progreso real de Lumina. Todo está sujeto a cambios continuos. Última actualización: marzo 2026.</p>
+    <p><strong>Página privada · Solo para Fernanda</strong> — Este sitio documenta el progreso real del proyecto Lumina. Todo está sujeto a cambios continuos — el nicho, la dirección, el nombre y la estrategia aún están siendo definidos. Última actualización: marzo 2026.</p>
     <button onclick="document.getElementById('wip-banner').style.display='none'">Cerrar</button>
   </div>
 
@@ -1448,7 +1446,7 @@
     </div>
 
     <div class="prog-master-wrap">
-      <span class="prog-master-label">General</span>
+      <span class="prog-master-label">Progreso de Creación</span>
       <div class="prog-master-outer">
         <div class="prog-master-fill" id="masterFill"></div>
       </div>
@@ -1463,7 +1461,7 @@
     <div class="h-sticky" id="hSticky">
       <div class="h-header">
         <span class="s-label">Portfolio</span>
-        <h2 class="s-title" style="color:var(--cream)">Trabajo <em>Selecto</em></h2>
+        <h2 class="s-title" style="color:var(--cream)"><em>Gallery</em></h2>
       </div>
       <div class="h-counter" id="hCounter">01 / 08</div>
       <div class="h-track" id="hTrack">
@@ -1578,7 +1576,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="f-logo">LUMINA</div>
-    <div class="f-copy">&copy; 2026 Lumina — Proyecto en construcción.</div>
+    <div class="f-copy">&copy; 2026 Lumina — Proyecto en construcción · Página privada · Pendiente por definir: nicho final, estrategia de redes, monetización y dirección de marca.</div>
     <div class="f-social">
       <a href="https://instagram.com/lumina" target="_blank">@lumina</a>
       <a href="https://tiktok.com/@lumina" target="_blank">TikTok</a>
@@ -1743,63 +1741,50 @@
           div.classList.toggle('expanded');
         });
 
-        // Drag interaction on bar
-        const outer = div.querySelector('.prog-bar-outer');
-        const fill  = div.querySelector('.prog-bar-fill');
-        const pctEl = div.querySelector('.prog-pct-num');
-
-        function setFromEvent(e) {
-          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-          const r = outer.getBoundingClientRect();
-          let v = Math.round(Math.max(0, Math.min(1, (clientX - r.left) / r.width)) * 100);
-          fill.style.transition = 'none';
-          fill.style.width = v + '%';
-          pctEl.textContent = v + '%';
-          // Ripple
-          const rip = document.createElement('div');
-          rip.className = 'prog-ripple';
-          rip.style.left = (clientX - r.left - 3) + 'px';
-          outer.appendChild(rip);
-          setTimeout(() => rip.remove(), 700);
-        }
-        let dragging = false;
-        outer.addEventListener('mousedown',  e => { dragging = true; setFromEvent(e); });
-        outer.addEventListener('touchstart', e => { dragging = true; setFromEvent(e); }, { passive: true });
-        window.addEventListener('mousemove',  e => { if (dragging) setFromEvent(e); });
-        window.addEventListener('touchmove',  e => { if (dragging) setFromEvent(e); }, { passive: true });
-        window.addEventListener('mouseup',   () => { dragging = false; });
-        window.addEventListener('touchend',  () => { dragging = false; });
-
         itemsEl.appendChild(div);
       });
       container.appendChild(phEl);
     });
 
-    // Reveal fills on scroll
+    // Scroll-reactive fills — fill on enter, empty when scrolled back above
     const masterFill = document.getElementById('masterFill');
     const masterPct  = document.getElementById('masterPct');
+    let masterTimer  = null;
+
+    function fillBars() {
+      masterFill.style.width = masterVal + '%';
+      if (masterTimer) clearInterval(masterTimer);
+      let n = 0;
+      masterTimer = setInterval(() => {
+        n = Math.min(n + 2, masterVal);
+        masterPct.textContent = n + '%';
+        if (n >= masterVal) clearInterval(masterTimer);
+      }, 22);
+      document.querySelectorAll('.prog-bar-outer').forEach((outer, i) => {
+        setTimeout(() => {
+          outer.querySelector('.prog-bar-fill').style.width = outer.dataset.pct + '%';
+        }, i * 70);
+      });
+    }
+
+    function emptyBars() {
+      if (masterTimer) clearInterval(masterTimer);
+      masterFill.style.width = '0%';
+      masterPct.textContent = '0%';
+      document.querySelectorAll('.prog-bar-fill').forEach(f => { f.style.width = '0%'; });
+    }
 
     const progObs = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        // master bar
-        masterFill.style.width = masterVal + '%';
-        let n = 0;
-        const t = setInterval(() => {
-          n = Math.min(n + 2, masterVal);
-          masterPct.textContent = n + '%';
-          if (n >= masterVal) clearInterval(t);
-        }, 24);
-        // item bars
-        document.querySelectorAll('.prog-bar-outer').forEach((outer, i) => {
-          const pct = outer.dataset.pct;
-          setTimeout(() => {
-            outer.querySelector('.prog-bar-fill').style.width = pct + '%';
-          }, i * 80);
-        });
-        progObs.disconnect();
+        if (e.isIntersecting) {
+          fillBars();
+        } else if (e.boundingClientRect.top > 0) {
+          // Section is below viewport — user scrolled back up above it
+          emptyBars();
+        }
+        // top < 0 means already scrolled past — leave filled
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.1 });
     progObs.observe(document.getElementById('progress'));
   }
   buildProgress();
