@@ -633,6 +633,15 @@
     }
     .svc-row:hover .svc-desc { color: rgba(245,240,232,.55); }
 
+    /* scroll-triggered beige highlight */
+    .svc-row.in-view {
+      background: rgba(200,169,122,.055);
+    }
+    .svc-row.in-view::before { transform: scaleX(1); }
+    .svc-row.in-view .svc-num  { color: var(--gold); }
+    .svc-row.in-view .svc-name { color: var(--cream); }
+    .svc-row.in-view .svc-desc { color: rgba(245,240,232,.5); }
+
     /* ── PROGRESS ── */
     #progress {
       padding: 10rem 6vw;
@@ -831,86 +840,118 @@
       opacity: 0.6;
     }
 
-    /* ── PROGRESS CIRCLE ── */
-    .prog-overview {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 3.5rem;
-      align-items: center;
-      margin-bottom: 4rem;
-      padding: 2.8rem 3rem;
-      border: 1px solid rgba(200,169,122,.08);
-      background: rgba(200,169,122,.02);
-    }
-    .prog-c-svg {
-      width: clamp(130px, 18vw, 200px);
-      height: clamp(130px, 18vw, 200px);
-      display: block;
-      overflow: visible;
-    }
-    .prog-c-track {
-      fill: none;
-      stroke: rgba(200,169,122,.1);
-      stroke-width: 7;
-    }
-    .prog-c-fill {
-      fill: none;
-      stroke: #00c45e;
-      stroke-width: 7;
-      stroke-linecap: round;
-      stroke-dasharray: 314.16;
-      stroke-dashoffset: 314.16;
-      transform-origin: 60px 60px;
-      transform: rotate(-90deg);
-      transition: stroke-dashoffset 2s cubic-bezier(.22,1,.36,1);
-      filter: drop-shadow(0 0 6px rgba(0,196,94,.55));
-    }
-    .prog-c-pct {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      font-weight: 400;
-      fill: var(--cream);
-      text-anchor: middle;
-    }
-    .prog-c-label {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 6.5px;
-      fill: rgba(200,169,122,.45);
-      text-anchor: middle;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-    }
-    .prog-ov-stats {
+    /* ── PROGRESS DASHBOARD ── */
+    .prog-dash {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 1.2rem;
+      margin-bottom: 4rem;
     }
-    .prog-ov-item {
-      display: flex;
-      align-items: baseline;
-      gap: 1.4rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(200,169,122,.06);
+    .prog-kpis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
     }
-    .prog-ov-item:last-child { border-bottom: none; padding-bottom: 0; }
-    .prog-ov-n {
+    .prog-kpi {
+      padding: 2rem 2.2rem 1.8rem;
+      border: 1px solid rgba(200,169,122,.08);
+      background: rgba(200,169,122,.018);
+      position: relative;
+      overflow: hidden;
+    }
+    .prog-kpi::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+    .prog-kpi.kpi-done::after   { background: linear-gradient(90deg, var(--gold), var(--gold-lt)); }
+    .prog-kpi.kpi-active::after { background: linear-gradient(90deg, #4ecb8d, #2db870); }
+    .prog-kpi.kpi-total::after  { background: rgba(200,169,122,.2); }
+    .prog-kpi-n {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-size: clamp(3rem, 5.5vw, 5rem);
       font-weight: 400;
-      color: var(--gold-lt);
       line-height: 1;
-      min-width: 2ch;
+      margin-bottom: .5rem;
     }
-    .prog-ov-l {
-      font-size: .58rem;
+    .kpi-done   .prog-kpi-n { color: var(--gold-lt); }
+    .kpi-active .prog-kpi-n { color: #7ecf8e; }
+    .kpi-total  .prog-kpi-n { color: rgba(245,240,232,.4); }
+    .prog-kpi-l {
+      font-size: .57rem;
       letter-spacing: .22em;
       text-transform: uppercase;
-      color: rgba(245,240,232,.3);
-      line-height: 1.7;
+      color: rgba(245,240,232,.28);
     }
+    .prog-kpi-sub {
+      margin-top: 1.2rem;
+      font-size: .6rem;
+      letter-spacing: .06em;
+    }
+    .kpi-done   .prog-kpi-sub { color: rgba(200,169,122,.4); }
+    .kpi-active .prog-kpi-sub { color: rgba(78,203,141,.38); }
+    .kpi-total  .prog-kpi-sub { color: rgba(245,240,232,.15); }
+
+    /* phase timeline bar */
+    .prog-timeline {
+      display: flex;
+      gap: .5rem;
+      padding: 1.6rem 2rem 1.8rem;
+      border: 1px solid rgba(200,169,122,.07);
+      background: rgba(200,169,122,.012);
+      align-items: flex-end;
+    }
+    .prog-tl-seg {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+    }
+    .prog-tl-bar {
+      width: 100%;
+      border-radius: 2px;
+    }
+    .prog-tl-seg.tl-done   .prog-tl-bar { height: 4px; background: var(--gold); box-shadow: 0 0 8px rgba(200,169,122,.3); }
+    .prog-tl-seg.tl-active .prog-tl-bar { height: 7px; background: #4ecb8d; box-shadow: 0 0 10px rgba(78,203,141,.4); }
+    .prog-tl-seg.tl-up     .prog-tl-bar { height: 2px; background: rgba(200,169,122,.1); }
+    .prog-tl-lbl {
+      font-size: .48rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .prog-tl-seg.tl-done   .prog-tl-lbl { color: rgba(200,169,122,.55); }
+    .prog-tl-seg.tl-active .prog-tl-lbl { color: rgba(78,203,141,.85); font-weight: 500; }
+    .prog-tl-seg.tl-up     .prog-tl-lbl { color: rgba(245,240,232,.12); }
+    .prog-tl-legend {
+      display: flex;
+      gap: 2rem;
+      padding: .8rem 2rem 0;
+    }
+    .prog-tl-legend-item {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .55rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .prog-tl-legend-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+    }
+    .prog-tl-legend-item.l-done   .prog-tl-legend-dot { background: var(--gold); }
+    .prog-tl-legend-item.l-active .prog-tl-legend-dot { background: #4ecb8d; }
+    .prog-tl-legend-item.l-up     .prog-tl-legend-dot { background: rgba(200,169,122,.18); }
+    .prog-tl-legend-item.l-done   { color: rgba(200,169,122,.55); }
+    .prog-tl-legend-item.l-active { color: rgba(78,203,141,.7); }
+    .prog-tl-legend-item.l-up     { color: rgba(245,240,232,.2); }
     @media (max-width: 640px) {
-      .prog-overview { grid-template-columns: 1fr; gap: 2rem; padding: 2rem; }
-      .prog-ov-stats { flex-direction: row; flex-wrap: wrap; gap: 1.5rem; }
+      .prog-kpis { grid-template-columns: 1fr 1fr; }
+      .kpi-total { grid-column: span 2; }
+      .prog-tl-lbl { display: none; }
     }
 
     /* ── FILTER GALLERY (full library) ── */
@@ -1502,28 +1543,29 @@
       </h2>
     </div>
 
-    <div class="prog-overview">
-      <div class="prog-circle-wrap">
-        <svg class="prog-c-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="60" cy="60" r="50" class="prog-c-track"/>
-          <circle cx="60" cy="60" r="50" class="prog-c-fill" id="progCircleFill"/>
-          <text x="60" y="57" class="prog-c-pct" id="progCirclePct">0%</text>
-          <text x="60" y="71" class="prog-c-label">completado</text>
-        </svg>
+    <div class="prog-dash">
+      <div class="prog-kpis">
+        <div class="prog-kpi kpi-done">
+          <div class="prog-kpi-n" id="povCompleted">0</div>
+          <div class="prog-kpi-l">Fases Completadas</div>
+          <div class="prog-kpi-sub" id="kpiDoneSub">de — fases totales</div>
+        </div>
+        <div class="prog-kpi kpi-active">
+          <div class="prog-kpi-n" id="povActive">0</div>
+          <div class="prog-kpi-l">En Progreso</div>
+          <div class="prog-kpi-sub">actualmente en curso</div>
+        </div>
+        <div class="prog-kpi kpi-total">
+          <div class="prog-kpi-n" id="povTotal">0</div>
+          <div class="prog-kpi-l">Fases Totales</div>
+          <div class="prog-kpi-sub">bootcamp completo</div>
+        </div>
       </div>
-      <div class="prog-ov-stats">
-        <div class="prog-ov-item">
-          <div class="prog-ov-n" id="povCompleted">0</div>
-          <div class="prog-ov-l">Fases<br/>Completadas</div>
-        </div>
-        <div class="prog-ov-item">
-          <div class="prog-ov-n" id="povActive">0</div>
-          <div class="prog-ov-l">En<br/>Progreso</div>
-        </div>
-        <div class="prog-ov-item">
-          <div class="prog-ov-n" id="povTotal">0</div>
-          <div class="prog-ov-l">Fases<br/>Totales</div>
-        </div>
+      <div class="prog-timeline" id="progTimeline"></div>
+      <div class="prog-tl-legend">
+        <div class="prog-tl-legend-item l-done"><div class="prog-tl-legend-dot"></div>Completado</div>
+        <div class="prog-tl-legend-item l-active"><div class="prog-tl-legend-dot"></div>En progreso</div>
+        <div class="prog-tl-legend-item l-up"><div class="prog-tl-legend-dot"></div>Próximo</div>
       </div>
     </div>
 
@@ -1762,6 +1804,23 @@
     document.getElementById('povCompleted').textContent = nCompleted;
     document.getElementById('povActive').textContent    = nActive;
     document.getElementById('povTotal').textContent     = totalItems;
+    const kpiSub = document.getElementById('kpiDoneSub');
+    if (kpiSub) kpiSub.textContent = `de ${totalItems} fases totales`;
+
+    // Build phase timeline
+    const tlEl = document.getElementById('progTimeline');
+    if (tlEl) {
+      PROGRESS_DATA.forEach(ph => {
+        ph.items.forEach(it => {
+          const seg = document.createElement('div');
+          const cls = it.status === 'done' ? 'tl-done' : it.status === 'active' ? 'tl-active' : 'tl-up';
+          const num = it.name.match(/\d+/)?.[0]?.padStart(2,'0') || '';
+          seg.className = `prog-tl-seg ${cls}`;
+          seg.innerHTML = `<div class="prog-tl-bar"></div><div class="prog-tl-lbl">F${num}</div>`;
+          tlEl.appendChild(seg);
+        });
+      });
+    }
 
     PROGRESS_DATA.forEach(ph => {
       const phEl = document.createElement('div');
@@ -1797,24 +1856,17 @@
     });
 
     // Scroll-reactive fills — fill on enter, empty when scrolled back above
-    const masterFill   = document.getElementById('masterFill');
-    const masterPct    = document.getElementById('masterPct');
-    const circFill     = document.getElementById('progCircleFill');
-    const circPct      = document.getElementById('progCirclePct');
-    const C_CIRC = 314.16; // 2π×50
-    let masterTimer = null, circTimer = null;
+    const masterFill = document.getElementById('masterFill');
+    const masterPct  = document.getElementById('masterPct');
+    let masterTimer  = null;
 
     function fillBars() {
       masterFill.style.width = masterVal + '%';
-      if (circFill) circFill.style.strokeDashoffset = C_CIRC * (1 - masterVal / 100);
       if (masterTimer) clearInterval(masterTimer);
-      if (circTimer)   clearInterval(circTimer);
-      let n = 0, cn = 0;
+      let n = 0;
       masterTimer = setInterval(() => {
-        n  = Math.min(n  + 2, masterVal);
-        cn = Math.min(cn + 2, masterVal);
+        n = Math.min(n + 2, masterVal);
         masterPct.textContent = n + '%';
-        if (circPct) circPct.textContent = cn + '%';
         if (n >= masterVal) clearInterval(masterTimer);
       }, 22);
       document.querySelectorAll('.prog-bar-outer').forEach((outer, i) => {
@@ -1826,11 +1878,8 @@
 
     function emptyBars() {
       if (masterTimer) clearInterval(masterTimer);
-      if (circTimer)   clearInterval(circTimer);
       masterFill.style.width = '0%';
       masterPct.textContent = '0%';
-      if (circFill) circFill.style.strokeDashoffset = C_CIRC;
-      if (circPct)  circPct.textContent = '0%';
       document.querySelectorAll('.prog-bar-fill').forEach(f => { f.style.width = '0%'; });
     }
 
@@ -1848,6 +1897,15 @@
     progObs.observe(document.getElementById('progress'));
   }
   buildProgress();
+
+  // ── SERVICES ROW SCROLL HIGHLIGHT ──
+  const svcRowObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('in-view');
+      else e.target.classList.remove('in-view');
+    });
+  }, { threshold: 0.45, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.svc-row').forEach(r => svcRowObs.observe(r));
 
   // ── SERVICES ORBITAL ANIMATION ──
   (function () {
