@@ -31,6 +31,41 @@
       cursor: none;
     }
 
+    /* ── WIP BANNER ── */
+    #wip-banner {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 9000;
+      background: rgba(10,7,4,.92);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(200,169,122,.18);
+      padding: .7rem 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    #wip-banner p {
+      font-size: .68rem;
+      letter-spacing: .12em;
+      color: rgba(245,240,232,.5);
+      line-height: 1.5;
+    }
+    #wip-banner strong { color: var(--gold); font-weight: 400; }
+    #wip-banner button {
+      background: none;
+      border: 1px solid rgba(200,169,122,.25);
+      color: rgba(200,169,122,.6);
+      font-size: .6rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      padding: .35rem .8rem;
+      cursor: none;
+      white-space: nowrap;
+      transition: border-color .3s, color .3s;
+    }
+    #wip-banner button:hover { border-color: var(--gold); color: var(--gold-lt); }
+
     /* ── NOISE LAYER ── */
     .noise {
       position: fixed;
@@ -584,7 +619,7 @@
     }
     .prog-master-outer {
       flex: 1;
-      height: 3px;
+      height: 2px;
       background: rgba(200,169,122,.12);
       border-radius: 2px;
       position: relative;
@@ -665,7 +700,7 @@
     /* Liquid bar */
     .prog-bar-outer {
       position: relative;
-      height: 5px;
+      height: 3px;
       background: rgba(200,169,122,.1);
       border-radius: 3px;
       cursor: ew-resize;
@@ -916,12 +951,12 @@
 
     /* masonry */
     .gal-grid {
-      columns: 4 auto;
-      column-gap: .5rem;
+      columns: 5 auto;
+      column-gap: .4rem;
     }
-    @media (max-width: 1100px) { .gal-grid { columns: 3; } }
-    @media (max-width: 700px)  { .gal-grid { columns: 2; } }
-    @media (max-width: 400px)  { .gal-grid { columns: 1; } }
+    @media (max-width: 1200px) { .gal-grid { columns: 4; } }
+    @media (max-width: 900px)  { .gal-grid { columns: 3; } }
+    @media (max-width: 600px)  { .gal-grid { columns: 2; } }
 
     .g-item {
       break-inside: avoid;
@@ -1281,6 +1316,12 @@
 </head>
 <body>
 
+  <!-- WIP BANNER -->
+  <div id="wip-banner">
+    <p><strong>Proyecto en desarrollo</strong> — Este sitio documenta el progreso real de Lumina. Todo está sujeto a cambios continuos. Última actualización: marzo 2026.</p>
+    <button onclick="document.getElementById('wip-banner').style.display='none'">Cerrar</button>
+  </div>
+
   <!-- NOISE -->
   <svg class="noise" xmlns="http://www.w3.org/2000/svg">
     <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
@@ -1299,21 +1340,22 @@
 
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#about"        onclick="closeMenu()">About</a>
-    <a href="#services"     onclick="closeMenu()">Services</a>
-    <a href="#h-gallery"    onclick="closeMenu()">Gallery</a>
-    <a href="#contact"      onclick="closeMenu()">Inquire</a>
+    <a href="#about"        onclick="closeMenu()">El Proyecto</a>
+    <a href="#services"     onclick="closeMenu()">Proceso</a>
+    <a href="#progress"     onclick="closeMenu()">Progreso</a>
+    <a href="#h-gallery"    onclick="closeMenu()">Galería</a>
+    <a href="#contact"      onclick="closeMenu()">Contacto</a>
   </div>
 
   <!-- NAV -->
   <nav id="nav">
     <a href="#hero" class="nav-logo" id="navLogo">LUMINA</a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#progress">Progress</a></li>
-      <li><a href="#h-gallery">Gallery</a></li>
-      <li><a href="#contact">Inquire</a></li>
+      <li><a href="#about">El Proyecto</a></li>
+      <li><a href="#services">Proceso</a></li>
+      <li><a href="#progress">Progreso</a></li>
+      <li><a href="#h-gallery">Galería</a></li>
+      <li><a href="#contact">Contacto</a></li>
     </ul>
     <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </nav>
@@ -1323,14 +1365,14 @@
     <canvas id="heroCanvas" class="hero-canvas"></canvas>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <span class="hero-tag" id="heroTag">AI Avatar · Built from Scratch</span>
+      <span class="hero-tag" id="heroTag">Avatar IA · Construida desde Cero</span>
       <h1 class="hero-title">
         <span class="hero-line"><span class="hero-line-inner" id="hl1">LU<em>MI</em></span></span>
         <span class="hero-line"><span class="hero-line-inner" id="hl2">NA</span></span>
       </h1>
       <div class="hero-bottom" id="heroBottom">
-        <p class="hero-sub">She doesn't exist — I built her.<br/>A documentation of AI model creation.</p>
-        <a href="#about" class="btn-magnetic magnetic">See the Process</a>
+        <p class="hero-sub">Ella no existe — yo la construí.<br/>Una documentación en progreso.</p>
+        <a href="#about" class="btn-magnetic magnetic">Ver el Proceso</a>
       </div>
     </div>
     <div class="scroll-line" id="scrollLine"><span>Scroll</span></div>
@@ -1339,10 +1381,10 @@
   <!-- MARQUEE -->
   <div class="marquee-wrap">
     <div class="marquee-track">
-      <span>LUMINA</span><span class="dot">×</span><span>AI AVATAR</span><span class="dot">×</span>
+      <span>LUMINA</span><span class="dot">×</span><span>AVATAR IA</span><span class="dot">×</span>
       <span>NANOBANANA PRO</span><span class="dot">×</span><span>SEEDREAM</span><span class="dot">×</span>
-      <span>KLING</span><span class="dot">×</span><span>VEO 3</span><span class="dot">×</span><span>BUILT WITH AI</span><span class="dot">×</span>
-      <span>LUMINA</span><span class="dot">×</span><span>AI AVATAR</span><span class="dot">×</span>
+      <span>KLING</span><span class="dot">×</span><span>VEO 3</span><span class="dot">×</span><span>HECHO CON IA</span><span class="dot">×</span>
+      <span>LUMINA</span><span class="dot">×</span><span>AVATAR IA</span><span class="dot">×</span>
       <span>NANOBANANA PRO</span><span class="dot">×</span><span>SEEDREAM</span><span class="dot">×</span>
       <span>DIGITAL</span><span class="dot">×</span><span>2025</span><span class="dot">×</span>
     </div>
@@ -1354,22 +1396,22 @@
       <img class="about-photo" src="CONTENT/lifestyle/REF NANO PRO - FACE BEACH TWO SHOT.jpeg" alt="Lumina" />
     </div>
     <div class="about-text">
-      <span class="s-label">About</span>
+      <span class="s-label">El Proyecto</span>
       <h2 class="s-title">
-        <span class="line-reveal"><span class="line-reveal-inner" id="abt1">Built,</span></span>
-        <span class="line-reveal"><span class="line-reveal-inner" id="abt2"><em>not born.</em></span></span>
+        <span class="line-reveal"><span class="line-reveal-inner" id="abt1">Construida,</span></span>
+        <span class="line-reveal"><span class="line-reveal-inner" id="abt2"><em>no nacida.</em></span></span>
       </h2>
       <p class="about-body">
-        LUMINA is a fully AI-generated model — no studio, no casting call, no real person.
-        She was built from the ground up as part of my AI Video Bootcamp training,
-        using a stack of generative tools to develop a consistent identity, face, and presence.<br /><br />
-        Every image and video here was produced through prompting, iteration, and curation using
-        NanoBanana PRO, SeedDream, Kling, and Veo 3. What you're seeing is not a portfolio — it's proof of concept.
+        LUMINA es un modelo 100% generado por IA — sin estudio, sin casting, sin persona real.
+        Fue construida durante mi formación en el AI Video Bootcamp, usando herramientas de generación
+        de imágenes y video para desarrollar una identidad, cara y presencia consistente.<br /><br />
+        Cada imagen y video aquí fue producido mediante prompting, iteración y curación usando
+        NanoBanana PRO, SeedDream, Kling y Veo 3. Lo que ves no es un portfolio — es prueba de concepto.
       </p>
       <div class="about-stats">
-        <div><div class="stat-n" data-target="18">0</div><div class="stat-l">Assets Created</div></div>
-        <div><div class="stat-n" data-target="4">0</div><div class="stat-l">AI Tools Used</div></div>
-        <div><div class="stat-n" data-target="6">0</div><div class="stat-l">Categories</div></div>
+        <div><div class="stat-n" data-target="18">0</div><div class="stat-l">Assets Creados</div></div>
+        <div><div class="stat-n" data-target="4">0</div><div class="stat-l">Herramientas IA</div></div>
+        <div><div class="stat-n" data-target="6">0</div><div class="stat-l">Categorías</div></div>
       </div>
     </div>
   </section>
@@ -1378,35 +1420,35 @@
   <section id="services">
     <div class="services-header">
       <div>
-        <span class="s-label">How She Was Made</span>
+        <span class="s-label">Cómo Fue Creada</span>
         <h2 class="s-title">
-          <span class="line-reveal"><span class="line-reveal-inner">The</span></span>
-          <span class="line-reveal"><span class="line-reveal-inner"><em>Process</em></span></span>
+          <span class="line-reveal"><span class="line-reveal-inner">El</span></span>
+          <span class="line-reveal"><span class="line-reveal-inner"><em>Proceso</em></span></span>
         </h2>
       </div>
     </div>
     <div class="services-list">
-      <div class="svc-row magnetic"><div class="svc-num">01</div><div class="svc-name">Character Design</div><div class="svc-desc">Defined her look, age, ethnicity, and energy through reference curation and early prompting rounds.</div></div>
-      <div class="svc-row magnetic"><div class="svc-num">02</div><div class="svc-name">Face Consistency</div><div class="svc-desc">NanoBanana PRO (Higgsfield AI) locked in a stable, reproducible face across angles, lighting, and scenes.</div></div>
-      <div class="svc-row magnetic"><div class="svc-num">03</div><div class="svc-name">Scene &amp; Context Building</div><div class="svc-desc">SeedDream placed her in lifestyle, travel, car, and brand environments with high scene diversity.</div></div>
-      <div class="svc-row magnetic"><div class="svc-num">04</div><div class="svc-name">Motion &amp; Video</div><div class="svc-desc">Kling and Veo 3 brought her to life — cinematic clips with natural movement and atmosphere.</div></div>
-      <div class="svc-row magnetic"><div class="svc-num">05</div><div class="svc-name">Curation &amp; Editing</div><div class="svc-desc">Reviewed hundreds of outputs, selected the strongest 18 assets, and organized them by category.</div></div>
-      <div class="svc-row magnetic"><div class="svc-num">06</div><div class="svc-name">Brand Identity</div><div class="svc-desc">Named, positioned, and packaged the avatar — LUMINA — as a deployable AI model brand.</div></div>
+      <div class="svc-row magnetic"><div class="svc-num">01</div><div class="svc-name">Diseño del Personaje</div><div class="svc-desc">Definí su look, edad, etnia y energía a través de referencias visuales y primeras rondas de prompting.</div></div>
+      <div class="svc-row magnetic"><div class="svc-num">02</div><div class="svc-name">Consistencia de Cara</div><div class="svc-desc">NanoBanana PRO (Higgsfield AI) bloqueó una cara estable y reproducible en distintos ángulos, luces y escenas.</div></div>
+      <div class="svc-row magnetic"><div class="svc-num">03</div><div class="svc-name">Construcción de Escenas</div><div class="svc-desc">SeedDream la ubicó en entornos de lifestyle, viajes, autos y marca con alta diversidad visual.</div></div>
+      <div class="svc-row magnetic"><div class="svc-num">04</div><div class="svc-name">Movimiento y Video</div><div class="svc-desc">Kling y Veo 3 la trajeron a la vida — clips cinematográficos con movimiento natural y atmósfera realista.</div></div>
+      <div class="svc-row magnetic"><div class="svc-num">05</div><div class="svc-name">Curación y Edición</div><div class="svc-desc">Revisé cientos de outputs, seleccioné los 18 mejores assets y los organicé por categoría.</div></div>
+      <div class="svc-row magnetic"><div class="svc-num">06</div><div class="svc-name">Identidad de Marca</div><div class="svc-desc">Nombré, posicioné y empaqué el avatar — LUMINA — como una marca de modelo IA desplegable.</div></div>
     </div>
   </section>
 
   <!-- PROGRESS -->
   <section id="progress">
     <div class="prog-header">
-      <span class="s-label">Live Progress</span>
+      <span class="s-label">Progreso en Vivo</span>
       <h2 class="s-title">
-        <span class="line-reveal"><span class="line-reveal-inner">Where I Am</span></span>
-        <span class="line-reveal"><span class="line-reveal-inner"><em>Right Now</em></span></span>
+        <span class="line-reveal"><span class="line-reveal-inner">Dónde Estoy</span></span>
+        <span class="line-reveal"><span class="line-reveal-inner"><em>Ahora Mismo</em></span></span>
       </h2>
     </div>
 
     <div class="prog-master-wrap">
-      <span class="prog-master-label">Overall</span>
+      <span class="prog-master-label">General</span>
       <div class="prog-master-outer">
         <div class="prog-master-fill" id="masterFill"></div>
       </div>
@@ -1421,7 +1463,7 @@
     <div class="h-sticky" id="hSticky">
       <div class="h-header">
         <span class="s-label">Portfolio</span>
-        <h2 class="s-title" style="color:var(--cream)">Selected <em>Work</em></h2>
+        <h2 class="s-title" style="color:var(--cream)">Trabajo <em>Selecto</em></h2>
       </div>
       <div class="h-counter" id="hCounter">01 / 08</div>
       <div class="h-track" id="hTrack">
@@ -1466,10 +1508,10 @@
   <section id="gallery">
     <div class="gal-header">
       <div>
-        <span class="s-label">Full Library</span>
-        <h2 class="s-title">All <em>Works</em></h2>
+        <span class="s-label">Biblioteca Completa</span>
+        <h2 class="s-title">Todos los <em>Assets</em></h2>
       </div>
-      <div class="gal-count-display"><strong id="galCount">18</strong> works</div>
+      <div class="gal-count-display"><strong id="galCount">18</strong> assets</div>
     </div>
     <div class="gal-filter" id="galFilter">
       <button class="gal-btn active" data-f="all">All <sup id="cn-all">18</sup></button>
@@ -1485,32 +1527,32 @@
 
   <!-- TOOLS -->
   <section id="testimonials">
-    <span class="s-label">Tech Stack</span>
+    <span class="s-label">Stack Tecnológico</span>
     <h2 class="s-title">
-      <span class="line-reveal"><span class="line-reveal-inner">Tools That</span></span>
-      <span class="line-reveal"><span class="line-reveal-inner"><em>Built Her</em></span></span>
+      <span class="line-reveal"><span class="line-reveal-inner">Herramientas que</span></span>
+      <span class="line-reveal"><span class="line-reveal-inner"><em>La Crearon</em></span></span>
     </h2>
     <div class="test-grid">
-      <div class="test-card"><div class="test-quote">✦</div><p class="test-text"><strong style="color:var(--gold-lt);letter-spacing:.1em">NANOBANANA PRO — HIGGSFIELD AI</strong><br/><br/>Primary image engine. The go-to model for AI influencer consistency. Used to establish Lumina's face and reproduce it reliably across angles, lighting, and scenes.</p><div class="test-author"><div class="test-dash"></div><span class="test-name">Image Generation · Face Consistency</span></div></div>
-      <div class="test-card"><div class="test-quote">✦</div><p class="test-text"><strong style="color:var(--gold-lt);letter-spacing:.1em">SEEDREAM</strong><br/><br/>Used for scene diversity — cars, travel, lifestyle, brand environments. Expanded the range of scenarios and visual contexts across the asset library.</p><div class="test-author"><div class="test-dash"></div><span class="test-name">Scene Building · Context Diversity</span></div></div>
-      <div class="test-card"><div class="test-quote">✦</div><p class="test-text"><strong style="color:var(--gold-lt);letter-spacing:.1em">KLING &amp; VEO 3</strong><br/><br/>Video generation. Brought Lumina into motion — cinematic clips with camera movement, environmental detail, and natural atmosphere. Static shots look AI; these don't.</p><div class="test-author"><div class="test-dash"></div><span class="test-name">Video Generation · Motion</span></div></div>
-      <div class="test-card"><div class="test-quote">✦</div><p class="test-text"><strong style="color:var(--gold-lt);letter-spacing:.1em">CLAUDE CODE</strong><br/><br/>The entire website you're looking at — this portfolio, the canvas animation, the gallery system — was built with Claude Code as the AI engineering layer. Zero manual coding.</p><div class="test-author"><div class="test-dash"></div><span class="test-name">Web Development · Deployment</span></div></div>
+      <div class="test-card"><div class="test-quote">✦</div><p class="test-text"><strong style="color:var(--gold-lt);letter-spacing:.1em">NANOBANANA PRO — HIGGSFIELD AI</strong><br/><br/>Motor principal de imágenes. El modelo ideal para consistencia de influencers IA. Con él establecí la cara de Lumina y la reproduje de forma confiable en distintos ángulos, iluminación y escenas.</p><div class="test-author"><div class="test-dash"></div><span class="test-name">Generación de Imágenes · Consistencia</span></div></div>
+      <div class="test-card"><div class="test-quote">✦</div><p class="test-text"><strong style="color:var(--gold-lt);letter-spacing:.1em">SEEDREAM</strong><br/><br/>Usado para diversidad de escenas — autos, viajes, lifestyle, marca. Amplió el rango de contextos visuales de la biblioteca de assets más allá de lo que NanoBanana PRO maneja de forma nativa.</p><div class="test-author"><div class="test-dash"></div><span class="test-name">Construcción de Escenas · Diversidad</span></div></div>
+      <div class="test-card"><div class="test-quote">✦</div><p class="test-text"><strong style="color:var(--gold-lt);letter-spacing:.1em">KLING &amp; VEO 3</strong><br/><br/>Generación de video. Trajeron a Lumina al movimiento — clips cinematográficos con movimiento de cámara, detalles ambientales y atmósfera natural. Los shots estáticos se ven IA; estos no.</p><div class="test-author"><div class="test-dash"></div><span class="test-name">Generación de Video · Movimiento</span></div></div>
+      <div class="test-card"><div class="test-quote">✦</div><p class="test-text"><strong style="color:var(--gold-lt);letter-spacing:.1em">CLAUDE CODE</strong><br/><br/>Todo el sitio que estás viendo — el portfolio, la animación de partículas, el sistema de galería, las barras de progreso — fue construido con Claude Code como capa de ingeniería IA. Cero código manual.</p><div class="test-author"><div class="test-dash"></div><span class="test-name">Desarrollo Web · Despliegue</span></div></div>
     </div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact">
     <div>
-      <span class="s-label">Inquiries</span>
+      <span class="s-label">Consultas</span>
       <h2 class="s-title">
-        <span class="line-reveal"><span class="line-reveal-inner">Want Your Own</span></span>
-        <span class="line-reveal"><span class="line-reveal-inner"><em>AI Model?</em></span></span>
+        <span class="line-reveal"><span class="line-reveal-inner">¿Quieres tu Propio</span></span>
+        <span class="line-reveal"><span class="line-reveal-inner"><em>Modelo IA?</em></span></span>
       </h2>
-      <p class="contact-tagline">Interested in building an AI avatar, AI influencer, or AI content pipeline for your brand? Let's talk about what's possible.</p>
+      <p class="contact-tagline">¿Te interesa construir un avatar IA, un influencer IA o un pipeline de contenido para tu marca? Hablemos de lo que es posible.</p>
       <div class="contact-details">
         <div><div class="cd-label">Email</div><div class="cd-val">hello@lumina.com</div></div>
-        <div><div class="cd-label">Project Type</div><div class="cd-val">AI Models · Content Pipelines · Brand Avatars</div></div>
-        <div><div class="cd-label">Response</div><div class="cd-val">Within 48 hours</div></div>
+        <div><div class="cd-label">Tipo de Proyecto</div><div class="cd-val">Modelos IA · Pipelines de Contenido · Avatares de Marca</div></div>
+        <div><div class="cd-label">Respuesta</div><div class="cd-val">Dentro de 48 horas</div></div>
       </div>
     </div>
     <form class="form" id="inquiryForm" novalidate>
@@ -1536,7 +1578,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="f-logo">LUMINA</div>
-    <div class="f-copy">&copy; 2025 Lumina. All rights reserved.</div>
+    <div class="f-copy">&copy; 2026 Lumina — Proyecto en construcción.</div>
     <div class="f-social">
       <a href="https://instagram.com/lumina" target="_blank">@lumina</a>
       <a href="https://tiktok.com/@lumina" target="_blank">TikTok</a>
@@ -1640,32 +1682,32 @@
   // ── PROGRESS BARS ──
   const PROGRESS_DATA = [
     {
-      phase: 'Completed — AI Video Bootcamp',
+      phase: 'Completado',
       items: [
-        { name: 'Fase 1 — INITIATE: Tools & Setup',       pct: 100, status: 'done', note: 'Skool platform, community, tool overview. Confidence: 10/10.' },
-        { name: 'Fase 2 — AI IMAGES: Avatar Workflow',    pct: 100, status: 'done', note: 'NanoBanana PRO mastered. Reference-based consistency workflow locked in. Confidence: 10/10.' },
-        { name: 'Fase 3 — AI VIDEOS: Cinematic Clips',    pct: 100, status: 'done', note: 'Kling, Veo 3, Higgsfield Video. Camera movement, atmosphere, and micro-story format.' },
+        { name: 'Fase 1 — Iniciación y Herramientas',     pct: 100, status: 'done', note: 'Aprendí a navegar la plataforma Skool, entendí el ecosistema de herramientas IA disponibles y cómo se estructuran los niveles del bootcamp (Lvl 2 Apprentice → Lvl 9 Oracle). Base sólida para todo lo que vino después.' },
+        { name: 'Fase 2 — Imágenes IA: Workflow de Avatar', pct: 100, status: 'done', note: 'Dominé NanoBanana PRO en Higgsfield AI. Aprendí el flujo completo: idea → prompt con ChatGPT → generación → seleccionar mejor output como referencia → reutilizar esa referencia para escenas nuevas. La clave: las imágenes de referencia son todo para mantener consistencia de cara.' },
+        { name: 'Fase 3 — Videos IA: Clips Cinematográficos', pct: 100, status: 'done', note: 'Aprendí a generar clips de 3–5 segundos que cuentan micro-historias. Herramientas: Kling, Veo 3, Higgsfield Video. Insight clave: el movimiento de cámara vende el realismo — los shots estáticos se ven más "IA". Los detalles ambientales (viento, reflejos de luz, movimiento de fondo) marcan la diferencia.' },
       ]
     },
     {
-      phase: 'Current',
+      phase: 'En Progreso',
       items: [
-        { name: 'Fase 4 — SOUND EFFECTS & EDITING',       pct: 10, status: 'active', note: 'Starting now — ambient SFX, music timing, cinematic cuts, and full short-form video builds.' },
+        { name: 'Fase 4 — Sonido y Edición',              pct: 10, status: 'active', note: 'Comenzando ahora. Aprenderé diseño de sonido ambiental, SFX de impacto, selección y timing de música, cortes fluidos y transiciones cinematográficas. El objetivo: construir videos cortos completos uniendo imagen + video + sonido en un solo contenido.' },
       ]
     },
     {
-      phase: 'Coming Up',
+      phase: 'Próximamente',
       items: [
-        { name: 'Fase 5 — CHARACTER CONSISTENCY',         pct: 0, status: 'upcoming', note: 'Advanced techniques to maintain identity across all content types.' },
-        { name: 'Fase 6 — AI ADS + UGC & INFLUENCERS',   pct: 0, status: 'upcoming', note: 'Monetization layer — ad creation, UGC, and influencer pipeline.' },
-        { name: 'Fase 7 — SOCIAL MEDIA',                  pct: 0, status: 'upcoming', note: 'Strategy, scheduling, and full launch of Lumina\'s accounts.' },
-        { name: 'Fase 8 — AI FILMMAKING',                 pct: 0, status: 'upcoming', note: 'Long-form storytelling and cinematic production at scale.' },
-        { name: 'Fase 9 — CLONE & SCALE: AUTOMATION',    pct: 0, status: 'upcoming', note: 'Full automated content pipeline — the endgame.' },
+        { name: 'Fase 5 — Consistencia del Personaje',    pct: 0, status: 'upcoming', note: 'Técnicas avanzadas para mantener la identidad de Lumina a través de todos los tipos de contenido.' },
+        { name: 'Fase 6 — Ads IA + UGC e Influencers',   pct: 0, status: 'upcoming', note: 'La capa de monetización — creación de anuncios, contenido UGC y pipeline de influencer IA.' },
+        { name: 'Fase 7 — Redes Sociales',                pct: 0, status: 'upcoming', note: 'Estrategia, calendario y lanzamiento oficial de las cuentas de Lumina.' },
+        { name: 'Fase 8 — Filmmaking IA',                 pct: 0, status: 'upcoming', note: 'Narrativa de formato largo y producción cinematográfica a escala.' },
+        { name: 'Fase 9 — Clonar y Escalar: Automatización', pct: 0, status: 'upcoming', note: 'Pipeline de contenido 100% automatizado — el objetivo final de todo el proceso.' },
       ]
     }
   ];
 
-  const BADGE = { done: ['done','Complete'], active: ['active','In Progress'], upcoming: ['upcoming','Upcoming'] };
+  const BADGE = { done: ['done','Completado'], active: ['active','En Progreso'], upcoming: ['upcoming','Próximo'] };
 
   function buildProgress() {
     const container = document.getElementById('progPhases');
