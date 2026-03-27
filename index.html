@@ -118,6 +118,7 @@
     .loader-word {
       display: flex;
       gap: .05em;
+      overflow: visible;
     }
     .loader-char {
       font-family: 'Cormorant Garamond', serif;
@@ -126,10 +127,26 @@
       letter-spacing: .35em;
       color: var(--cream);
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity .6s ease, transform .6s ease;
+      transform: translateY(40px);
+      transition: opacity .6s ease, transform .7s cubic-bezier(.34,1.56,.64,1);
+      display: inline-block;
+      background: none;
+      outline: none;
+      border: none;
     }
     .loader-char.show { opacity: 1; transform: translateY(0); }
+
+    @keyframes jelly-float {
+      0%   { transform: translateY(0px)   scaleX(1)    scaleY(1); }
+      20%  { transform: translateY(-14px) scaleX(.94)  scaleY(1.06); }
+      40%  { transform: translateY(-18px) scaleX(.92)  scaleY(1.08); }
+      60%  { transform: translateY(-10px) scaleX(.96)  scaleY(1.04); }
+      80%  { transform: translateY(-4px)  scaleX(.98)  scaleY(1.02); }
+      100% { transform: translateY(0px)   scaleX(1)    scaleY(1); }
+    }
+    .loader-char.jelly {
+      animation: jelly-float 3s ease-in-out infinite;
+    }
 
     .loader-line {
       width: 0;
@@ -628,10 +645,11 @@
     .prog-master-fill {
       height: 100%;
       border-radius: 2px;
-      background: linear-gradient(90deg, var(--warm-mid), var(--gold), var(--gold-lt));
+      background: linear-gradient(90deg, #0a3320, #00c45e, #4dffaa);
       width: 0%;
       transition: width 1.8s cubic-bezier(.22,1,.36,1);
       position: relative;
+      box-shadow: 0 0 8px rgba(0,196,94,.4);
     }
     .prog-master-fill::after {
       content: '';
@@ -640,8 +658,8 @@
       transform: translateY(-50%);
       width: 11px; height: 11px;
       border-radius: 50%;
-      background: var(--gold-lt);
-      box-shadow: 0 0 10px var(--gold), 0 0 24px rgba(200,169,122,.6);
+      background: #4dffaa;
+      box-shadow: 0 0 8px #00c45e, 0 0 20px rgba(0,196,94,.7);
     }
     .prog-master-pct {
       font-family: 'Cormorant Garamond', serif;
@@ -709,37 +727,42 @@
     .prog-bar-fill {
       height: 100%;
       border-radius: 3px;
-      background: linear-gradient(90deg, var(--warm-mid) 0%, var(--gold) 60%, var(--gold-lt) 100%);
+      background: linear-gradient(90deg, #062a18 0%, #00c45e 55%, #4dffaa 100%);
       width: 0%;
       transition: width 1.4s cubic-bezier(.22,1,.36,1), filter .3s;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 0 6px rgba(0,196,94,.3), 0 0 12px rgba(0,196,94,.15);
     }
+    .prog-bar-outer:hover .prog-bar-fill { filter: brightness(1.25); }
     .prog-bar-fill::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.25) 50%, transparent 100%);
-      background-size: 200% 100%;
-      animation: liq-shimmer 3s ease-in-out infinite;
+      background: linear-gradient(90deg, transparent 0%, rgba(160,255,190,.8) 50%, transparent 100%);
+      background-size: 35% 100%;
+      animation: electric-bolt 1.8s ease-in-out infinite;
     }
-    @keyframes liq-shimmer {
-      0%   { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
+    @keyframes electric-bolt {
+      0%   { background-position: -70% 0; opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { background-position: 170% 0; opacity: 0; }
     }
     .prog-bar-drop {
       position: absolute;
       top: 50%; right: -5px;
       transform: translateY(-50%);
-      width: 10px; height: 10px;
+      width: 8px; height: 8px;
       border-radius: 50%;
-      background: var(--gold-lt);
-      box-shadow: 0 0 8px var(--gold), 0 0 18px rgba(200,169,122,.5);
+      background: #4dffaa;
+      box-shadow: 0 0 6px #00c45e, 0 0 14px rgba(0,196,94,.6), 0 0 24px rgba(0,196,94,.3);
       pointer-events: none;
-      transition: opacity .3s, box-shadow .3s;
+      animation: pulse-drop 1.4s ease-in-out infinite;
     }
-    .prog-bar-outer:hover .prog-bar-drop {
-      box-shadow: 0 0 12px var(--gold-lt), 0 0 28px rgba(222,192,144,.7);
+    @keyframes pulse-drop {
+      0%,100% { box-shadow: 0 0 6px #00c45e, 0 0 14px rgba(0,196,94,.6); }
+      50%      { box-shadow: 0 0 10px #4dffaa, 0 0 22px rgba(0,196,94,.9), 0 0 36px rgba(0,196,94,.4); }
     }
     .prog-note {
       margin-top: .55rem;
@@ -1433,7 +1456,7 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="about-visual" id="aboutVisual">
-      <img class="about-photo" src="CONTENT/lifestyle/REF NANO PRO - FACE BEACH TWO SHOT.jpeg" alt="AI-IFM" />
+      <img class="about-photo" src="CONTENT/referencias/REF NANO BANANA - FACE HIGHLIGHT.png" alt="AI-IFM" />
     </div>
     <div class="about-text">
       <span class="s-label">El Proyecto</span>
@@ -1664,7 +1687,14 @@
   const loaderLine = document.getElementById('loaderLine');
 
   setTimeout(() => {
-    chars.forEach((c, i) => setTimeout(() => c.classList.add('show'), i * 90));
+    chars.forEach((c, i) => {
+      setTimeout(() => c.classList.add('show'), i * 90);
+      // Jellyfish wave — staggered after all chars appear
+      setTimeout(() => {
+        c.style.animationDelay = (i * 0.18) + 's';
+        c.classList.add('jelly');
+      }, 900 + i * 90);
+    });
     setTimeout(() => loaderLine.classList.add('show'), 300);
   }, 200);
 
@@ -1731,25 +1761,20 @@
     {
       phase: 'Completado',
       items: [
-        { name: 'Fase 1 — Iniciación y Herramientas',     pct: 100, status: 'done', note: 'Aprendí a navegar la plataforma Skool, entendí el ecosistema de herramientas IA disponibles y cómo se estructuran los niveles del bootcamp (Lvl 2 Apprentice → Lvl 9 Oracle). Base sólida para todo lo que vino después.' },
-        { name: 'Fase 2 — Imágenes IA: Workflow de Avatar', pct: 100, status: 'done', note: 'Dominé NanoBanana PRO en Higgsfield AI. Aprendí el flujo completo: idea → prompt con ChatGPT → generación → seleccionar mejor output como referencia → reutilizar esa referencia para escenas nuevas. La clave: las imágenes de referencia son todo para mantener consistencia de cara.' },
-        { name: 'Fase 3 — Videos IA: Clips Cinematográficos', pct: 100, status: 'done', note: 'Aprendí a generar clips de 3–5 segundos que cuentan micro-historias. Herramientas: Kling, Veo 3, Higgsfield Video. Insight clave: el movimiento de cámara vende el realismo — los shots estáticos se ven más "IA". Los detalles ambientales (viento, reflejos de luz, movimiento de fondo) marcan la diferencia.' },
+        { name: 'Fase 1 — Iniciación y Herramientas',       pct: 100, status: 'done', note: 'Plataforma Skool, comunidad, ecosistema de herramientas IA. Niveles: Lvl 2 Apprentice → Lvl 9 Oracle. Confianza 10/10.' },
+        { name: 'Fase 2 — Imágenes IA: Workflow de Avatar', pct: 100, status: 'done', note: 'NanoBanana PRO dominado. Flujo completo: idea → ChatGPT prompt → generación → referencia → nuevas escenas. Las imágenes de referencia fijan la identidad del personaje. Confianza 10/10.' },
+        { name: 'Fase 3 — Videos IA: Clips Cinematográficos', pct: 100, status: 'done', note: 'Clips de 3–5s que cuentan micro-historias. Kling, Veo 3, Higgsfield Video. El movimiento de cámara vende el realismo. Confianza 8/10.' },
+        { name: 'Fase 4 — Sonido y Edición',                pct: 100, status: 'done', note: 'Diseño de sonido ambiental, SFX impactantes, selección y timing de música, cortes suaves y transiciones cinematográficas. Confianza 5/10 — practicando en CapCut.' },
+        { name: 'Fase 5 — Consistencia del Personaje',      pct: 100, status: 'done', note: 'Consistencia = lo que separa "jugar con IA" de "construir una marca IA". Cara, cuerpo, peinado, ropa, expresiones, iluminación, ángulos y personalidad. Confianza 7/10.' },
+        { name: 'Fase 6 — AI Ads + UGC e Influencers',      pct: 100, status: 'done', note: 'Workflow de ads para cualquier producto. Storytelling de producto, videos estilo UGC, flows de ads y adverts. Confianza 6/10.' },
+        { name: 'Fase 7 — Social Media',                    pct: 100, status: 'done', note: 'Branding de página, sistemas de contenido, hooks virales, estrategias de crecimiento, construcción de comunidad. Confianza 7/10.' },
       ]
     },
     {
       phase: 'En Progreso',
       items: [
-        { name: 'Fase 4 — Sonido y Edición',              pct: 10, status: 'active', note: 'Comenzando ahora. Aprenderé diseño de sonido ambiental, SFX de impacto, selección y timing de música, cortes fluidos y transiciones cinematográficas. El objetivo: construir videos cortos completos uniendo imagen + video + sonido en un solo contenido.' },
-      ]
-    },
-    {
-      phase: 'Próximamente',
-      items: [
-        { name: 'Fase 5 — Consistencia del Personaje',    pct: 0, status: 'upcoming', note: 'Técnicas avanzadas para mantener la identidad de AI-IFM a través de todos los tipos de contenido.' },
-        { name: 'Fase 6 — Ads IA + UGC e Influencers',   pct: 0, status: 'upcoming', note: 'La capa de monetización — creación de anuncios, contenido UGC y pipeline de influencer IA.' },
-        { name: 'Fase 7 — Redes Sociales',                pct: 0, status: 'upcoming', note: 'Estrategia, calendario y lanzamiento oficial de las cuentas de AI-IFM.' },
-        { name: 'Fase 8 — Filmmaking IA',                 pct: 0, status: 'upcoming', note: 'Narrativa de formato largo y producción cinematográfica a escala.' },
-        { name: 'Fase 9 — Clonar y Escalar: Automatización', pct: 0, status: 'upcoming', note: 'Pipeline de contenido 100% automatizado — el objetivo final de todo el proceso.' },
+        { name: 'Fase 8 — AI Filmmaking',                   pct: 10, status: 'active', note: 'Estructura de historia y guión, planificación de escenas y shot lists, ángulos de cámara, iluminación/realismo, diálogo/lip-sync, diseño de sonido, edición y ritmo.' },
+        { name: 'Fase 9 — Clone & Scale: Automatización',   pct: 8,  status: 'active', note: 'Clonación digital (cara, voz, personalidad), sistemas de automatización IA, contenido longform, repurposing a escala, sistemas de monetización con clones.' },
       ]
     }
   ];
