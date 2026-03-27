@@ -772,12 +772,54 @@
       .prog-item-name { font-size: 1rem; }
     }
 
+    /* ── H-GALLERY TOGGLE ── */
+    .hg-toggle-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 3rem 0 1rem;
+    }
+    .hg-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .8rem;
+      padding: 1rem 2.8rem;
+      border: 1px solid rgba(200,169,122,.3);
+      background: none;
+      color: rgba(200,169,122,.7);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .68rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      cursor: none;
+      transition: border-color .3s, color .3s, background .3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .hg-toggle-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .35s;
+      z-index: -1;
+    }
+    .hg-toggle-btn:hover { border-color: var(--gold); color: var(--dark); }
+    .hg-toggle-btn:hover::before { transform: scaleX(1); }
+    .hg-toggle-arrow { transition: transform .4s ease; display: inline-block; }
+    .hg-toggle-btn.open .hg-toggle-arrow { transform: rotate(180deg); }
+
     /* ── HORIZONTAL GALLERY ── */
     #h-gallery {
       height: 550vh;
       position: relative;
       background: var(--dark-2);
+      display: none;
+      opacity: 0;
+      transition: opacity .5s ease;
     }
+    #h-gallery.open { opacity: 1; }
 
     .h-sticky {
       position: sticky;
@@ -1456,7 +1498,35 @@
     <div class="prog-phases" id="progPhases"></div>
   </section>
 
-  <!-- HORIZONTAL GALLERY -->
+  <!-- FULL GALLERY -->
+  <section id="gallery">
+    <div class="gal-header">
+      <div>
+        <span class="s-label">Biblioteca Completa</span>
+        <h2 class="s-title">Todos los <em>Assets</em></h2>
+      </div>
+      <div class="gal-count-display"><strong id="galCount">30</strong> assets</div>
+    </div>
+    <div class="gal-filter" id="galFilter">
+      <button class="gal-btn active" data-f="all">All <sup id="cn-all">18</sup></button>
+      <button class="gal-btn" data-f="brand">Brand <sup id="cn-brand">—</sup></button>
+      <button class="gal-btn" data-f="car">Car <sup id="cn-car">—</sup></button>
+      <button class="gal-btn" data-f="gym">Gym <sup id="cn-gym">0</sup></button>
+      <button class="gal-btn" data-f="lifestyle">Lifestyle <sup id="cn-lifestyle">—</sup></button>
+      <button class="gal-btn" data-f="referencias">Referencias <sup id="cn-referencias">—</sup></button>
+      <button class="gal-btn" data-f="travel">Travel <sup id="cn-travel">—</sup></button>
+    </div>
+    <div class="gal-grid" id="galGrid"></div>
+
+    <!-- Toggle for horizontal gallery -->
+    <div class="hg-toggle-wrap">
+      <button class="hg-toggle-btn magnetic" id="hgToggleBtn">
+        <span class="hg-toggle-arrow">↓</span>&nbsp;&nbsp;Ver Horizontal Gallery
+      </button>
+    </div>
+  </section>
+
+  <!-- HORIZONTAL GALLERY (collapsed by default) -->
   <section id="h-gallery">
     <div class="h-sticky" id="hSticky">
       <div class="h-header">
@@ -1500,27 +1570,6 @@
       </div>
       <div class="h-progress-wrap"><div class="h-progress-bar" id="hBar"></div></div>
     </div>
-  </section>
-
-  <!-- FULL GALLERY -->
-  <section id="gallery">
-    <div class="gal-header">
-      <div>
-        <span class="s-label">Biblioteca Completa</span>
-        <h2 class="s-title">Todos los <em>Assets</em></h2>
-      </div>
-      <div class="gal-count-display"><strong id="galCount">30</strong> assets</div>
-    </div>
-    <div class="gal-filter" id="galFilter">
-      <button class="gal-btn active" data-f="all">All <sup id="cn-all">18</sup></button>
-      <button class="gal-btn" data-f="brand">Brand <sup id="cn-brand">—</sup></button>
-      <button class="gal-btn" data-f="car">Car <sup id="cn-car">—</sup></button>
-      <button class="gal-btn" data-f="gym">Gym <sup id="cn-gym">0</sup></button>
-      <button class="gal-btn" data-f="lifestyle">Lifestyle <sup id="cn-lifestyle">—</sup></button>
-      <button class="gal-btn" data-f="referencias">Referencias <sup id="cn-referencias">—</sup></button>
-      <button class="gal-btn" data-f="travel">Travel <sup id="cn-travel">—</sup></button>
-    </div>
-    <div class="gal-grid" id="galGrid"></div>
   </section>
 
   <!-- TOOLS -->
@@ -1806,6 +1855,27 @@
     hCounter.textContent = String(idx + 1).padStart(2,'0') + ' / ' + String(hItems.length).padStart(2,'0');
   }
   window.addEventListener('scroll', updateHGallery, { passive: true });
+
+  // ── H-GALLERY TOGGLE ──
+  const hgBtn = document.getElementById('hgToggleBtn');
+  const hgSec = document.getElementById('h-gallery');
+  hgBtn.addEventListener('click', () => {
+    const isOpen = hgSec.classList.contains('open');
+    if (isOpen) {
+      hgSec.style.opacity = '0';
+      setTimeout(() => { hgSec.style.display = 'none'; hgSec.classList.remove('open'); }, 450);
+      hgBtn.classList.remove('open');
+      hgBtn.querySelector('.hg-toggle-arrow').textContent = '↓';
+      hgBtn.childNodes[2].textContent = '\u00a0\u00a0Ver Horizontal Gallery';
+    } else {
+      hgSec.style.display = 'block';
+      requestAnimationFrame(() => { hgSec.style.opacity = '0'; requestAnimationFrame(() => { hgSec.classList.add('open'); }); });
+      hgBtn.classList.add('open');
+      hgBtn.querySelector('.hg-toggle-arrow').textContent = '↑';
+      hgBtn.childNodes[2].textContent = '\u00a0\u00a0Cerrar Horizontal Gallery';
+      setTimeout(() => hgSec.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }
+  });
 
   // ── SCROLL REVEAL ──
   const revObs = new IntersectionObserver((entries) => {
