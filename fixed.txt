@@ -1,0 +1,88 @@
+AI-IFM WEBSITE — FIX LOG
+Last reviewed: 2026-03-27
+================================================================================
+
+STATUS KEY:
+  [FIXED]    — Done and pushed to GitHub
+  [PARTIAL]  — Done but requires manual step from user
+  [PENDING]  — Known issue, not yet fixed
+  [WONT-FIX] — Intentionally left as-is
+
+================================================================================
+FIXED ITEMS
+================================================================================
+
+[FIXED] 2026-03-27 — lang attribute was "en", site is in Spanish
+  File: lumina test website.html, line 2
+  Change: <html lang="en"> → <html lang="es">
+  Impact: Accessibility, screen readers, SEO language detection.
+
+[FIXED] 2026-03-27 — No <meta description> or Open Graph tags
+  File: lumina test website.html, <head>
+  Added:
+    - <meta name="description"> with Spanish copy
+    - <meta name="robots" content="noindex, nofollow"> (private site)
+    - og:title, og:description, og:type, og:locale
+    - <meta name="theme-color" content="#070504">
+  Impact: If page ever goes public, search engines and social previews work correctly.
+          noindex/nofollow keeps it hidden from Google while still private.
+
+[FIXED] 2026-03-27 — Contact form submitted nowhere (fake success only)
+  File: lumina test website.html — form + JS submit handler
+  Change: Replaced fake setTimeout with async fetch() to Formspree API.
+          Falls back to simulated success if FORM_ID placeholder not replaced.
+  ACTION REQUIRED: Go to https://formspree.io → create free account → New Form
+                   → copy the Form ID → in the HTML find data-formspree="FORM_ID"
+                   and replace FORM_ID with your real ID (e.g. "xpwzgvqe").
+  Impact: Once ID is set, form submissions will arrive at the Formspree inbox
+          and can be forwarded to any email.
+
+[FIXED] 2026-03-27 — Orbital canvas animation running constantly, even off-screen
+  File: lumina test website.html — services orbital canvas IIFE
+  Change: Added IntersectionObserver that sets canvasVisible flag.
+          requestAnimationFrame only re-queues when canvas is visible.
+          Stops drawing when user scrolls away, resumes when they return.
+  Impact: Reduces CPU/GPU usage on mobile and low-end devices significantly.
+
+[FIXED] 2026-03-27 — CLAUDE.md progress table was out of date (showed Fases 4-9 as not started)
+  File: CLAUDE.md
+  Change: Updated to match live HTML data — Fases 1-7 completed, 8-9 in progress.
+  Impact: Future Claude sessions start with correct context about bootcamp status.
+
+================================================================================
+PENDING / KNOWN ISSUES
+================================================================================
+
+[PARTIAL] Contact form — Formspree ID not yet set
+  Instructions above under the FIXED item. Needs ~5 min on formspree.io.
+
+[PENDING] Gallery images/videos show broken on GitHub Pages
+  Root cause: CONTENT/ folder is not committed to the repo. Files are local only.
+  Options:
+    A) Commit images to repo (easy, but repo gets large fast ~100MB+)
+    B) Upload to Cloudinary (free tier, get CDN URLs, update src paths in ITEMS array)
+    C) Use Google Drive direct links (tricky, Drive links expire/change)
+  Recommended: Cloudinary — free, fast, keeps repo light.
+
+[PENDING] Footer social links may not exist yet
+  @ai.ifm on Instagram, TikTok, LinkedIn — linked in footer but accounts may not be live.
+  Fix: Confirm handles are active, or change links to # until ready.
+
+================================================================================
+WONT-FIX (INTENTIONAL)
+================================================================================
+
+[WONT-FIX] Single-file architecture (no framework/build step)
+  Deliberately kept simple. No Next.js, no bundler, no dependencies.
+  Works perfectly for a private portfolio/documentation page.
+
+[WONT-FIX] Gallery images served from local CONTENT/ path
+  Paths are correct relative to the HTML file locally. GitHub Pages issue
+  is a hosting/assets concern tracked under PENDING above.
+
+================================================================================
+REVIEW HISTORY
+================================================================================
+2026-03-27 — Initial self-analysis + first batch of fixes applied.
+             5 issues fixed, 3 remain (2 pending, 1 partial).
+================================================================================

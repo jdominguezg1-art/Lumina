@@ -1,9 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI-IFM</title>
+  <title>AI-IFM — Influencer IA</title>
+  <meta name="description" content="AI-IFM — Avatar IA creado con NanoBanana PRO, Kling y Veo 3. Documentación en progreso del proceso de creación de un influencer IA de cero." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:title" content="AI-IFM — Influencer IA" />
+  <meta property="og:description" content="Ella no existe — yo la construí. Una documentación en progreso del proceso de creación de un avatar IA." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="theme-color" content="#070504" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@200;300;400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1632,7 +1639,8 @@
         <div><div class="cd-label">Respuesta</div><div class="cd-val">Dentro de 48 horas</div></div>
       </div>
     </div>
-    <form class="form" id="inquiryForm" novalidate>
+    <!-- Formspree: replace FORM_ID with your ID from formspree.io/forms -->
+    <form class="form" id="inquiryForm" novalidate data-formspree="FORM_ID">
       <div class="f-row">
         <div class="f-group"><input type="text" id="fname" placeholder="x" required /><label for="fname">First Name</label></div>
         <div class="f-group"><input type="text" id="lname" placeholder="x" required /><label for="lname">Last Name</label></div>
@@ -1915,6 +1923,11 @@
     function resize() { c.width = c.offsetWidth; c.height = c.offsetHeight; }
     window.addEventListener('resize', resize);
     resize();
+    let canvasVisible = false;
+    new IntersectionObserver(entries => {
+      canvasVisible = entries[0].isIntersecting;
+      if (canvasVisible) requestAnimationFrame(drawFrame);
+    }, { threshold: 0.01 }).observe(c);
 
     const rings = [
       { rx: .46, ry: .20, tilt:  0.0,  speed:  0.00055, dot: 0.0,  dotR: 3.5, col: '200,169,122' },
@@ -1964,9 +1977,9 @@
         ctx.restore();
       });
 
-      requestAnimationFrame(drawFrame);
+      if (canvasVisible) requestAnimationFrame(drawFrame);
     }
-    requestAnimationFrame(drawFrame);
+    // initial kick handled by IntersectionObserver above
   })();
 
   // ── HERO BG SCROLL ZOOM ──
@@ -2189,18 +2202,53 @@
   });
 
   // ── FORM ──
-  document.getElementById('inquiryForm').addEventListener('submit', function(e) {
+  document.getElementById('inquiryForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const btn = document.getElementById('submitBtn');
-    btn.textContent = 'Inquiry Sent ✓';
-    btn.classList.add('sent');
-    btn.disabled = true;
-    setTimeout(() => {
-      btn.textContent = 'Send Inquiry';
-      btn.classList.remove('sent');
+    const btn    = document.getElementById('submitBtn');
+    const formId = this.dataset.formspree;
+    const data   = new FormData(this);
+
+    btn.textContent = 'Enviando...';
+    btn.disabled    = true;
+
+    // If no real Formspree ID yet, simulate success
+    if (!formId || formId === 'FORM_ID') {
+      setTimeout(() => {
+        btn.textContent = 'Inquiry Sent ✓';
+        btn.classList.add('sent');
+        setTimeout(() => {
+          btn.textContent = 'Send Inquiry';
+          btn.classList.remove('sent');
+          btn.disabled = false;
+          this.reset();
+        }, 3500);
+      }, 800);
+      return;
+    }
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${formId}`, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        btn.textContent = 'Inquiry Sent ✓';
+        btn.classList.add('sent');
+        this.reset();
+        setTimeout(() => {
+          btn.textContent = 'Send Inquiry';
+          btn.classList.remove('sent');
+          btn.disabled = false;
+        }, 4000);
+      } else {
+        btn.textContent = 'Error — Try Again';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Error — Try Again';
       btn.disabled = false;
-      this.reset();
-    }, 4000);
+    }
   });
 
   // ── HERO CANVAS — AURORA + SHADER + PARTICLES ──
