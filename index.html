@@ -275,11 +275,14 @@
     .mobile-menu a:hover { color: var(--gold); }
 
     /* ── HERO ── */
-    .hero-bg-img {
+    .hero-bg-video {
       position: absolute;
       inset: -6%;
-      background: url('CONTENT/brand/REF NANO PRO - FACE BLUE ASYMMETRICAL SHOT.png') center 15% / cover no-repeat;
-      opacity: 0.24;
+      width: 112%;
+      height: 112%;
+      object-fit: cover;
+      object-position: center 20%;
+      opacity: 0.32;
       z-index: 0;
       will-change: transform;
       transform-origin: center;
@@ -1508,7 +1511,9 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-bg-img" id="heroBgImg"></div>
+    <video class="hero-bg-video" id="heroBgImg" autoplay muted loop playsinline>
+      <source src="CONTENT/hf_20260328_010900_40cd0426-de6b-4532-b78b-4069755c2ece.mp4" type="video/mp4">
+    </video>
     <canvas id="heroCanvas" class="hero-canvas"></canvas>
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -1883,30 +1888,47 @@
       phEl.innerHTML = `<div class="prog-phase-label">${ph.phase}</div><div class="prog-items"></div>`;
       const itemsEl = phEl.querySelector('.prog-items');
 
-      ph.items.forEach(it => {
-        const [bClass, bLabel] = BADGE[it.status];
+      if (ph.phase === 'Completado') {
+        // Single consolidated bar for all completed phases
         const div = document.createElement('div');
         div.className = 'prog-item';
         div.innerHTML = `
           <div class="prog-item-top">
-            <span class="prog-item-name">${it.name}</span>
+            <span class="prog-item-name">Fases 1 – 7 · Bootcamp Completado</span>
             <div class="prog-item-right">
-              <span class="prog-badge ${bClass}">${bLabel}</span>
-              <span class="prog-pct-num">${it.pct}%</span>
+              <span class="prog-badge done">Completado ✓</span>
+              <span class="prog-pct-num">100%</span>
             </div>
           </div>
-          <div class="prog-bar-outer" data-pct="${it.pct}">
+          <div class="prog-bar-outer" data-pct="100">
             <div class="prog-bar-fill"><div class="prog-bar-drop"></div></div>
-          </div>
-          <div class="prog-note">${it.note}</div>`;
-
-        // Toggle note on click
-        div.querySelector('.prog-item-top').addEventListener('click', () => {
-          div.classList.toggle('expanded');
-        });
-
+          </div>`;
         itemsEl.appendChild(div);
-      });
+      } else {
+        ph.items.forEach(it => {
+          const [bClass, bLabel] = BADGE[it.status];
+          const div = document.createElement('div');
+          div.className = 'prog-item';
+          div.innerHTML = `
+            <div class="prog-item-top">
+              <span class="prog-item-name">${it.name}</span>
+              <div class="prog-item-right">
+                <span class="prog-badge ${bClass}">${bLabel}</span>
+                <span class="prog-pct-num">${it.pct}%</span>
+              </div>
+            </div>
+            <div class="prog-bar-outer" data-pct="${it.pct}">
+              <div class="prog-bar-fill"><div class="prog-bar-drop"></div></div>
+            </div>
+            <div class="prog-note">${it.note}</div>`;
+
+          div.querySelector('.prog-item-top').addEventListener('click', () => {
+            div.classList.toggle('expanded');
+          });
+
+          itemsEl.appendChild(div);
+        });
+      }
       container.appendChild(phEl);
     });
 
@@ -2066,6 +2088,16 @@
 
   // ── GALLERY DATA ──
   const ITEMS = [
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_003100_a7ace570-9a00-4385-86a9-3459e8c8c4cf.png', title:'NanoBanana 01' },
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_003215_4e119d52-5ae8-4020-949c-dd7268fa6893.png', title:'NanoBanana 02' },
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_003305_c284dc71-090d-465a-86bd-e85fc1fffc27.png', title:'NanoBanana 03' },
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_003407_afd3ddbf-b902-48d6-ae94-bccacaac0464.png', title:'NanoBanana 04' },
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_004033_82af9cc1-4e44-44d9-b20c-91593ddc4f5f.png', title:'NanoBanana 05' },
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_010016_439fd8d0-2037-4fcf-ae18-499d2b4ba89d.png', title:'NanoBanana 06' },
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_010109_28c6d368-723a-4f77-be1b-f8b751aeeaaf.png', title:'NanoBanana 07' },
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_010256_1e78b903-07bf-404c-a242-b9c0bde10c3c.png', title:'NanoBanana 08' },
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_010350_ad33595d-6411-4baa-9a3e-b8757e7ab7e5.png', title:'NanoBanana 09' },
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_010539_8cbe49c0-5fe6-40d2-b0ea-7a0fad5af42e.png', title:'NanoBanana 10' },
     { type:'photo', cat:'brand referencias', src:'CONTENT/brand/REF1 NANO PRO.jpeg',                                        title:'Golden Hour' },
     { type:'photo', cat:'brand',             src:'CONTENT/brand/REF NANO PRO - BEACH CLOTHES.jpeg',                         title:'Shore Style' },
     { type:'photo', cat:'brand referencias', src:'CONTENT/brand/REF NANO PRO - FACE BLUE ASYMMETRICAL SHOT.png',            title:'Electric Blue' },

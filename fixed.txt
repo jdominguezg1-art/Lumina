@@ -85,4 +85,29 @@ REVIEW HISTORY
 ================================================================================
 2026-03-27 — Initial self-analysis + first batch of fixes applied.
              5 issues fixed, 3 remain (2 pending, 1 partial).
+
+2026-03-27 — Added 13 new lifestyle/brand assets to gallery (30 → 43 total).
+             BUG: Images were not displaying on GitHub Pages because the new
+             files in CONTENT/ root were not committed to the repo.
+             FIX: git add + commit + push the 13 image files directly.
+             Root cause: new images dropped in CONTENT/ root (not a subfolder)
+             were untracked. Always run `git status` after adding new images.
+
+2026-03-27 — Hero background replaced: static photo → looping video.
+             File: lumina test website.html / index.html
+             Change: <div class="hero-bg-img"> replaced with <video class="hero-bg-video">
+             Video: CONTENT/hf_20260328_010900_40cd0426-de6b-4532-b78b-4069755c2ece.mp4
+             kept id="heroBgImg" so scroll-zoom JS works unchanged.
+
+2026-03-27 — Progress section: collapsed 7 individual 100% bars → 1 COMPLETED bar.
+             File: lumina test website.html / index.html — buildProgress()
+             Change: Completado group now renders a single row:
+             "Fases 1 – 7 · Bootcamp Completado" | badge: Completado ✓ | 100%
+             En Progreso group (Fases 8–9) keeps individual bars.
+
+2026-03-27 — Added 10 NanoBanana images to gallery top (30 → 40 total).
+             Files: CONTENT/hf_20260328_003100_*.png through hf_20260328_010539_*.png
+             Titles: NanoBanana 01–10, cat: referencias
+             Inserted at top of ITEMS array so they appear first in grid.
+             Also committed hero video (1 MP4) + all 10 PNGs to repo.
 ================================================================================
