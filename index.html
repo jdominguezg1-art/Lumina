@@ -1405,31 +1405,78 @@
   <!-- LOADER -->
   <div id="loader">
     <div class="ld-sil-wrap">
-      <svg id="ldSilSvg" viewBox="0 0 90 265" xmlns="http://www.w3.org/2000/svg">
+      <svg id="ldSilSvg" viewBox="0 0 90 270" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="ldGrad" x1="0" y1="265" x2="0" y2="0" gradientUnits="userSpaceOnUse">
-            <stop offset="0%"   stop-color="#A0784A"/>
-            <stop offset="42%"  stop-color="#C8A97A"/>
-            <stop offset="78%"  stop-color="#DFC090"/>
-            <stop offset="100%" stop-color="#F5F0E8" stop-opacity="0.88"/>
+          <linearGradient id="ldGrad" x1="0" y1="270" x2="0" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stop-color="#8A6030"/>
+            <stop offset="30%"  stop-color="#C8A97A"/>
+            <stop offset="72%"  stop-color="#DFC090"/>
+            <stop offset="100%" stop-color="#F5F0E8" stop-opacity="0.9"/>
           </linearGradient>
           <clipPath id="ldClip">
-            <rect id="ldReveal" x="-5" y="265" width="100" height="0"/>
+            <rect id="ldReveal" x="-5" y="270" width="100" height="0"/>
           </clipPath>
         </defs>
-        <!-- base outline (dim, always visible) -->
+
+        <!-- ── BASE OUTLINE — always visible, dim gold ── -->
         <g class="sil-outline">
-          <path d="M 28,22 Q 16,8 6,22 Q -2,40 2,70 Q 6,92 12,112 Q 14,96 16,76 Q 18,54 22,36 Q 24,24 28,22 Z"/>
-          <ellipse cx="45" cy="30" rx="18" ry="22"/>
-          <rect x="40" y="52" width="10" height="14" rx="3"/>
-          <path d="M 24,66 Q 14,70 10,84 L 12,128 Q 11,140 18,152 Q 11,165 8,174 L 10,226 L 12,258 L 22,260 L 24,228 L 26,184 Q 33,176 38,175 Q 52,175 57,176 L 62,184 L 64,228 L 66,260 L 78,260 L 80,228 L 82,174 Q 79,165 72,152 Q 79,140 78,128 L 80,84 Q 76,70 66,66 Q 56,62 45,62 Q 34,62 24,66 Z"/>
+          <!-- Long hair – left sweep flowing past shoulder -->
+          <path d="M 32,14 C 24,2 10,0 4,12 C 0,24 2,50 6,74 C 8,90 12,112 14,128 C 14,108 14,82 18,60 C 20,42 24,16 32,14 Z"/>
+          <!-- Long hair – right sweep -->
+          <path d="M 58,14 C 66,2 80,2 86,14 C 90,26 88,52 84,76 C 82,92 78,112 76,128 C 76,108 76,82 72,60 C 70,42 66,16 58,14 Z"/>
+          <!-- Head -->
+          <ellipse cx="45" cy="24" rx="15" ry="18"/>
+          <!-- Left earring drop -->
+          <ellipse cx="30" cy="44" rx="1.8" ry="3"/>
+          <!-- Right earring drop -->
+          <ellipse cx="60" cy="44" rx="1.8" ry="3"/>
+          <!-- Neck -->
+          <path d="M 40,42 L 38,58 Q 45,63 52,58 L 50,42 Z"/>
+          <!-- Décolletage notch -->
+          <path d="M 33,62 Q 39,70 45,68 Q 51,70 57,62" fill="none" stroke="rgba(200,169,122,.18)" stroke-width="0.7"/>
+          <!-- Torso + dress — defined waist, A-line skirt -->
+          <path d="
+            M 22,60
+            C 14,64 8,74 6,90
+            L 8,112
+            Q 6,126 14,134
+            Q 6,148 2,165
+            C 0,183 0,212 0,270
+            L 90,270
+            C 90,212 90,183 88,165
+            Q 84,148 76,134
+            Q 84,126 82,112
+            L 84,90
+            C 82,74 76,64 68,60
+            Q 57,55 45,55
+            Q 33,55 22,60 Z
+          "/>
         </g>
-        <!-- golden fill revealed from bottom up -->
+
+        <!-- ── GOLDEN FILL — revealed bottom-up by clip ── -->
         <g clip-path="url(#ldClip)">
-          <path d="M 28,22 Q 16,8 6,22 Q -2,40 2,70 Q 6,92 12,112 Q 14,96 16,76 Q 18,54 22,36 Q 24,24 28,22 Z" fill="url(#ldGrad)"/>
-          <ellipse cx="45" cy="30" rx="18" ry="22" fill="url(#ldGrad)"/>
-          <rect x="40" y="52" width="10" height="14" rx="3" fill="url(#ldGrad)"/>
-          <path d="M 24,66 Q 14,70 10,84 L 12,128 Q 11,140 18,152 Q 11,165 8,174 L 10,226 L 12,258 L 22,260 L 24,228 L 26,184 Q 33,176 38,175 Q 52,175 57,176 L 62,184 L 64,228 L 66,260 L 78,260 L 80,228 L 82,174 Q 79,165 72,152 Q 79,140 78,128 L 80,84 Q 76,70 66,66 Q 56,62 45,62 Q 34,62 24,66 Z" fill="url(#ldGrad)"/>
+          <path d="M 32,14 C 24,2 10,0 4,12 C 0,24 2,50 6,74 C 8,90 12,112 14,128 C 14,108 14,82 18,60 C 20,42 24,16 32,14 Z" fill="url(#ldGrad)"/>
+          <path d="M 58,14 C 66,2 80,2 86,14 C 90,26 88,52 84,76 C 82,92 78,112 76,128 C 76,108 76,82 72,60 C 70,42 66,16 58,14 Z" fill="url(#ldGrad)"/>
+          <ellipse cx="45" cy="24" rx="15" ry="18" fill="url(#ldGrad)"/>
+          <ellipse cx="30" cy="44" rx="1.8" ry="3" fill="url(#ldGrad)"/>
+          <ellipse cx="60" cy="44" rx="1.8" ry="3" fill="url(#ldGrad)"/>
+          <path d="M 40,42 L 38,58 Q 45,63 52,58 L 50,42 Z" fill="url(#ldGrad)"/>
+          <path d="
+            M 22,60
+            C 14,64 8,74 6,90
+            L 8,112
+            Q 6,126 14,134
+            Q 6,148 2,165
+            C 0,183 0,212 0,270
+            L 90,270
+            C 90,212 90,183 88,165
+            Q 84,148 76,134
+            Q 84,126 82,112
+            L 84,90
+            C 82,74 76,64 68,60
+            Q 57,55 45,55
+            Q 33,55 22,60 Z
+          " fill="url(#ldGrad)"/>
         </g>
       </svg>
     </div>
@@ -1694,7 +1741,7 @@
   const ldBar     = document.getElementById('ldBar');
   const ldReveal  = document.getElementById('ldReveal');
   const ldSilSvg  = document.getElementById('ldSilSvg');
-  const LD_H = 265; // matches SVG viewBox height
+  const LD_H = 270; // matches SVG viewBox height
 
   function dismissLoader() {
     document.getElementById('loader').classList.add('out');
