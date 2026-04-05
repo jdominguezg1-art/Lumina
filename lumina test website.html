@@ -1215,7 +1215,7 @@
 
   <!-- HERO -->
   <section id="hero">
-    <video class="hero-bg-video" id="heroBgImg" autoplay muted loop playsinline>
+    <video class="hero-bg-video" id="heroBgImg" autoplay muted loop playsinline disableremoteplayback x-webkit-airplay="deny">
       <source src="CONTENT/hf_20260328_010900_40cd0426-de6b-4532-b78b-4069755c2ece.mp4" type="video/mp4">
     </video>
     <canvas id="heroCanvas" class="hero-canvas"></canvas>
@@ -1561,9 +1561,19 @@
     // initial kick handled by IntersectionObserver above
   })();
 
-  // ── HERO BG SCROLL ZOOM ──
+  // ── SUPPRESS BROWSER MEDIA SESSION for background video ──
   const heroBgEl = document.getElementById('heroBgImg');
-  const heroEl   = document.getElementById('hero');
+  heroBgEl.disableRemotePlayback = true;
+  if ('mediaSession' in navigator) {
+    heroBgEl.addEventListener('play', () => {
+      navigator.mediaSession.metadata = null;
+      navigator.mediaSession.setActionHandler('play', null);
+      navigator.mediaSession.setActionHandler('pause', null);
+    }, { once: true });
+  }
+
+  // ── HERO BG SCROLL ZOOM ──
+  const heroEl = document.getElementById('hero');
   window.addEventListener('scroll', () => {
     const p = Math.min(1, window.scrollY / (heroEl.offsetHeight * 0.9));
     heroBgEl.style.transform = `scale(${1 + p * 0.14})`;
