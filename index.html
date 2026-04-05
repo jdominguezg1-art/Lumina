@@ -105,7 +105,7 @@
     }
     body.cur-hover #c-ring { width: 60px; height: 60px; border-color: var(--gold); }
     body.cur-hover #c-dot  { width: 5px; height: 5px; background: var(--gold-lt); }
-    @media (hover:none) { #c-dot,#c-ring { display:none } body { cursor:auto } }
+    @media (hover:none), (pointer:coarse) { #c-dot,#c-ring { display:none !important } body { cursor:auto !important } }
 
     /* ── LOADER ── */
     #loader {
@@ -1435,20 +1435,26 @@
   // ── CURSOR ──
   const dot = document.getElementById('c-dot');
   const ring = document.getElementById('c-ring');
-  let mx = 0, my = 0, rx = 0, ry = 0;
+  const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  (function animCursor() {
-    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
-    rx += (mx - rx) * .11; ry += (my - ry) * .11;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(animCursor);
-  })();
-
-  document.querySelectorAll('a,button,.g-item,.svc-row,.test-card,.lb-thumb').forEach(el => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('cur-hover'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('cur-hover'));
-  });
+  if (isTouch) {
+    dot.style.display = 'none';
+    ring.style.display = 'none';
+    document.body.style.cursor = 'auto';
+  } else {
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    (function animCursor() {
+      dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+      rx += (mx - rx) * .11; ry += (my - ry) * .11;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animCursor);
+    })();
+    document.querySelectorAll('a,button,.g-item,.svc-row,.test-card,.lb-thumb').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cur-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cur-hover'));
+    });
+  }
 
   // ── NAV ──
   const nav = document.getElementById('nav');
