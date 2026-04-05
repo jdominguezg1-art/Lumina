@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI-IFM — Influencer IA</title>
-  <meta name="description" content="AI-IFM — Avatar IA construida con NanoBanana PRO, Kling y Veo 3. Proyecto concluido: identidad definida, biblioteca de assets lista, pipeline preparado para automatización." />
+  <title>Lumina — Avatar IA</title>
+  <meta name="description" content="Lumina — Avatar IA construida con NanoBanana PRO, Kling y Veo 3. Proyecto concluido: identidad definida, biblioteca de assets lista, pipeline preparado para automatización." />
   <meta name="robots" content="noindex, nofollow" />
-  <meta property="og:title" content="AI-IFM — Influencer IA" />
-  <meta property="og:description" content="Ella no existe — yo la construí. Proyecto concluido: un avatar IA con identidad, biblioteca de assets y pipeline listo para escalar." />
+  <meta property="og:title" content="Lumina — Avatar IA" />
+  <meta property="og:description" content="Ella no existe — yo la construí. Lumina: un avatar IA con identidad propia, biblioteca de assets y pipeline listo para escalar." />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="es_ES" />
   <meta name="theme-color" content="#070504" />
@@ -652,187 +652,6 @@
     .svc-row.in-view .svc-name { color: var(--cream); }
     .svc-row.in-view .svc-desc { color: rgba(245,240,232,.5); }
 
-    /* ── PROGRESS ── */
-    #progress {
-      padding: 10rem 6vw;
-      background: var(--dark);
-      border-top: 1px solid rgba(200,169,122,.08);
-    }
-    .prog-header { margin-bottom: 5rem; }
-    .prog-master-wrap {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      margin: 2.5rem 0 4rem;
-    }
-    .prog-master-label {
-      font-size: .62rem;
-      letter-spacing: .25em;
-      text-transform: uppercase;
-      color: var(--gold);
-      white-space: nowrap;
-    }
-    .prog-master-outer {
-      flex: 1;
-      height: 2px;
-      background: rgba(200,169,122,.12);
-      border-radius: 2px;
-      position: relative;
-      overflow: visible;
-    }
-    .prog-master-fill {
-      height: 100%;
-      border-radius: 2px;
-      background: linear-gradient(90deg, #0a3320, #00c45e, #4dffaa);
-      width: 0%;
-      transition: width 1.8s cubic-bezier(.22,1,.36,1);
-      position: relative;
-      box-shadow: 0 0 8px rgba(0,196,94,.4);
-    }
-    .prog-master-fill::after {
-      content: '';
-      position: absolute;
-      right: -5px; top: 50%;
-      transform: translateY(-50%);
-      width: 11px; height: 11px;
-      border-radius: 50%;
-      background: #4dffaa;
-      box-shadow: 0 0 8px #00c45e, 0 0 20px rgba(0,196,94,.7);
-    }
-    .prog-master-pct {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      font-weight: 300;
-      color: var(--gold-lt);
-      min-width: 3.5rem;
-      text-align: right;
-    }
-
-    .prog-phases { display: flex; flex-direction: column; gap: 4rem; }
-    .prog-phase-label {
-      font-size: .58rem;
-      letter-spacing: .35em;
-      text-transform: uppercase;
-      color: rgba(200,169,122,.4);
-      margin-bottom: 1.8rem;
-    }
-    .prog-items { display: flex; flex-direction: column; gap: 2rem; }
-    .prog-item { position: relative; }
-    .prog-item-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: .7rem;
-      gap: 1rem;
-    }
-    .prog-item-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem;
-      font-weight: 300;
-      color: var(--cream);
-      letter-spacing: .03em;
-    }
-    .prog-item-right { display: flex; align-items: center; gap: 1rem; }
-    .prog-badge {
-      font-size: .58rem;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      padding: .25rem .7rem;
-      border-radius: 20px;
-      white-space: nowrap;
-    }
-    .prog-badge.done     { background: rgba(200,169,122,.15); color: var(--gold); border: 1px solid rgba(200,169,122,.3); }
-    .prog-badge.active   { background: rgba(100,200,120,.08); color: #7ecf8e;     border: 1px solid rgba(100,200,120,.25); }
-    .prog-badge.upcoming { background: rgba(200,169,122,.05); color: rgba(245,240,232,.3); border: 1px solid rgba(200,169,122,.1); }
-    .prog-pct-num {
-      font-size: .75rem;
-      font-weight: 300;
-      letter-spacing: .1em;
-      color: rgba(200,169,122,.7);
-      min-width: 2.8rem;
-      text-align: right;
-    }
-
-    /* Liquid bar */
-    .prog-bar-outer {
-      position: relative;
-      height: 3px;
-      background: rgba(200,169,122,.1);
-      border-radius: 3px;
-      overflow: visible;
-    }
-    .prog-bar-outer:hover .prog-bar-fill { filter: brightness(1.2); }
-    .prog-bar-fill {
-      height: 100%;
-      border-radius: 3px;
-      background: linear-gradient(90deg, #062a18 0%, #00c45e 55%, #4dffaa 100%);
-      width: 0%;
-      transition: width 1.4s cubic-bezier(.22,1,.36,1), filter .3s;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 0 6px rgba(0,196,94,.3), 0 0 12px rgba(0,196,94,.15);
-    }
-    .prog-bar-outer:hover .prog-bar-fill { filter: brightness(1.25); }
-    .prog-bar-fill::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(160,255,190,.8) 50%, transparent 100%);
-      background-size: 35% 100%;
-      animation: electric-bolt 1.8s ease-in-out infinite;
-    }
-    @keyframes electric-bolt {
-      0%   { background-position: -70% 0; opacity: 0; }
-      10%  { opacity: 1; }
-      90%  { opacity: 1; }
-      100% { background-position: 170% 0; opacity: 0; }
-    }
-    .prog-bar-drop {
-      position: absolute;
-      top: 50%; right: -5px;
-      transform: translateY(-50%);
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: #4dffaa;
-      box-shadow: 0 0 6px #00c45e, 0 0 14px rgba(0,196,94,.6), 0 0 24px rgba(0,196,94,.3);
-      pointer-events: none;
-      animation: pulse-drop 1.4s ease-in-out infinite;
-    }
-    @keyframes pulse-drop {
-      0%,100% { box-shadow: 0 0 6px #00c45e, 0 0 14px rgba(0,196,94,.6); }
-      50%      { box-shadow: 0 0 10px #4dffaa, 0 0 22px rgba(0,196,94,.9), 0 0 36px rgba(0,196,94,.4); }
-    }
-    .prog-note {
-      margin-top: .55rem;
-      font-size: .72rem;
-      font-weight: 300;
-      letter-spacing: .05em;
-      color: rgba(245,240,232,.3);
-      line-height: 1.6;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .4s ease, opacity .4s;
-      opacity: 0;
-    }
-    .prog-item.expanded .prog-note { max-height: 4rem; opacity: 1; }
-    /* ripple on click */
-    .prog-ripple {
-      position: absolute;
-      top: 50%; transform: translateY(-50%);
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--gold-lt);
-      pointer-events: none;
-      animation: ripple-out .6s ease-out forwards;
-    }
-    @keyframes ripple-out {
-      to { width: 40px; height: 40px; opacity: 0; }
-    }
-    @media (max-width: 640px) {
-      .prog-master-wrap { flex-wrap: wrap; }
-      .prog-item-name { font-size: 1rem; }
-    }
-
     /* ── SERVICES ORBITAL DECO ── */
     #services { position: relative; overflow: hidden; }
     .svc-deco-wrap {
@@ -848,120 +667,6 @@
       width: 100%;
       height: 100%;
       opacity: 0.6;
-    }
-
-    /* ── PROGRESS DASHBOARD ── */
-    .prog-dash {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-      margin-bottom: 4rem;
-    }
-    .prog-kpis {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.2rem;
-    }
-    .prog-kpi {
-      padding: 2rem 2.2rem 1.8rem;
-      border: 1px solid rgba(200,169,122,.08);
-      background: rgba(200,169,122,.018);
-      position: relative;
-      overflow: hidden;
-    }
-    .prog-kpi::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-    }
-    .prog-kpi.kpi-done::after   { background: linear-gradient(90deg, var(--gold), var(--gold-lt)); }
-    .prog-kpi.kpi-active::after { background: linear-gradient(90deg, #4ecb8d, #2db870); }
-    .prog-kpi.kpi-total::after  { background: rgba(200,169,122,.2); }
-    .prog-kpi-n {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 5.5vw, 5rem);
-      font-weight: 400;
-      line-height: 1;
-      margin-bottom: .5rem;
-    }
-    .kpi-done   .prog-kpi-n { color: var(--gold-lt); }
-    .kpi-active .prog-kpi-n { color: #7ecf8e; }
-    .kpi-total  .prog-kpi-n { color: rgba(245,240,232,.4); }
-    .prog-kpi-l {
-      font-size: .57rem;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: rgba(245,240,232,.28);
-    }
-    .prog-kpi-sub {
-      margin-top: 1.2rem;
-      font-size: .6rem;
-      letter-spacing: .06em;
-    }
-    .kpi-done   .prog-kpi-sub { color: rgba(200,169,122,.4); }
-    .kpi-active .prog-kpi-sub { color: rgba(78,203,141,.38); }
-    .kpi-total  .prog-kpi-sub { color: rgba(245,240,232,.15); }
-
-    /* phase timeline bar */
-    .prog-timeline {
-      display: flex;
-      gap: .5rem;
-      padding: 1.6rem 2rem 1.8rem;
-      border: 1px solid rgba(200,169,122,.07);
-      background: rgba(200,169,122,.012);
-      align-items: flex-end;
-    }
-    .prog-tl-seg {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: .5rem;
-    }
-    .prog-tl-bar {
-      width: 100%;
-      border-radius: 2px;
-    }
-    .prog-tl-seg.tl-done   .prog-tl-bar { height: 4px; background: var(--gold); box-shadow: 0 0 8px rgba(200,169,122,.3); }
-    .prog-tl-seg.tl-active .prog-tl-bar { height: 7px; background: #4ecb8d; box-shadow: 0 0 10px rgba(78,203,141,.4); }
-    .prog-tl-seg.tl-up     .prog-tl-bar { height: 2px; background: rgba(200,169,122,.1); }
-    .prog-tl-lbl {
-      font-size: .48rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-    .prog-tl-seg.tl-done   .prog-tl-lbl { color: rgba(200,169,122,.55); }
-    .prog-tl-seg.tl-active .prog-tl-lbl { color: rgba(78,203,141,.85); font-weight: 500; }
-    .prog-tl-seg.tl-up     .prog-tl-lbl { color: rgba(245,240,232,.12); }
-    .prog-tl-legend {
-      display: flex;
-      gap: 2rem;
-      padding: .8rem 2rem 0;
-    }
-    .prog-tl-legend-item {
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-      font-size: .55rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-    .prog-tl-legend-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-    }
-    .prog-tl-legend-item.l-done   .prog-tl-legend-dot { background: var(--gold); }
-    .prog-tl-legend-item.l-active .prog-tl-legend-dot { background: #4ecb8d; }
-    .prog-tl-legend-item.l-up     .prog-tl-legend-dot { background: rgba(200,169,122,.18); }
-    .prog-tl-legend-item.l-done   { color: rgba(200,169,122,.55); }
-    .prog-tl-legend-item.l-active { color: rgba(78,203,141,.7); }
-    .prog-tl-legend-item.l-up     { color: rgba(245,240,232,.2); }
-    @media (max-width: 640px) {
-      .prog-kpis { grid-template-columns: 1fr 1fr; }
-      .kpi-total { grid-column: span 2; }
-      .prog-tl-lbl { display: none; }
     }
 
     /* ── FILTER GALLERY (full library) ── */
@@ -1373,7 +1078,7 @@
       .services-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
       .svc-row { grid-template-columns: 60px 1fr; }
       .svc-desc { display: none; }
-.test-grid { grid-template-columns: 1fr; }
+      .test-grid { grid-template-columns: 1fr; }
       #contact { grid-template-columns: 1fr; }
       footer { flex-direction: column; gap: 1.2rem; text-align: center; }
       .nav-links { display: none; }
@@ -1391,7 +1096,7 @@
 
   <!-- WIP BANNER -->
   <div id="wip-banner">
-    <p><strong>Página privada · Solo para Fernanda</strong> — Este sitio documenta el progreso real del proyecto AI-IFM. Todo está sujeto a cambios continuos — el nicho, la dirección, el nombre y la estrategia aún están siendo definidos. Última actualización: marzo 2026.</p>
+    <p><strong>Página privada · Solo para Fernanda</strong> — Lumina: avatar IA construida y concluida. Pipeline completo, identidad definida. Siguiente fase: automatización y escala. Última actualización: abril 2026.</p>
     <button onclick="document.getElementById('wip-banner').style.display='none'">Cerrar</button>
   </div>
 
@@ -1497,7 +1202,7 @@
 
   <!-- NAV -->
   <nav id="nav">
-    <a href="#hero" class="nav-logo" id="navLogo">AI-IFM</a>
+    <a href="#hero" class="nav-logo" id="navLogo">LUMINA</a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#gallery">Galería</a></li>
       <li><a href="#about">El Proyecto</a></li>
@@ -1515,10 +1220,10 @@
     <canvas id="heroCanvas" class="hero-canvas"></canvas>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <span class="hero-tag" id="heroTag">Avatar IA · Construida desde Cero</span>
+      <span class="hero-tag" id="heroTag">Lumina · Avatar IA · Construida desde Cero</span>
       <h1 class="hero-title">
-        <span class="hero-line"><span class="hero-line-inner" id="hl1">AI<em>-I</em></span></span>
-        <span class="hero-line"><span class="hero-line-inner" id="hl2">FM</span></span>
+        <span class="hero-line"><span class="hero-line-inner" id="hl1">LU<em>MI</em></span></span>
+        <span class="hero-line"><span class="hero-line-inner" id="hl2">NA</span></span>
       </h1>
       <div class="hero-bottom" id="heroBottom">
         <p class="hero-sub">Ella no existe — yo la construí.<br/>Construida. Concluida. Lista.</p>
@@ -1531,12 +1236,12 @@
   <!-- MARQUEE -->
   <div class="marquee-wrap">
     <div class="marquee-track">
-      <span>AI-IFM</span><span class="dot">×</span><span>AVATAR IA</span><span class="dot">×</span>
+      <span>LUMINA</span><span class="dot">×</span><span>AVATAR IA</span><span class="dot">×</span>
       <span>NANOBANANA PRO</span><span class="dot">×</span><span>SEEDREAM</span><span class="dot">×</span>
       <span>KLING</span><span class="dot">×</span><span>VEO 3</span><span class="dot">×</span><span>HECHO CON IA</span><span class="dot">×</span>
-      <span>AI-IFM</span><span class="dot">×</span><span>AVATAR IA</span><span class="dot">×</span>
+      <span>LUMINA</span><span class="dot">×</span><span>AVATAR IA</span><span class="dot">×</span>
       <span>NANOBANANA PRO</span><span class="dot">×</span><span>SEEDREAM</span><span class="dot">×</span>
-      <span>DIGITAL</span><span class="dot">×</span><span>2026</span><span class="dot">×</span>
+      <span>CONSTRUIDA</span><span class="dot">×</span><span>2026</span><span class="dot">×</span>
     </div>
   </div>
 
@@ -1573,7 +1278,7 @@
         <span class="line-reveal"><span class="line-reveal-inner" id="abt2"><em>no nacida.</em></span></span>
       </h2>
       <p class="about-body">
-        AI-IFM es un modelo 100% generado por IA — sin estudio, sin casting, sin persona real.
+        Lumina es un modelo 100% generado por IA — sin estudio, sin casting, sin persona real.
         El proceso fue corto pero intensamente dedicado: semanas de formación, iteración y curación
         comprimidas en un pipeline funcional de principio a fin.<br /><br />
         El proyecto ha concluido su fase de construcción. La identidad está definida, la biblioteca de
@@ -1619,9 +1324,9 @@
       <span class="line-reveal"><span class="line-reveal-inner"><em>La Crearon</em></span></span>
     </h2>
     <div class="test-grid">
-      <div class="test-card"><div class="test-quote">✦</div><p class="test-text"><strong style="color:var(--gold-lt);letter-spacing:.1em">NANOBANANA PRO — HIGGSFIELD AI</strong><br/><br/>Motor principal de imágenes. El modelo ideal para consistencia de influencers IA. Con él establecí la cara de AI-IFM y la reproduje de forma confiable en distintos ángulos, iluminación y escenas.</p><div class="test-author"><div class="test-dash"></div><span class="test-name">Generación de Imágenes · Consistencia</span></div></div>
+      <div class="test-card"><div class="test-quote">✦</div><p class="test-text"><strong style="color:var(--gold-lt);letter-spacing:.1em">NANOBANANA PRO — HIGGSFIELD AI</strong><br/><br/>Motor principal de imágenes. El modelo ideal para consistencia de influencers IA. Con él establecí la cara de Lumina y la reproduje de forma confiable en distintos ángulos, iluminación y escenas.</p><div class="test-author"><div class="test-dash"></div><span class="test-name">Generación de Imágenes · Consistencia</span></div></div>
       <div class="test-card"><div class="test-quote">✦</div><p class="test-text"><strong style="color:var(--gold-lt);letter-spacing:.1em">SEEDREAM</strong><br/><br/>Usado para diversidad de escenas — autos, viajes, lifestyle, marca. Amplió el rango de contextos visuales de la biblioteca de assets más allá de lo que NanoBanana PRO maneja de forma nativa.</p><div class="test-author"><div class="test-dash"></div><span class="test-name">Construcción de Escenas · Diversidad</span></div></div>
-      <div class="test-card"><div class="test-quote">✦</div><p class="test-text"><strong style="color:var(--gold-lt);letter-spacing:.1em">KLING &amp; VEO 3</strong><br/><br/>Generación de video. Trajeron a AI-IFM al movimiento — clips cinematográficos con movimiento de cámara, detalles ambientales y atmósfera natural. Los shots estáticos se ven IA; estos no.</p><div class="test-author"><div class="test-dash"></div><span class="test-name">Generación de Video · Movimiento</span></div></div>
+      <div class="test-card"><div class="test-quote">✦</div><p class="test-text"><strong style="color:var(--gold-lt);letter-spacing:.1em">KLING &amp; VEO 3</strong><br/><br/>Generación de video. Trajeron a Lumina al movimiento — clips cinematográficos con movimiento de cámara, detalles ambientales y atmósfera natural. Los shots estáticos se ven IA; estos no.</p><div class="test-author"><div class="test-dash"></div><span class="test-name">Generación de Video · Movimiento</span></div></div>
       <div class="test-card"><div class="test-quote">✦</div><p class="test-text"><strong style="color:var(--gold-lt);letter-spacing:.1em">CLAUDE CODE</strong><br/><br/>Todo el sitio que estás viendo — el portfolio, la animación de partículas, el sistema de galería, el lightbox, el video hero — fue construido con Claude Code como capa de ingeniería IA. Cero código manual.</p><div class="test-author"><div class="test-dash"></div><span class="test-name">Desarrollo Web · Despliegue</span></div></div>
     </div>
   </section>
@@ -1636,7 +1341,7 @@
       </h2>
       <p class="contact-tagline">¿Te interesa construir un avatar IA, un influencer IA o un pipeline de contenido para tu marca? Hablemos de lo que es posible.</p>
       <div class="contact-details">
-        <div><div class="cd-label">Email</div><div class="cd-val">hello@ai-ifm.com</div></div>
+        <div><div class="cd-label">Email</div><div class="cd-val">hello@lumina.ai</div></div>
         <div><div class="cd-label">Tipo de Proyecto</div><div class="cd-val">Modelos IA · Pipelines de Contenido · Avatares de Marca</div></div>
         <div><div class="cd-label">Respuesta</div><div class="cd-val">Dentro de 48 horas</div></div>
       </div>
@@ -1664,12 +1369,11 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="f-logo">AI-IFM</div>
-    <div class="f-copy">&copy; 2026 AI-IFM — Proyecto concluido · Página privada · Pipeline construido, identidad definida, listo para automatización y escala.</div>
+    <div class="f-logo">LUMINA</div>
+    <div class="f-copy">&copy; 2026 Lumina — Proyecto concluido · Página privada · Pipeline construido, identidad definida, lista para automatización y escala.</div>
     <div class="f-social">
-      <a href="https://instagram.com/ai.ifm" target="_blank">@ai.ifm</a>
-      <a href="https://tiktok.com/@ai.ifm" target="_blank">TikTok</a>
-      <a href="https://linkedin.com/in/ai-ifm" target="_blank">LinkedIn</a>
+      <a href="https://instagram.com/lumina.ai.official" target="_blank">Instagram</a>
+      <a href="https://tiktok.com/@lumina.ai" target="_blank">TikTok</a>
     </div>
   </footer>
 
