@@ -15,6 +15,9 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     a, button, input, select, textarea { outline: none; -webkit-tap-highlight-color: transparent; }
+    .hero-bg-video::-webkit-media-controls,
+    .hero-bg-video::-webkit-media-controls-enclosure,
+    .hero-bg-video::-webkit-media-controls-overlay-play-button { display: none !important; }
 
     :root {
       --black:       #070504;
@@ -1217,7 +1220,7 @@
 
   <!-- HERO -->
   <section id="hero">
-    <video class="hero-bg-video" id="heroBgImg" autoplay muted loop playsinline disableremoteplayback x-webkit-airplay="deny">
+    <video class="hero-bg-video" id="heroBgImg" autoplay muted loop playsinline disableremoteplayback disablepictureinpicture x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
       <source src="CONTENT/hf_20260328_010900_40cd0426-de6b-4532-b78b-4069755c2ece.mp4" type="video/mp4">
     </video>
     <canvas id="heroCanvas" class="hero-canvas"></canvas>
