@@ -112,7 +112,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 28px 48px;
-    background: transparent;
+    mix-blend-mode: difference;
     transition: padding .4s;
   }
   nav.solid { padding: 18px 48px; }
@@ -200,6 +200,15 @@
   .hero-bg-video::-webkit-media-controls,
   .hero-bg-video::-webkit-media-controls-enclosure,
   .hero-bg-video::-webkit-media-controls-overlay-play-button { display: none !important; }
+
+  .hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    display: block;
+    pointer-events: none;
+    z-index: 1;
+  }
 
   #hero {
     min-height: 100vh;
@@ -739,6 +748,7 @@
   <video class="hero-bg-video" id="heroBgImg" autoplay muted loop playsinline disableremoteplayback disablepictureinpicture x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
     <source src="CONTENT/hf_20260328_010900_40cd0426-de6b-4532-b78b-4069755c2ece.mp4" type="video/mp4">
   </video>
+  <canvas id="heroCanvas" class="hero-canvas"></canvas>
   <div class="hero-overlay"></div>
   <div class="hero-eyebrow">Avatar IA · @babyblondie · Construida desde Cero</div>
   <h1 class="hero-title">
@@ -1113,6 +1123,139 @@
     if (e.key === 'ArrowRight') { lbIdx = (lbIdx + 1) % lbPhotos.length; renderLightbox(); }
     if (e.key === 'Escape')     { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; }
   });
+
+  // ── HERO CANVAS — AURORA ORBS + INTERACTIVE PARTICLES ──
+  (function () {
+    const canvas = document.getElementById('heroCanvas');
+    const ctx    = canvas.getContext('2d');
+    let W, H, mx = -9999, my = -9999, mxSmooth = -9999, mySmooth = -9999;
+    let hasMoused = false;
+
+    function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const hero = document.getElementById('hero');
+    hero.addEventListener('mousemove', e => {
+      const r = canvas.getBoundingClientRect();
+      mx = e.clientX - r.left; my = e.clientY - r.top; hasMoused = true;
+    });
+    hero.addEventListener('mouseleave', () => { hasMoused = false; });
+    hero.addEventListener('touchmove', e => {
+      const r = canvas.getBoundingClientRect();
+      mx = e.touches[0].clientX - r.left; my = e.touches[0].clientY - r.top; hasMoused = true;
+    }, { passive: true });
+    hero.addEventListener('touchend', () => { hasMoused = false; });
+
+    // Aurora orbs
+    const orbs = [
+      { bx:.20, by:.40, speed:.00016, phase:0.0, drift:.10, r:.58, col:'200,128,52'  },
+      { bx:.72, by:.30, speed:.00012, phase:2.1, drift:.09, r:.50, col:'225,162,72'  },
+      { bx:.45, by:.80, speed:.00020, phase:4.3, drift:.08, r:.52, col:'168,90,38'   },
+      { bx:.88, by:.58, speed:.00014, phase:1.7, drift:.11, r:.40, col:'210,148,65'  },
+      { bx:.08, by:.65, speed:.00018, phase:3.5, drift:.07, r:.36, col:'185,105,48'  },
+    ];
+
+    // Particles
+    const PCOUNT = 200;
+    const P = [];
+    class Particle {
+      init(initial) {
+        this.x  = Math.random() * W;
+        this.y  = initial ? Math.random() * H : H + 14;
+        this.vx = (Math.random() - .5) * .4;
+        this.vy = -(Math.random() * .6 + .2);
+        this.sz = Math.random() * 1.6 + .3;
+        this.maxA = Math.random() * .7 + .2;
+        this.life = initial ? Math.floor(Math.random() * 450) : 0;
+        this.maxLife = Math.random() * 550 + 200;
+        this.hue = 30 + Math.random() * 24;
+      }
+      constructor() { this.init(true); }
+      update(t) {
+        this.vx += Math.sin(t * .00044 + this.y * .013) * .018;
+        this.vy += Math.cos(t * .00033 + this.x * .010) * .004;
+        if (hasMoused) {
+          const dx = this.x - mx, dy = this.y - my;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < 22500) {
+            const d = Math.sqrt(d2); const f = (150 - d) / 150 * 1.1;
+            this.vx += (dx / d) * f; this.vy += (dy / d) * f;
+          }
+        }
+        this.vx *= .968; this.vy = this.vy * .982 - .045;
+        if (this.vy > -.07) this.vy = -.07;
+        this.x += this.vx; this.y += this.vy; this.life++;
+        if (this.y < -26 || this.x < -34 || this.x > W + 34 || this.life > this.maxLife) this.init(false);
+      }
+      draw() {
+        const lr = this.life / this.maxLife;
+        const fade = Math.min(lr * 5, 1) * Math.min((1 - lr) * 5, 1);
+        const a = this.maxA * fade;
+        if (a < .01) return;
+        ctx.save();
+        ctx.globalAlpha = a;
+        ctx.shadowBlur  = this.sz * 7;
+        ctx.shadowColor = `hsl(${this.hue},75%,72%)`;
+        ctx.fillStyle   = `hsl(${this.hue},58%,70%)`;
+        ctx.beginPath(); ctx.arc(this.x, this.y, this.sz, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
+      }
+    }
+    for (let i = 0; i < PCOUNT; i++) P.push(new Particle());
+
+    function draw(t) {
+      ctx.clearRect(0, 0, W, H);
+      // Shader wash
+      const shAngle = t * 0.00008;
+      const cx0 = W * (.5 + Math.cos(shAngle) * .5), cy0 = H * (.5 + Math.sin(shAngle) * .5);
+      const cx1 = W * (.5 - Math.cos(shAngle) * .5), cy1 = H * (.5 - Math.sin(shAngle) * .5);
+      const hShift = Math.sin(t * 0.00012) * 12;
+      const sw = ctx.createLinearGradient(cx0, cy0, cx1, cy1);
+      sw.addColorStop(0,   `hsla(${38+hShift},65%,18%,0.38)`);
+      sw.addColorStop(.35, `hsla(${28+hShift},55%,14%,0.22)`);
+      sw.addColorStop(.65, `hsla(${48+hShift},70%,16%,0.28)`);
+      sw.addColorStop(1,   `hsla(${34+hShift},60%,12%,0.35)`);
+      ctx.fillStyle = sw; ctx.fillRect(0, 0, W, H);
+      // Aurora orbs
+      ctx.globalCompositeOperation = 'lighter';
+      orbs.forEach(o => {
+        const ox = (o.bx + Math.sin(t * o.speed + o.phase) * o.drift + Math.sin(t * o.speed * 1.9 + o.phase + 1) * o.drift * .4) * W;
+        const oy = (o.by + Math.cos(t * o.speed * 1.4 + o.phase + .5) * o.drift * .6) * H;
+        let rx = ox, ry = oy;
+        if (hasMoused) { rx = ox + (mx - ox) * 0.12; ry = oy + (my - oy) * 0.08; }
+        const radius = o.r * Math.min(W, H);
+        const pulse  = 1 + Math.sin(t * o.speed * 4 + o.phase) * .08;
+        const g = ctx.createRadialGradient(rx, ry, 0, rx, ry, radius * pulse);
+        g.addColorStop(0,   `rgba(${o.col},0.22)`);
+        g.addColorStop(.3,  `rgba(${o.col},0.12)`);
+        g.addColorStop(.65, `rgba(${o.col},0.04)`);
+        g.addColorStop(1,   `rgba(${o.col},0)`);
+        ctx.beginPath(); ctx.ellipse(rx, ry, radius * pulse * 1.6, radius * pulse, 0, 0, Math.PI * 2);
+        ctx.fillStyle = g; ctx.fill();
+      });
+      ctx.globalCompositeOperation = 'source-over';
+      // Cursor spotlight
+      if (hasMoused) {
+        mxSmooth += (mx - mxSmooth) * .08; mySmooth += (my - mySmooth) * .08;
+        const sg = ctx.createRadialGradient(mxSmooth, mySmooth, 0, mxSmooth, mySmooth, 220);
+        sg.addColorStop(0,  'rgba(210,160,80,0.10)');
+        sg.addColorStop(.5, 'rgba(190,130,55,0.05)');
+        sg.addColorStop(1,  'rgba(190,130,55,0)');
+        ctx.fillStyle = sg; ctx.beginPath(); ctx.arc(mxSmooth, mySmooth, 220, 0, Math.PI * 2); ctx.fill();
+      } else { mxSmooth = mx; mySmooth = my; }
+      // Edge vignette
+      const vg = ctx.createRadialGradient(W*.5, H*.5, H*.3, W*.5, H*.5, Math.max(W,H)*.75);
+      vg.addColorStop(0,  'rgba(12,11,9,0)');
+      vg.addColorStop(.7, 'rgba(12,11,9,0.15)');
+      vg.addColorStop(1,  'rgba(12,11,9,0.55)');
+      ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
+      // Particles
+      P.forEach(p => { p.update(t); p.draw(); });
+      requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+  })();
 
   // ── VIDEO MODAL ──
   function openVideo(src) {
