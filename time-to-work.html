@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time to Work · Proyecto Lara</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Syncopate:wght@400;700&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  a, button, input, select, textarea { outline: none; -webkit-tap-highlight-color: transparent; }
+
+  :root {
+    --ink:     #0C0B09;
+    --dark:    #0F0E0B;
+    --panel:   #131210;
+    --card:    #181614;
+    --cream:   #F2EDE4;
+    --gold:    #C8A97A;
+    --gold-lt: #DFC090;
+    --muted:   #6B6560;
+    --line:    rgba(200,169,122,0.12);
+    --rose:    #C4907A;
+    --rose-lt: #D9AA97;
+    --sage:    #8DA68A;
+    --lavender:#9A8AAA;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* GRAIN */
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 9990;
+    opacity: .035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--ink); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); opacity: .4; border-radius: 2px; }
+
+  /* ─── HEADER ─── */
+  .page-header {
+    position: sticky;
+    top: 0; z-index: 100;
+    background: rgba(12,11,9,.96);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--line);
+    padding: 18px 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .header-left { display: flex; align-items: center; gap: 1.5rem; }
+  .header-logo {
+    font-family: 'Syncopate', sans-serif;
+    font-size: .75rem;
+    letter-spacing: .25em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .header-sep { width: 1px; height: 24px; background: var(--line); }
+  .header-title {
+    font-family: 'Syncopate', sans-serif;
+    font-size: .65rem;
+    letter-spacing: .2em;
+    color: var(--cream);
+    opacity: .6;
+  }
+  .header-right { display: flex; align-items: center; gap: 1.2rem; }
+  .session-badge {
+    font-size: .55rem;
+    letter-spacing: .15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .session-badge span { color: var(--gold); }
+  .collab-dots { display: flex; gap: .4rem; align-items: center; }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    position: relative;
+  }
+  .dot::after {
+    content: attr(data-name);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: .5rem;
+    letter-spacing: .1em;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity .2s;
+    pointer-events: none;
+  }
+  .dot:hover::after { opacity: 1; }
+  .dot-j { background: var(--gold); }
+  .dot-j::after { color: var(--gold); }
+  .dot-f { background: var(--rose); }
+  .dot-f::after { color: var(--rose); }
+
+  /* ─── MAIN LAYOUT ─── */
+  .main { max-width: 1200px; margin: 0 auto; padding: 3rem 5vw 6rem; }
+
+  /* ─── HERO BAND ─── */
+  .hero-band {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: end;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 2.5rem;
+  }
+  .hero-band h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: .9;
+    letter-spacing: -.02em;
+    color: var(--cream);
+  }
+  .hero-band h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-meta { text-align: right; }
+  .hero-meta .date-label {
+    font-size: .55rem;
+    letter-spacing: .2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: .4rem;
+  }
+  .hero-meta .date-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--cream);
+  }
+  .hero-meta .partners {
+    font-size: .55rem;
+    letter-spacing: .18em;
+    color: var(--muted);
+    margin-top: .5rem;
+    text-transform: uppercase;
+  }
+  .hero-meta .partners strong { color: var(--rose-lt); font-weight: 400; }
+
+  /* ─── STAT CARDS ROW ─── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .stat-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 1.4rem 1.6rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .3s;
+  }
+  .stat-card:hover { border-color: rgba(200,169,122,.28); }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .stat-card.gold-accent::before { background: var(--gold); }
+  .stat-card.rose-accent::before { background: var(--rose); }
+  .stat-card.sage-accent::before { background: var(--sage); }
+  .stat-label {
+    font-size: .5rem;
+    letter-spacing: .2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: .7rem;
+  }
+  .stat-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--cream);
+  }
+  .stat-sub {
+    font-size: .5rem;
+    letter-spacing: .12em;
+    color: var(--muted);
+    margin-top: .4rem;
+    text-transform: uppercase;
+  }
+  .progress-bar-wrap {
+    margin-top: .9rem;
+    height: 2px;
+    background: rgba(200,169,122,.1);
+    position: relative;
+  }
+  .progress-bar-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: var(--gold);
+    transition: width 1s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* ─── SECTION HEADER ─── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.4rem;
+  }
+  .section-eyebrow {
+    font-size: .5rem;
+    letter-spacing: .25em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .section-line { flex: 1; height: 1px; background: var(--line); }
+  .section-count {
+    font-size: .5rem;
+    letter-spacing: .15em;
+    color: var(--muted);
+  }
+
+  /* ─── SECTION BLOCK ─── */
+  .section-block { margin-bottom: 3rem; }
+
+  /* ─── BOOTCAMP GRID ─── */
+  .phase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: .8rem;
+  }
+  .phase-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 1.2rem 1.4rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: border-color .3s, background .3s;
+    cursor: pointer;
+    user-select: none;
+  }
+  .phase-card:hover { border-color: rgba(200,169,122,.25); background: var(--card); }
+  .phase-card.done { border-color: rgba(200,169,122,.2); }
+  .phase-card.done .phase-name { opacity: .5; text-decoration: line-through; text-decoration-color: var(--gold); }
+  .phase-card.in-progress { border-color: rgba(196,144,122,.3); }
+  .phase-check {
+    width: 18px; height: 18px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color .2s, background .2s;
+  }
+  .phase-card.done .phase-check { background: var(--gold); border-color: var(--gold); }
+  .phase-card.in-progress .phase-check { border-color: var(--rose); }
+  .phase-check svg { opacity: 0; transition: opacity .2s; }
+  .phase-card.done .phase-check svg { opacity: 1; }
+  .phase-info { flex: 1; min-width: 0; }
+  .phase-num {
+    font-size: .5rem;
+    letter-spacing: .2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: .3rem;
+  }
+  .phase-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--cream);
+    line-height: 1.3;
+    margin-bottom: .4rem;
+    transition: opacity .3s;
+  }
+  .phase-badge {
+    display: inline-block;
+    font-size: .42rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    padding: .2rem .5rem;
+    border-radius: 20px;
+  }
+  .badge-done { background: rgba(200,169,122,.12); color: var(--gold); }
+  .badge-progress { background: rgba(196,144,122,.12); color: var(--rose-lt); }
+  .badge-pending { background: rgba(107,101,96,.1); color: var(--muted); }
+  .phase-conf {
+    margin-top: .5rem;
+    display: flex;
+    gap: 2px;
+  }
+  .conf-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--line);
+  }
+  .conf-dot.filled { background: var(--gold); }
+
+  /* ─── PIPELINE CHECKLIST ─── */
+  .pipeline-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .pipeline-col-title {
+    font-size: .5rem;
+    letter-spacing: .2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    padding: .7rem 1.2rem;
+    background: rgba(200,169,122,.05);
+    border-bottom: 1px solid var(--line);
+  }
+  .checklist-wrap {
+    background: var(--panel);
+    border: 1px solid var(--line);
+  }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: .9rem;
+    padding: .75rem 1.2rem;
+    border-bottom: 1px solid rgba(200,169,122,.06);
+    cursor: pointer;
+    user-select: none;
+    transition: background .2s;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-item:hover { background: rgba(200,169,122,.04); }
+  .check-item.checked .check-label { opacity: .35; text-decoration: line-through; text-decoration-color: var(--gold); }
+  .check-box {
+    width: 15px; height: 15px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color .2s, background .2s;
+  }
+  .check-item.checked .check-box { background: var(--gold); border-color: var(--gold); }
+  .check-box svg { opacity: 0; transition: opacity .15s; }
+  .check-item.checked .check-box svg { opacity: 1; }
+  .check-label {
+    font-size: .6rem;
+    letter-spacing: .06em;
+    color: var(--cream);
+    opacity: .75;
+    transition: opacity .3s;
+    flex: 1;
+  }
+  .check-tag {
+    font-size: .42rem;
+    letter-spacing: .12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  /* ─── IDEAS BOARD ─── */
+  .ideas-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: .8rem;
+  }
+  .idea-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 1.1rem 1.2rem;
+    position: relative;
+    min-height: 100px;
+    transition: border-color .3s;
+  }
+  .idea-card:hover { border-color: rgba(200,169,122,.25); }
+  .idea-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+  }
+  .idea-cat-contenido::before { background: var(--gold); }
+  .idea-cat-viral::before     { background: var(--rose); }
+  .idea-cat-brand::before     { background: var(--sage); }
+  .idea-cat-tecnico::before   { background: var(--lavender); }
+  .idea-cat-label {
+    font-size: .42rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    margin-bottom: .5rem;
+  }
+  .cat-contenido { color: var(--gold-lt); }
+  .cat-viral     { color: var(--rose-lt); }
+  .cat-brand     { color: var(--sage); }
+  .cat-tecnico   { color: var(--lavender); }
+  .idea-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: .95rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--cream);
+    opacity: .85;
+    line-height: 1.5;
+  }
+  .idea-del {
+    position: absolute;
+    top: .6rem; right: .7rem;
+    width: 18px; height: 18px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: .7rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity .2s, color .2s;
+    border-radius: 2px;
+  }
+  .idea-card:hover .idea-del { opacity: 1; }
+  .idea-del:hover { color: var(--rose); }
+
+  /* NEW IDEA CARD */
+  .idea-add-card {
+    background: transparent;
+    border: 1px dashed rgba(200,169,122,.2);
+    padding: 1.1rem 1.2rem;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+    transition: border-color .3s;
+  }
+  .idea-add-card:hover { border-color: rgba(200,169,122,.4); }
+  .idea-add-card select,
+  .idea-add-card textarea,
+  .idea-add-card input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    font-size: .58rem;
+    letter-spacing: .08em;
+    padding: .3rem 0;
+    width: 100%;
+    resize: none;
+    transition: border-color .2s;
+  }
+  .idea-add-card select:focus,
+  .idea-add-card textarea:focus { border-color: var(--gold); }
+  .idea-add-card select option { background: var(--card); color: var(--cream); }
+  .idea-add-card textarea { min-height: 50px; font-family: 'Cormorant Garamond', serif; font-size: .9rem; font-style: italic; }
+  .btn-add-idea {
+    align-self: flex-start;
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: .5rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    padding: .35rem .8rem;
+    cursor: pointer;
+    transition: border-color .2s, background .2s, color .2s;
+    margin-top: .2rem;
+  }
+  .btn-add-idea:hover { border-color: var(--gold); background: rgba(200,169,122,.08); }
+
+  /* ─── SESSION LOG ─── */
+  .log-add-form {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 1.4rem;
+    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: .8rem;
+    align-items: end;
+  }
+  .form-field { display: flex; flex-direction: column; gap: .5rem; }
+  .form-label {
+    font-size: .48rem;
+    letter-spacing: .2em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .form-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    font-size: .6rem;
+    letter-spacing: .06em;
+    padding: .4rem 0;
+    width: 100%;
+    transition: border-color .2s;
+  }
+  .form-input:focus { border-color: var(--gold); }
+  .form-input::placeholder { color: var(--muted); }
+  .btn-log {
+    background: var(--gold);
+    border: none;
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: .5rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    padding: .6rem 1.2rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .2s, opacity .2s;
+    height: fit-content;
+  }
+  .btn-log:hover { background: var(--gold-lt); }
+
+  .log-full-form {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 1.4rem;
+    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .8rem;
+  }
+  .log-full-form textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    font-size: .6rem;
+    letter-spacing: .06em;
+    padding: .4rem 0;
+    width: 100%;
+    resize: vertical;
+    min-height: 60px;
+    transition: border-color .2s;
+  }
+  .log-full-form textarea:focus { border-color: var(--gold); }
+  .log-full-form textarea::placeholder { color: var(--muted); }
+  .log-form-full { grid-column: 1 / -1; }
+  .log-form-actions { grid-column: 1 / -1; display: flex; gap: .6rem; align-items: center; }
+
+  .log-entries { display: flex; flex-direction: column; gap: .5rem; }
+  .log-entry {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 1rem 1.4rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.4rem;
+    align-items: start;
+    transition: border-color .3s;
+  }
+  .log-entry:hover { border-color: rgba(200,169,122,.2); }
+  .log-date-block { text-align: right; }
+  .log-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .log-by {
+    font-size: .45rem;
+    letter-spacing: .15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: .3rem;
+  }
+  .log-sep { width: 1px; background: var(--line); align-self: stretch; }
+  .log-body { }
+  .log-title-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: .4rem;
+  }
+  .log-desc {
+    font-size: .58rem;
+    letter-spacing: .04em;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: .5rem;
+  }
+  .log-next {
+    font-size: .52rem;
+    letter-spacing: .08em;
+    color: var(--rose-lt);
+    opacity: .8;
+  }
+  .log-next::before { content: '→ '; }
+  .log-del-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: .65rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity .2s, color .2s;
+    padding: .2rem;
+  }
+  .log-entry:hover .log-del-btn { opacity: 1; }
+  .log-del-btn:hover { color: var(--rose); }
+
+  /* ─── NEXT STEPS ─── */
+  .next-steps-list { display: flex; flex-direction: column; gap: .5rem; }
+  .next-step-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: .9rem 1.2rem;
+    transition: border-color .3s;
+    cursor: pointer;
+    user-select: none;
+  }
+  .next-step-item:hover { border-color: rgba(200,169,122,.22); }
+  .next-step-item.done-step .step-text { opacity: .35; text-decoration: line-through; text-decoration-color: var(--rose); }
+  .step-priority {
+    font-size: .42rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    padding: .2rem .55rem;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .prio-alta  { background: rgba(196,144,122,.12); color: var(--rose-lt); }
+  .prio-media { background: rgba(200,169,122,.1);  color: var(--gold-lt); }
+  .prio-baja  { background: rgba(141,166,138,.1);  color: var(--sage); }
+  .step-text { font-size: .62rem; letter-spacing: .06em; color: var(--cream); opacity: .8; flex: 1; transition: opacity .3s; }
+  .step-owner {
+    font-size: .48rem;
+    letter-spacing: .12em;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+  .step-owner.owner-j { color: var(--gold); }
+  .step-owner.owner-f { color: var(--rose-lt); }
+
+  /* ADD NEXT STEP */
+  .add-step-form {
+    background: transparent;
+    border: 1px dashed rgba(200,169,122,.18);
+    padding: .9rem 1.2rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: .8rem;
+    align-items: center;
+    transition: border-color .3s;
+  }
+  .add-step-form:focus-within { border-color: rgba(200,169,122,.35); }
+  .add-step-form select {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    font-size: .55rem;
+    letter-spacing: .06em;
+    padding: .2rem 0;
+    cursor: pointer;
+    transition: border-color .2s;
+  }
+  .add-step-form select:focus { border-color: var(--gold); }
+  .add-step-form select option { background: var(--card); }
+  .add-step-form input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    font-size: .6rem;
+    letter-spacing: .06em;
+    padding: .3rem 0;
+    width: 100%;
+    transition: border-color .2s;
+  }
+  .add-step-form input:focus { border-color: var(--gold); }
+  .add-step-form input::placeholder { color: var(--muted); }
+  .btn-add-step {
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: .5rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    padding: .35rem .8rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all .2s;
+  }
+  .btn-add-step:hover { border-color: var(--gold); background: rgba(200,169,122,.08); }
+
+  /* ─── QUOTE BAR ─── */
+  .quote-bar {
+    padding: 2rem 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    text-align: center;
+    margin: 2rem 0 3rem;
+  }
+  .quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--cream);
+    opacity: .7;
+    letter-spacing: .02em;
+  }
+  .quote-attr {
+    font-size: .48rem;
+    letter-spacing: .2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: .6rem;
+  }
+
+  /* ─── EMPTY STATE ─── */
+  .empty-state {
+    font-size: .58rem;
+    letter-spacing: .1em;
+    color: var(--muted);
+    padding: 1.5rem 1.4rem;
+    background: var(--panel);
+    border: 1px dashed rgba(200,169,122,.1);
+    text-align: center;
+  }
+
+  /* ─── TOAST ─── */
+  #toast {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    background: rgba(200,169,122,.95);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: .55rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .6rem 1.2rem;
+    z-index: 9998;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .3s, transform .3s;
+    pointer-events: none;
+  }
+  #toast.show { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .stats-row { grid-template-columns: 1fr; }
+    .pipeline-cols { grid-template-columns: 1fr; }
+    .hero-band { grid-template-columns: 1fr; }
+    .hero-meta { text-align: left; }
+    .log-add-form { grid-template-columns: 1fr; }
+    .add-step-form { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; }
+    .add-step-form input { grid-column: 1 / -1; }
+    .log-full-form { grid-template-columns: 1fr; }
+    .page-header { flex-wrap: wrap; }
+    .header-right { flex-wrap: wrap; }
+  }
+  @media (max-width: 480px) {
+    .phase-grid { grid-template-columns: 1fr; }
+    .ideas-board { grid-template-columns: 1fr; }
+    .log-entry { grid-template-columns: 1fr; }
+    .log-sep { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="toast"></div>
+
+<!-- HEADER -->
+<header class="page-header">
+  <div class="header-left">
+    <a class="header-logo" href="index.html">LARA</a>
+    <div class="header-sep"></div>
+    <span class="header-title">TIME TO WORK</span>
+  </div>
+  <div class="header-right">
+    <div class="session-badge">Sesión <span id="sessionCount">—</span></div>
+    <div class="collab-dots">
+      <div class="dot dot-j" data-name="Jorge"></div>
+      <div class="dot dot-f" data-name="Fernanda"></div>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- HERO BAND -->
+  <div class="hero-band">
+    <h1>Time<br>to <em>Work.</em></h1>
+    <div class="hero-meta">
+      <div class="date-label">Hoy</div>
+      <div class="date-val" id="todayDate">—</div>
+      <div class="partners">Jorge &amp; <strong>Fernanda</strong> · Proyecto Lara</div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-card gold-accent">
+      <div class="stat-label">Progreso General</div>
+      <div class="stat-value" id="statProgress">0%</div>
+      <div class="stat-sub" id="statSub">fases completadas</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+    <div class="stat-card rose-accent">
+      <div class="stat-label">Ideas en Tablero</div>
+      <div class="stat-value" id="statIdeas">0</div>
+      <div class="stat-sub">ideas guardadas</div>
+    </div>
+    <div class="stat-card sage-accent">
+      <div class="stat-label">Sesiones Juntos</div>
+      <div class="stat-value" id="statSessions">0</div>
+      <div class="stat-sub">entradas en el log</div>
+    </div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="quote-bar">
+    <p class="quote-text" id="quoteText">"El trabajo consistente supera al talento inconsistente."</p>
+    <p class="quote-attr" id="quoteAttr">— Tablero Lara</p>
+  </div>
+
+  <!-- BOOTCAMP PHASES -->
+  <div class="section-block">
+    <div class="section-header">
+      <span class="section-eyebrow">Bootcamp · El Camino</span>
+      <div class="section-line"></div>
+      <span class="section-count" id="phaseCount">0 / 9</span>
+    </div>
+    <div class="phase-grid" id="phaseGrid"></div>
+  </div>
+
+  <!-- PIPELINE -->
+  <div class="section-block">
+    <div class="section-header">
+      <span class="section-eyebrow">Pipeline de Contenido</span>
+      <div class="section-line"></div>
+      <span class="section-count">Por post</span>
+    </div>
+    <div class="pipeline-cols">
+      <div class="checklist-wrap">
+        <div class="pipeline-col-title">Creación</div>
+        <div id="pipelineCreacion"></div>
+      </div>
+      <div class="checklist-wrap">
+        <div class="pipeline-col-title">Publicación</div>
+        <div id="pipelinePublicacion"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IDEAS BOARD -->
+  <div class="section-block">
+    <div class="section-header">
+      <span class="section-eyebrow">Tablero de Ideas</span>
+      <div class="section-line"></div>
+      <span class="section-count" id="ideasCount">0 ideas</span>
+    </div>
+    <div class="ideas-board" id="ideasBoard">
+      <!-- idea cards injected by JS -->
+      <div class="idea-add-card">
+        <select id="ideaCat">
+          <option value="contenido">Contenido</option>
+          <option value="viral">Viral / Trend</option>
+          <option value="brand">Brand / Collab</option>
+          <option value="tecnico">Técnico</option>
+        </select>
+        <textarea id="ideaText" placeholder="Escribe una idea…" rows="2"></textarea>
+        <button class="btn-add-idea" onclick="addIdea()">+ Agregar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRÓXIMOS PASOS -->
+  <div class="section-block">
+    <div class="section-header">
+      <span class="section-eyebrow">Próximos Pasos</span>
+      <div class="section-line"></div>
+      <span class="section-count" id="stepsCount">0 pendientes</span>
+    </div>
+    <div class="next-steps-list" id="nextStepsList"></div>
+    <div class="add-step-form" style="margin-top:.5rem">
+      <select id="stepPrio">
+        <option value="alta">Alta</option>
+        <option value="media" selected>Media</option>
+        <option value="baja">Baja</option>
+      </select>
+      <input type="text" id="stepText" placeholder="Describe el próximo paso…" />
+      <select id="stepOwner">
+        <option value="J">Jorge</option>
+        <option value="F">Fernanda</option>
+        <option value="JF">Ambos</option>
+      </select>
+      <button class="btn-add-step" onclick="addStep()">+ Agregar</button>
+    </div>
+  </div>
+
+  <!-- SESSION LOG -->
+  <div class="section-block">
+    <div class="section-header">
+      <span class="section-eyebrow">Log de Sesiones</span>
+      <div class="section-line"></div>
+      <span class="section-count" id="logCount">0 sesiones</span>
+    </div>
+    <!-- Add entry form -->
+    <div class="log-full-form">
+      <div class="form-field">
+        <label class="form-label">Título de la sesión</label>
+        <input class="form-input" type="text" id="logTitle" placeholder="Ej: Sesión Fase 8 — Video AI" />
+      </div>
+      <div class="form-field">
+        <label class="form-label">Por</label>
+        <input class="form-input" type="text" id="logBy" placeholder="Jorge, Fernanda, o ambos" />
+      </div>
+      <div class="form-field log-form-full">
+        <label class="form-label">¿Qué hicimos hoy?</label>
+        <textarea class="form-input" id="logDesc" placeholder="Describe lo que trabajaron…" rows="2"></textarea>
+      </div>
+      <div class="form-field log-form-full">
+        <label class="form-label">Siguiente paso</label>
+        <textarea class="form-input" id="logNext" placeholder="¿Qué queda pendiente para la próxima sesión?" rows="1"></textarea>
+      </div>
+      <div class="log-form-actions">
+        <button class="btn-log" onclick="addLogEntry()">Guardar Sesión</button>
+        <span style="font-size:.5rem;letter-spacing:.12em;color:var(--muted)">Se guarda automáticamente con la fecha de hoy</span>
+      </div>
+    </div>
+    <div class="log-entries" id="logEntries"></div>
+  </div>
+
+</main>
+
+<script>
+// ─── DATA ───────────────────────────────────────────
+const PHASES = [
+  { num:1, name:'Initiate — Tools & Setup',       status:'done',     conf:10 },
+  { num:2, name:'AI Images — Avatar Workflow',    status:'done',     conf:10 },
+  { num:3, name:'AI Videos — Cinematic Clips',    status:'done',     conf:8  },
+  { num:4, name:'Sound Effects & Editing',        status:'done',     conf:5  },
+  { num:5, name:'Character Consistency',          status:'done',     conf:7  },
+  { num:6, name:'AI Ads + UGC & Influencers',     status:'done',     conf:6  },
+  { num:7, name:'Social Media',                   status:'done',     conf:7  },
+  { num:8, name:'AI Filmmaking',                  status:'in-progress', conf:2 },
+  { num:9, name:'Clone & Scale: Automation',      status:'in-progress', conf:1 },
+];
+
+const PIPELINE_CREACION = [
+  { id:'pc1', label:'Definir concepto del post',       tag:'Estrategia' },
+  { id:'pc2', label:'Generar prompt con ChatGPT',      tag:'Prompt' },
+  { id:'pc3', label:'Crear imagen NanoBanana PRO',     tag:'Imagen' },
+  { id:'pc4', label:'Seleccionar mejor referencia',    tag:'Curaduría' },
+  { id:'pc5', label:'Generar variantes de escena',     tag:'Imagen' },
+  { id:'pc6', label:'Crear video con Kling / Veo 3',   tag:'Video' },
+  { id:'pc7', label:'Añadir sonido y editar',          tag:'Audio' },
+];
+const PIPELINE_PUBLICACION = [
+  { id:'pp1', label:'Revisar calidad visual',          tag:'QC' },
+  { id:'pp2', label:'Escribir caption y hashtags',     tag:'Copy' },
+  { id:'pp3', label:'Programar publicación',           tag:'Schedule' },
+  { id:'pp4', label:'Responder primeros comentarios',  tag:'Comunidad' },
+  { id:'pp5', label:'Archivar en CONTENT/',            tag:'Archivo' },
+  { id:'pp6', label:'Actualizar tracker de métricas',  tag:'Analytics' },
+];
+
+const QUOTES = [
+  { text: '"El trabajo consistente supera al talento inconsistente."',         attr: '— Tablero Lara' },
+  { text: '"Una foto buena hoy vale más que cien perfectas mañana."',         attr: '— Regla del Pipeline' },
+  { text: '"La consistencia es la estrategia más poderosa del algoritmo."',   attr: '— Tablero Lara' },
+  { text: '"Construimos a Lara. Ella trabaja por nosotras las 24 horas."',    attr: '— Proyecto AIIF' },
+  { text: '"Cada sesión que trabajamos juntas es un ladrillo en el castillo."', attr: '— Jorge & Fernanda' },
+];
+
+// ─── STORAGE HELPERS ────────────────────────────────
+const S = {
+  get: k => { try { return JSON.parse(localStorage.getItem('ttw_' + k)); } catch { return null; } },
+  set: (k, v) => localStorage.setItem('ttw_' + k, JSON.stringify(v)),
+};
+
+// ─── INIT DATE ──────────────────────────────────────
+function initDate() {
+  const d = new Date();
+  const opts = { day:'numeric', month:'long', year:'numeric' };
+  document.getElementById('todayDate').textContent = d.toLocaleDateString('es-ES', opts);
+}
+
+// ─── QUOTE ──────────────────────────────────────────
+function initQuote() {
+  const q = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+  document.getElementById('quoteText').textContent = q.text;
+  document.getElementById('quoteAttr').textContent = q.attr;
+}
+
+// ─── CHECK SVG ──────────────────────────────────────
+const checkSVG = `<svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="${getComputedStyle(document.documentElement).getPropertyValue('--ink').trim() || '#0C0B09'}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const checkSVGGold = `<svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#0C0B09" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+// ─── PHASES ─────────────────────────────────────────
+function renderPhases() {
+  const grid = document.getElementById('phaseGrid');
+  grid.innerHTML = '';
+  const saved = S.get('phases') || {};
+  let doneCount = 0;
+
+  PHASES.forEach(p => {
+    const isDone = saved[p.num] !== undefined ? saved[p.num] : (p.status === 'done');
+    const isIP   = !isDone && p.status === 'in-progress';
+    if (isDone) doneCount++;
+
+    const card = document.createElement('div');
+    card.className = 'phase-card' + (isDone ? ' done' : '') + (isIP ? ' in-progress' : '');
+    card.dataset.num = p.num;
+
+    const badge = isDone ? '<span class="phase-badge badge-done">Completado ✓</span>'
+                : isIP   ? '<span class="phase-badge badge-progress">En Progreso</span>'
+                         : '<span class="phase-badge badge-pending">Pendiente</span>';
+
+    const conf = isDone ? Array.from({length:10}, (_,i) =>
+      `<div class="conf-dot${i < p.conf ? ' filled' : ''}"></div>`).join('') : '';
+
+    card.innerHTML = `
+      <div class="phase-check">${isDone ? checkSVGGold : ''}</div>
+      <div class="phase-info">
+        <div class="phase-num">Fase ${p.num}</div>
+        <div class="phase-name">${p.name}</div>
+        ${badge}
+        ${conf ? `<div class="phase-conf">${conf}</div>` : ''}
+      </div>`;
+
+    card.addEventListener('click', () => togglePhase(p.num));
+    grid.appendChild(card);
+  });
+
+  document.getElementById('phaseCount').textContent = `${doneCount} / 9`;
+  const pct = Math.round((doneCount / 9) * 100);
+  document.getElementById('statProgress').textContent = pct + '%';
+  document.getElementById('statSub').textContent = `${doneCount} de 9 fases`;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+function togglePhase(num) {
+  const saved = S.get('phases') || {};
+  const cur   = saved[num] !== undefined ? saved[num] : (PHASES[num-1].status === 'done');
+  saved[num]  = !cur;
+  S.set('phases', saved);
+  renderPhases();
+  toast(saved[num] ? 'Fase marcada como completa ✓' : 'Fase desmarcada');
+}
+
+// ─── PIPELINE ───────────────────────────────────────
+function renderPipeline() {
+  const saved = S.get('pipeline') || {};
+  renderChecklist('pipelineCreacion', PIPELINE_CREACION, saved);
+  renderChecklist('pipelinePublicacion', PIPELINE_PUBLICACION, saved);
+}
+function renderChecklist(containerId, items, saved) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = '';
+  items.forEach(item => {
+    const checked = !!saved[item.id];
+    const div = document.createElement('div');
+    div.className = 'check-item' + (checked ? ' checked' : '');
+    div.dataset.id = item.id;
+    div.innerHTML = `
+      <div class="check-box">${checked ? checkSVGGold : ''}</div>
+      <span class="check-label">${item.label}</span>
+      <span class="check-tag">${item.tag}</span>`;
+    div.addEventListener('click', () => togglePipeline(item.id));
+    el.appendChild(div);
+  });
+}
+function togglePipeline(id) {
+  const saved = S.get('pipeline') || {};
+  saved[id] = !saved[id];
+  S.set('pipeline', saved);
+  renderPipeline();
+}
+
+// ─── IDEAS ──────────────────────────────────────────
+function renderIdeas() {
+  const ideas = S.get('ideas') || [];
+  const board = document.getElementById('ideasBoard');
+  const addCard = board.querySelector('.idea-add-card');
+
+  // Remove all idea cards (keep add card)
+  board.querySelectorAll('.idea-card').forEach(el => el.remove());
+
+  ideas.forEach((idea, i) => {
+    const card = document.createElement('div');
+    card.className = `idea-card idea-cat-${idea.cat}`;
+    card.innerHTML = `
+      <div class="idea-cat-label cat-${idea.cat}">${idea.cat}</div>
+      <div class="idea-text">${escHtml(idea.text)}</div>
+      <button class="idea-del" onclick="delIdea(${i})" title="Eliminar">×</button>`;
+    board.insertBefore(card, addCard);
+  });
+
+  document.getElementById('ideasCount').textContent = ideas.length + ' idea' + (ideas.length !== 1 ? 's' : '');
+  document.getElementById('statIdeas').textContent = ideas.length;
+}
+function addIdea() {
+  const cat  = document.getElementById('ideaCat').value;
+  const text = document.getElementById('ideaText').value.trim();
+  if (!text) return;
+  const ideas = S.get('ideas') || [];
+  ideas.unshift({ cat, text });
+  S.set('ideas', ideas);
+  document.getElementById('ideaText').value = '';
+  renderIdeas();
+  toast('Idea guardada ✓');
+}
+function delIdea(i) {
+  const ideas = S.get('ideas') || [];
+  ideas.splice(i, 1);
+  S.set('ideas', ideas);
+  renderIdeas();
+}
+
+// ─── NEXT STEPS ─────────────────────────────────────
+const DEFAULT_STEPS = [
+  { prio:'alta',  text:'Completar Fase 8 — AI Filmmaking (continuar módulos)', owner:'JF', done:false },
+  { prio:'alta',  text:'Crear primer video corto con Veo 3 para Instagram',    owner:'J',  done:false },
+  { prio:'media', text:'Definir nicho final de Lara (fitness, lifestyle, o mix)', owner:'JF', done:false },
+  { prio:'media', text:'Configurar Formspree en la página web de contacto',    owner:'J',  done:false },
+  { prio:'media', text:'Publicar 3 posts con imágenes del batch NanoBanana',   owner:'F',  done:false },
+  { prio:'baja',  text:'Subir assets a Cloudinary para GitHub Pages',         owner:'J',  done:false },
+  { prio:'baja',  text:'Confirmar cuentas @ai.ifm en redes sociales',         owner:'JF', done:false },
+];
+function renderSteps() {
+  const steps = S.get('steps') || DEFAULT_STEPS;
+  const list  = document.getElementById('nextStepsList');
+  list.innerHTML = '';
+  const pending = steps.filter(s => !s.done).length;
+  document.getElementById('stepsCount').textContent = pending + ' pendiente' + (pending !== 1 ? 's' : '');
+
+  steps.forEach((s, i) => {
+    const item = document.createElement('div');
+    item.className = 'next-step-item' + (s.done ? ' done-step' : '');
+    item.innerHTML = `
+      <span class="step-priority prio-${s.prio}">${s.prio}</span>
+      <span class="step-text">${escHtml(s.text)}</span>
+      <span class="step-owner owner-${s.owner.length===1?s.owner:''}">${s.owner}</span>`;
+    item.addEventListener('click', () => toggleStep(i));
+    list.appendChild(item);
+  });
+}
+function addStep() {
+  const prio  = document.getElementById('stepPrio').value;
+  const text  = document.getElementById('stepText').value.trim();
+  const owner = document.getElementById('stepOwner').value;
+  if (!text) return;
+  const steps = S.get('steps') || DEFAULT_STEPS;
+  steps.unshift({ prio, text, owner, done:false });
+  S.set('steps', steps);
+  document.getElementById('stepText').value = '';
+  renderSteps();
+  toast('Paso agregado ✓');
+}
+function toggleStep(i) {
+  const steps = S.get('steps') || DEFAULT_STEPS;
+  steps[i].done = !steps[i].done;
+  S.set('steps', steps);
+  renderSteps();
+}
+
+// ─── LOG ────────────────────────────────────────────
+function renderLog() {
+  const entries = S.get('log') || [];
+  const container = document.getElementById('logEntries');
+  container.innerHTML = '';
+  document.getElementById('logCount').textContent = entries.length + ' sesión' + (entries.length !== 1 ? 'es' : '');
+  document.getElementById('statSessions').textContent = entries.length;
+  document.getElementById('sessionCount').textContent = entries.length;
+
+  if (!entries.length) {
+    container.innerHTML = '<div class="empty-state">Aún no hay sesiones registradas — ¡guarda la primera hoy!</div>';
+    return;
+  }
+
+  entries.forEach((e, i) => {
+    const entry = document.createElement('div');
+    entry.className = 'log-entry';
+    entry.innerHTML = `
+      <div class="log-date-block">
+        <div class="log-date">${e.date}</div>
+        <div class="log-by">${escHtml(e.by)}</div>
+      </div>
+      <div class="log-sep"></div>
+      <div class="log-body">
+        <div class="log-title-text">${escHtml(e.title)}</div>
+        ${e.desc ? `<div class="log-desc">${escHtml(e.desc)}</div>` : ''}
+        ${e.next ? `<div class="log-next">${escHtml(e.next)}</div>` : ''}
+      </div>
+      <button class="log-del-btn" onclick="delLog(${i})" title="Eliminar">×</button>`;
+    container.appendChild(entry);
+  });
+}
+function addLogEntry() {
+  const title = document.getElementById('logTitle').value.trim();
+  const by    = document.getElementById('logBy').value.trim();
+  const desc  = document.getElementById('logDesc').value.trim();
+  const next  = document.getElementById('logNext').value.trim();
+  if (!title) { toast('Agrega un título a la sesión'); return; }
+  const d     = new Date();
+  const date  = d.toLocaleDateString('es-ES', { day:'2-digit', month:'short' });
+  const entries = S.get('log') || [];
+  entries.unshift({ title, by: by || 'Jorge & Fernanda', desc, next, date, ts: Date.now() });
+  S.set('log', entries);
+  document.getElementById('logTitle').value = '';
+  document.getElementById('logBy').value    = '';
+  document.getElementById('logDesc').value  = '';
+  document.getElementById('logNext').value  = '';
+  renderLog();
+  toast('Sesión guardada ✓');
+}
+function delLog(i) {
+  const entries = S.get('log') || [];
+  entries.splice(i, 1);
+  S.set('log', entries);
+  renderLog();
+}
+
+// ─── UTILS ──────────────────────────────────────────
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+let toastTimer;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
+}
+
+// ─── KEYBOARD ───────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if ((e.key === 'Enter') && e.target.id === 'ideaText') { e.preventDefault(); addIdea(); }
+  if ((e.key === 'Enter') && e.target.id === 'stepText')  { e.preventDefault(); addStep(); }
+  if ((e.key === 'Enter') && e.ctrlKey && e.target.id === 'logTitle') { addLogEntry(); }
+});
+
+// ─── BOOT ────────────────────────────────────────────
+initDate();
+initQuote();
+renderPhases();
+renderPipeline();
+renderIdeas();
+renderSteps();
+renderLog();
+</script>
+</body>
+</html>
