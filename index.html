@@ -591,25 +591,74 @@
 
   /* TOOLS */
   #testimonials { background: var(--ink); padding: 9rem 48px; }
-  .test-grid {
+  .tools-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1px;
     margin-top: 4rem;
     background: var(--line);
   }
-  .test-card {
+  .tool-card {
     background: var(--ink);
-    padding: 3rem;
+    padding: 2.8rem 3rem;
     position: relative;
-    transition: background .3s;
+    transition: background .4s;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
   }
-  .test-card:hover { background: rgba(200,169,122,.025); }
-  .test-quote { font-family: 'Cormorant Garamond', serif; font-size: 4rem; color: rgba(200,169,122,.1); line-height: .8; position: absolute; top: 2rem; left: 2.5rem; }
-  .test-text { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-style: italic; font-weight: 300; line-height: 1.8; color: rgba(242,237,228,.5); margin-top: 2rem; position: relative; }
-  .test-author { display: flex; align-items: center; gap: 1rem; margin-top: 1.8rem; }
-  .test-dash { width: 22px; height: 1px; background: var(--gold); }
-  .test-name { font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+  .tool-card:hover { background: rgba(200,169,122,.03); }
+  .tool-logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 1.6rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .tool-logo-icon {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(200,169,122,.2);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    background: rgba(200,169,122,.04);
+  }
+  .tool-logo-icon svg { width: 22px; height: 22px; }
+  .tool-logo-name {
+    font-family: 'Syncopate', sans-serif;
+    font-size: .6rem;
+    font-weight: 700;
+    letter-spacing: .18em;
+    color: var(--cream);
+  }
+  .tool-logo-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: .5rem;
+    letter-spacing: .15em;
+    color: var(--muted);
+    margin-top: 2px;
+    text-transform: uppercase;
+  }
+  .tool-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(242,237,228,.48);
+    flex: 1;
+  }
+  .tool-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: .52rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .tool-tag::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); flex-shrink: 0; }
 
   /* CONTACT */
   .contact { text-align: center; padding: 140px 48px; background: var(--dark); }
@@ -699,9 +748,11 @@
     .about-photo { min-height: unset; }
     .about-text { padding: 4rem 24px; }
     .services-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-    .svc-row { grid-template-columns: 60px 1fr; }
-    .svc-desc { display: none; }
+    .svc-row { grid-template-columns: 48px 1fr; gap: 1rem; flex-wrap: wrap; }
+    .svc-desc { display: block; text-align: left; max-width: 100%; color: rgba(242,237,228,.38); font-size: .68rem; margin-top: .3rem; grid-column: 2; }
     .test-grid { grid-template-columns: 1fr; }
+    .tools-grid { grid-template-columns: 1fr; }
+    .tool-card[style*="grid-column"] { grid-column: 1 !important; }
     footer { flex-direction: column; gap: 1.2rem; text-align: center; padding: 24px; }
     .contact { padding: 80px 24px; }
     .hero-meta { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
@@ -846,11 +897,103 @@
 <section id="testimonials">
   <div class="section-label reveal">Stack Tecnológico</div>
   <h2 class="section-title reveal">Herramientas que <em>La Crearon</em></h2>
-  <div class="test-grid">
-    <div class="test-card reveal"><div class="test-quote">✦</div><p class="test-text"><strong style="color:var(--gold-lt);letter-spacing:.1em">NANOBANANA PRO — HIGGSFIELD AI</strong><br/><br/>Motor principal de imágenes. El modelo ideal para consistencia de influencers IA. Con él establecí la cara de Lara y la reproduje de forma confiable en distintos ángulos, iluminación y escenas.</p><div class="test-author"><div class="test-dash"></div><span class="test-name">Generación de Imágenes · Consistencia</span></div></div>
-    <div class="test-card reveal"><div class="test-quote">✦</div><p class="test-text"><strong style="color:var(--gold-lt);letter-spacing:.1em">SEEDREAM</strong><br/><br/>Usado para diversidad de escenas — autos, viajes, lifestyle, marca. Amplió el rango de contextos visuales de la biblioteca de assets más allá de lo que NanoBanana PRO maneja de forma nativa.</p><div class="test-author"><div class="test-dash"></div><span class="test-name">Construcción de Escenas · Diversidad</span></div></div>
-    <div class="test-card reveal"><div class="test-quote">✦</div><p class="test-text"><strong style="color:var(--gold-lt);letter-spacing:.1em">KLING &amp; VEO 3</strong><br/><br/>Generación de video. Trajeron a Lara al movimiento — clips cinematográficos con movimiento de cámara, detalles ambientales y atmósfera natural. Los shots estáticos se ven IA; estos no.</p><div class="test-author"><div class="test-dash"></div><span class="test-name">Generación de Video · Movimiento</span></div></div>
-    <div class="test-card reveal"><div class="test-quote">✦</div><p class="test-text"><strong style="color:var(--gold-lt);letter-spacing:.1em">CLAUDE CODE</strong><br/><br/>Todo el sitio que estás viendo — la galería, las animaciones, el lightbox, el video hero — fue construido con Claude Code como capa de ingeniería IA. Cero código manual.</p><div class="test-author"><div class="test-dash"></div><span class="test-name">Desarrollo Web · Despliegue</span></div></div>
+  <div class="tools-grid">
+
+    <!-- NanoBanana PRO -->
+    <div class="tool-card reveal">
+      <div class="tool-logo-wrap">
+        <div class="tool-logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="8" r="4.5" stroke="#C8A97A" stroke-width="1.2"/>
+            <path d="M5 20c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="#C8A97A" stroke-width="1.2" stroke-linecap="round"/>
+            <circle cx="12" cy="8" r="1.5" fill="#C8A97A" opacity=".5"/>
+          </svg>
+        </div>
+        <div>
+          <div class="tool-logo-name">NanoBanana PRO</div>
+          <div class="tool-logo-sub">Higgsfield AI</div>
+        </div>
+      </div>
+      <p class="tool-body">Motor principal de imágenes. El modelo ideal para consistencia de influencers IA. Establecí la cara de Lara y la reproduje de forma confiable en distintos ángulos, iluminación y escenas.</p>
+      <div class="tool-tag">Generación de Imágenes · Consistencia</div>
+    </div>
+
+    <!-- Seedream -->
+    <div class="tool-card reveal">
+      <div class="tool-logo-wrap">
+        <div class="tool-logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9 9-4.03 9-9" stroke="#C8A97A" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M15 3.5c2.5 1 4.5 3.5 4.5 6" stroke="#C8A97A" stroke-width="1.2" stroke-linecap="round" opacity=".5"/>
+            <circle cx="12" cy="12" r="2.5" stroke="#C8A97A" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div>
+          <div class="tool-logo-name">Seedream</div>
+          <div class="tool-logo-sub">Escenas &amp; Entornos</div>
+        </div>
+      </div>
+      <p class="tool-body">Diversidad de escenas — autos, viajes, lifestyle, marca. Amplió el rango de contextos visuales de la biblioteca más allá de lo que NanoBanana PRO maneja de forma nativa.</p>
+      <div class="tool-tag">Construcción de Escenas · Diversidad</div>
+    </div>
+
+    <!-- Kling -->
+    <div class="tool-card reveal">
+      <div class="tool-logo-wrap">
+        <div class="tool-logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="8" height="8" rx="1.5" stroke="#C8A97A" stroke-width="1.2"/>
+            <rect x="13" y="3" width="8" height="8" rx="1.5" stroke="#C8A97A" stroke-width="1.2" opacity=".5"/>
+            <rect x="3" y="13" width="8" height="8" rx="1.5" stroke="#C8A97A" stroke-width="1.2" opacity=".5"/>
+            <path d="M13 17l3-3 2 2 3-3" stroke="#C8A97A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="tool-logo-name">Kling</div>
+          <div class="tool-logo-sub">Video Generation</div>
+        </div>
+      </div>
+      <p class="tool-body">Clips cinematográficos con movimiento de cámara, detalles ambientales y atmósfera natural. Los shots estáticos se ven IA — los de Kling, no.</p>
+      <div class="tool-tag">Generación de Video · Movimiento</div>
+    </div>
+
+    <!-- Veo 3 -->
+    <div class="tool-card reveal">
+      <div class="tool-logo-wrap">
+        <div class="tool-logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="6,4 20,12 6,20" stroke="#C8A97A" stroke-width="1.2" stroke-linejoin="round" fill="rgba(200,169,122,0.08)"/>
+            <circle cx="6" cy="12" r="2" fill="#C8A97A" opacity=".4"/>
+          </svg>
+        </div>
+        <div>
+          <div class="tool-logo-name">Veo 3</div>
+          <div class="tool-logo-sub">Google DeepMind</div>
+        </div>
+      </div>
+      <p class="tool-body">Generación de video de alta fidelidad de Google. Movimiento fluido, física realista y coherencia temporal — eleva el nivel cinematográfico del contenido.</p>
+      <div class="tool-tag">Video Avanzado · Realismo</div>
+    </div>
+
+    <!-- Claude Code -->
+    <div class="tool-card reveal" style="grid-column: 1 / -1;">
+      <div class="tool-logo-wrap">
+        <div class="tool-logo-icon" style="width:48px;height:48px;border-radius:10px;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#C8A97A" stroke-width="1.2" stroke-linejoin="round"/>
+            <path d="M2 17l10 5 10-5" stroke="#C8A97A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 12l10 5 10-5" stroke="#C8A97A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/>
+          </svg>
+        </div>
+        <div>
+          <div class="tool-logo-name">Claude Code</div>
+          <div class="tool-logo-sub">Anthropic · Ingeniería IA</div>
+        </div>
+      </div>
+      <p class="tool-body" style="max-width:680px;">Todo el sitio que estás viendo — la galería, las partículas interactivas, el lightbox, el video hero, las animaciones — fue construido con Claude Code como capa de ingeniería IA. Cero código manual.</p>
+      <div class="tool-tag">Desarrollo Web · Despliegue</div>
+    </div>
+
   </div>
 </section>
 
