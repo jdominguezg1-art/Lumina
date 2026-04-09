@@ -285,7 +285,7 @@
       height: 112%;
       object-fit: cover;
       object-position: center 20%;
-      opacity: 0.32;
+      opacity: 0.18;
       z-index: 0;
       will-change: transform;
       transform-origin: center;
@@ -294,10 +294,11 @@
 
     #hero {
       position: relative;
-      height: 100vh;
-      min-height: 680px;
-      display: flex;
-      align-items: flex-end;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr;
+      align-content: center;
+      padding: 140px 5vw 80px;
       overflow: hidden;
     }
 
@@ -312,75 +313,182 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(to bottom, rgba(7,5,4,.05) 0%, rgba(7,5,4,.55) 100%),
-        linear-gradient(to right, rgba(7,5,4,.15) 0%, transparent 55%);
+        linear-gradient(to bottom, rgba(7,5,4,.2) 0%, rgba(7,5,4,.6) 100%),
+        linear-gradient(to right, rgba(7,5,4,.3) 0%, transparent 60%);
     }
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      padding: 0 6vw 10vh;
-      width: 100%;
-    }
-
+    /* eyebrow */
     .hero-tag {
-      font-size: .65rem;
-      letter-spacing: .38em;
+      font-family: 'DM Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .3em;
       text-transform: uppercase;
       color: var(--gold);
-      display: block;
-      margin-bottom: 1.2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 2;
       opacity: 0;
-      transform: translateY(12px);
-      transition: opacity .7s 2s, transform .7s 2s;
+      transform: translateY(20px);
+      transition: opacity .7s ease, transform .7s ease;
     }
     .hero-tag.show { opacity: 1; transform: translateY(0); }
 
+    /* title */
     .hero-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(5.5rem, 15vw, 13rem);
+      font-style: italic;
       font-weight: 300;
-      line-height: .85;
+      font-size: clamp(72px, 11vw, 160px);
+      line-height: .92;
+      letter-spacing: -.02em;
+      max-width: 900px;
       color: var(--cream);
-      letter-spacing: .04em;
-      overflow: hidden;
+      position: relative;
+      z-index: 2;
     }
 
-    .hero-line {
+    .title-line {
       display: block;
-      overflow: hidden;
-    }
-
-    .hero-line-inner {
-      display: block;
-      transform: translateY(110%);
-      filter: blur(10px);
       opacity: 0;
-      transition: transform .95s cubic-bezier(.16,1,.3,1), filter 1s ease .08s, opacity .6s ease;
+      transform: translateY(60px);
+      transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1);
     }
-    .hero-line-inner.show { transform: translateY(0); filter: blur(0); opacity: 1; }
-    .hero-line-inner em { font-style: italic; color: var(--gold-lt); }
+    .title-line.show { opacity: 1; transform: translateY(0); }
+    .title-line .accent-word { color: var(--gold-lt); font-style: italic; }
 
-    .hero-bottom {
+    /* meta bar */
+    .hero-meta {
       display: flex;
-      justify-content: space-between;
       align-items: flex-end;
-      margin-top: 2.5rem;
+      justify-content: space-between;
+      margin-top: 5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(200,169,122,.12);
+      position: relative;
+      z-index: 2;
       opacity: 0;
-      transform: translateY(16px);
-      transition: opacity .7s 2.4s, transform .7s 2.4s;
+      transform: translateY(20px);
+      transition: opacity .8s ease, transform .8s ease;
     }
-    .hero-bottom.show { opacity: 1; transform: translateY(0); }
+    .hero-meta.show { opacity: 1; transform: translateY(0); }
 
-    .hero-sub {
-      font-size: .88rem;
-      font-weight: 300;
-      letter-spacing: .08em;
-      color: rgba(245,240,232,.55);
-      max-width: 320px;
+    .hero-desc {
+      font-family: 'DM Mono', monospace;
+      font-size: .68rem;
       line-height: 1.9;
+      color: rgba(245,240,232,.38);
+      max-width: 280px;
+      letter-spacing: .04em;
     }
 
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: 'Syncopate', sans-serif;
+      font-size: .6rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: none;
+      padding: 1.1rem 2rem;
+      border: 1px solid rgba(200,169,122,.18);
+      transition: border-color .3s, color .3s, background .3s;
+      white-space: nowrap;
+    }
+    .hero-cta::after {
+      content: '→';
+      transition: transform .3s;
+    }
+    .hero-cta:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(200,169,122,.04);
+    }
+    .hero-cta:hover::after { transform: translateX(4px); }
+
+    /* ghost year */
+    .hero-ghost-year {
+      position: absolute;
+      top: 50%;
+      right: 120px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(120px, 18vw, 200px);
+      font-weight: 300;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(242,237,228,.05);
+      user-select: none;
+      pointer-events: none;
+      line-height: 1;
+      transform: translateY(-50%);
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+    .hero-ghost-year.show { opacity: 1; }
+
+    /* vertical label */
+    .vertical-label {
+      position: absolute;
+      right: 3rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      transform-origin: center;
+      font-family: 'DM Mono', monospace;
+      font-size: .52rem;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,.22);
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+    .vertical-label.show { opacity: 1; }
+
+    /* horizontal scroll hint — bottom left */
+    .scroll-hint {
+      position: absolute;
+      bottom: 3rem;
+      left: 5vw;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: 'DM Mono', monospace;
+      font-size: .52rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,.22);
+      z-index: 2;
+      opacity: 0;
+      transition: opacity .8s ease;
+    }
+    .scroll-hint.show { opacity: 1; }
+    .scroll-line-h {
+      width: 40px;
+      height: 1px;
+      background: rgba(245,240,232,.15);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .scroll-line-h::after {
+      content: '';
+      position: absolute;
+      left: -100%;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gold);
+      animation: scan-h 2s 2s ease infinite;
+    }
+    @keyframes scan-h {
+      0%   { left: -100%; }
+      50%  { left: 100%; }
+      100% { left: 100%; }
+    }
+
+    /* keep btn-magnetic for non-hero uses */
     .btn-magnetic {
       display: inline-flex;
       align-items: center;
@@ -408,65 +516,6 @@
     }
     .btn-magnetic:hover { color: var(--dark); }
     .btn-magnetic:hover::before { transform: scaleX(1); }
-
-    /* ── GHOST YEAR ── */
-    .hero-ghost-year {
-      position: absolute;
-      top: 50%;
-      right: 6vw;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(80px, 15vw, 160px);
-      font-weight: 300;
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(245,240,232,.045);
-      user-select: none;
-      pointer-events: none;
-      line-height: 1;
-      transform: translateY(-50%);
-      z-index: 1;
-      opacity: 0;
-      transition: opacity 1.5s 1.6s ease;
-    }
-    .hero-ghost-year.show { opacity: 1; }
-
-    .scroll-line {
-      position: absolute;
-      bottom: 3rem; right: 5vw;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: .7rem;
-      opacity: 0;
-      transition: opacity .7s 2.8s;
-    }
-    .scroll-line.show { opacity: 1; }
-    .scroll-line span {
-      font-size: .58rem;
-      letter-spacing: .3em;
-      text-transform: uppercase;
-      color: rgba(245,240,232,.3);
-      writing-mode: vertical-lr;
-    }
-    .scroll-line-bar {
-      width: 1px; height: 64px;
-      background: rgba(200,169,122,.1);
-      position: relative;
-      overflow: hidden;
-    }
-    .scroll-line-bar::after {
-      content: '';
-      position: absolute;
-      top: -100%; left: 0;
-      width: 100%; height: 100%;
-      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
-      animation: scan-v 2.4s ease infinite;
-    }
-    @keyframes scan-v {
-      0%   { top: -100%; }
-      55%  { top: 100%; }
-      100% { top: 100%; }
-    }
 
     /* ── MARQUEE ── */
     .marquee-wrap {
@@ -1131,8 +1180,11 @@
       .f-row { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
-      .hero-title { font-size: 4rem; }
-      .hero-bottom { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .hero-title { font-size: clamp(52px, 14vw, 72px); }
+      #hero { padding: 100px 6vw 60px; }
+      .hero-meta { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .hero-ghost-year { right: -20px; opacity: .5; }
+      .vertical-label { display: none; }
       .lb-prev { left: .4rem; } .lb-next { right: .4rem; }
     }
   </style>
@@ -1264,19 +1316,24 @@
     </video>
     <canvas id="heroCanvas" class="hero-canvas"></canvas>
     <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <span class="hero-tag" id="heroTag">Lara · @babybloondie · Avatar IA · Construida desde Cero</span>
-      <h1 class="hero-title">
-        <span class="hero-line"><span class="hero-line-inner" id="hl1">LA</span></span>
-        <span class="hero-line"><span class="hero-line-inner" id="hl2"><em>RA</em></span></span>
-      </h1>
-      <div class="hero-bottom" id="heroBottom">
-        <p class="hero-sub">Ella no existe — yo la construí.<br/>Construida. Concluida. Lista.</p>
-        <a href="#gallery" class="btn-magnetic magnetic">Ver la Galería</a>
-      </div>
+
+    <div class="hero-tag" id="heroTag">Avatar IA · @babybloondie · Construida desde Cero</div>
+    <h1 class="hero-title">
+      <span class="title-line" id="hl1">Ella no</span>
+      <span class="title-line" id="hl2"><em class="accent-word">existe</em> —</span>
+      <span class="title-line" id="hl3">yo la construí.</span>
+    </h1>
+    <div class="hero-meta" id="heroBottom">
+      <p class="hero-desc">Un avatar 100% IA — sin estudio, sin casting, sin persona real.<br/>Construida. Concluida. Lista para escalar.</p>
+      <a href="#gallery" class="hero-cta magnetic">Ver la Galería</a>
     </div>
+
     <div class="hero-ghost-year" id="heroGhostYear">2026</div>
-    <div class="scroll-line" id="scrollLine"><span>Scroll</span><div class="scroll-line-bar"></div></div>
+    <div class="vertical-label" id="verticalLabel">Scroll to explore</div>
+    <div class="scroll-hint" id="scrollHint">
+      <div class="scroll-line-h"></div>
+      Scroll
+    </div>
   </section>
 
   <!-- MARQUEE -->
@@ -1453,9 +1510,11 @@
     document.getElementById('heroTag').classList.add('show');
     setTimeout(() => document.getElementById('hl1').classList.add('show'), 100);
     setTimeout(() => document.getElementById('hl2').classList.add('show'), 280);
-    setTimeout(() => document.getElementById('heroBottom').classList.add('show'), 500);
-    setTimeout(() => document.getElementById('scrollLine').classList.add('show'), 700);
-    setTimeout(() => document.getElementById('heroGhostYear').classList.add('show'), 800);
+    setTimeout(() => document.getElementById('hl3').classList.add('show'), 460);
+    setTimeout(() => document.getElementById('heroBottom').classList.add('show'), 680);
+    setTimeout(() => document.getElementById('scrollHint').classList.add('show'), 820);
+    setTimeout(() => document.getElementById('verticalLabel').classList.add('show'), 900);
+    setTimeout(() => document.getElementById('heroGhostYear').classList.add('show'), 900);
     document.getElementById('navLogo').classList.add('show');
     document.getElementById('navLinks').classList.add('show');
   }
