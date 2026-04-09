@@ -761,6 +761,257 @@
     .hero-title { font-size: clamp(52px, 14vw, 72px); }
     .lb-prev { left: .4rem; } .lb-next { right: .4rem; }
   }
+
+  /* ─── WORKSPACE SECTION ─── */
+  #workspace {
+    padding: 7rem 0 4rem;
+    border-top: 1px solid var(--line);
+  }
+  .ws-wrap { max-width: 1100px; margin: 0 auto; padding: 0 5vw; }
+
+  .ws-hero {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: end;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 2rem;
+  }
+  .ws-hero h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.6rem, 5vw, 4.5rem);
+    font-weight: 300;
+    line-height: .92;
+    letter-spacing: -.02em;
+  }
+  .ws-hero h2 em { font-style: italic; color: var(--gold); }
+  .ws-hero-meta { text-align: right; }
+  .ws-hero-meta .ws-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--cream);
+  }
+  .ws-hero-meta .ws-partners {
+    font-size: .5rem;
+    letter-spacing: .18em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: .35rem;
+  }
+  .ws-hero-meta .ws-partners strong { color: var(--rose-lt,#D9AA97); font-weight: 400; }
+  .ws-collab-dots { display: flex; gap: .4rem; justify-content: flex-end; margin-top: .5rem; }
+  .ws-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .ws-dot-j { background: var(--gold); }
+  .ws-dot-f { background: #C4907A; }
+
+  .ws-stats {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: .8rem;
+    margin-bottom: 2rem;
+  }
+  @media(max-width:640px){ .ws-stats { grid-template-columns: 1fr 1fr; } }
+  .ws-stat {
+    background: #131210;
+    border: 1px solid var(--line);
+    padding: 1.1rem 1.3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .ws-stat::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+  .ws-stat.ws-gold::before  { background: var(--gold); }
+  .ws-stat.ws-rose::before  { background: #C4907A; }
+  .ws-stat.ws-sage::before  { background: #8DA68A; }
+  .ws-stat-label { font-size:.48rem; letter-spacing:.2em; color:var(--muted); text-transform:uppercase; margin-bottom:.5rem; }
+  .ws-stat-val { font-family:'Cormorant Garamond',serif; font-size:2.4rem; font-weight:300; line-height:1; color:var(--cream); }
+  .ws-stat-sub { font-size:.45rem; letter-spacing:.12em; color:var(--muted); margin-top:.3rem; text-transform:uppercase; }
+  .ws-prog-bar { margin-top:.7rem; height:2px; background:rgba(200,169,122,.1); position:relative; }
+  .ws-prog-fill { position:absolute; left:0; top:0; bottom:0; background:var(--gold); transition:width 1s cubic-bezier(.4,0,.2,1); }
+
+  .ws-sec-hdr {
+    display: flex; align-items: center; gap: .8rem; margin-bottom: 1.1rem; margin-top: 2.2rem;
+  }
+  .ws-eyebrow { font-size:.48rem; letter-spacing:.22em; color:var(--gold); text-transform:uppercase; white-space:nowrap; }
+  .ws-line { flex:1; height:1px; background:var(--line); }
+  .ws-count { font-size:.48rem; letter-spacing:.14em; color:var(--muted); white-space:nowrap; }
+
+  /* Phases */
+  .ws-phase-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:.7rem; }
+  .ws-phase {
+    background:#131210; border:1px solid var(--line);
+    padding:1.1rem 1.3rem; display:flex; gap:.9rem; align-items:flex-start;
+    cursor:pointer; user-select:none; transition:border-color .25s,background .25s;
+  }
+  .ws-phase:hover { border-color:rgba(200,169,122,.25); background:#181614; }
+  .ws-phase.ws-done { border-color:rgba(200,169,122,.18); }
+  .ws-phase.ws-done .ws-ph-name { opacity:.45; text-decoration:line-through; text-decoration-color:var(--gold); }
+  .ws-phase.ws-ip  { border-color:rgba(196,144,122,.28); }
+  .ws-ph-box {
+    width:17px; height:17px; border:1px solid var(--line); border-radius:3px;
+    flex-shrink:0; margin-top:2px; display:flex; align-items:center; justify-content:center;
+    transition:background .2s, border-color .2s;
+  }
+  .ws-phase.ws-done .ws-ph-box { background:var(--gold); border-color:var(--gold); }
+  .ws-phase.ws-ip   .ws-ph-box { border-color:#C4907A; }
+  .ws-ph-box svg { opacity:0; transition:opacity .15s; }
+  .ws-phase.ws-done .ws-ph-box svg { opacity:1; }
+  .ws-ph-num { font-size:.45rem; letter-spacing:.18em; color:var(--muted); text-transform:uppercase; margin-bottom:.25rem; }
+  .ws-ph-name { font-family:'Cormorant Garamond',serif; font-size:.95rem; color:var(--cream); line-height:1.3; margin-bottom:.35rem; transition:opacity .3s; }
+  .ws-ph-badge { display:inline-block; font-size:.4rem; letter-spacing:.14em; text-transform:uppercase; padding:.18rem .48rem; border-radius:20px; }
+  .ws-b-done  { background:rgba(200,169,122,.1);  color:var(--gold); }
+  .ws-b-ip    { background:rgba(196,144,122,.1);  color:#D9AA97; }
+  .ws-b-pend  { background:rgba(107,101,96,.09); color:var(--muted); }
+  .ws-ph-conf { margin-top:.45rem; display:flex; gap:2px; }
+  .ws-cd      { width:5px; height:5px; border-radius:50%; background:var(--line); }
+  .ws-cd.on   { background:var(--gold); }
+
+  /* Checklist */
+  .ws-pipe-cols { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+  @media(max-width:640px){ .ws-pipe-cols { grid-template-columns:1fr; } }
+  .ws-cl-wrap { background:#131210; border:1px solid var(--line); }
+  .ws-cl-title { font-size:.45rem; letter-spacing:.2em; color:var(--gold); text-transform:uppercase; padding:.65rem 1.1rem; background:rgba(200,169,122,.04); border-bottom:1px solid var(--line); }
+  .ws-ci {
+    display:flex; align-items:center; gap:.8rem; padding:.65rem 1.1rem;
+    border-bottom:1px solid rgba(200,169,122,.05);
+    cursor:pointer; user-select:none; transition:background .2s;
+  }
+  .ws-ci:last-child { border-bottom:none; }
+  .ws-ci:hover { background:rgba(200,169,122,.04); }
+  .ws-ci.ws-ck .ws-ci-label { opacity:.32; text-decoration:line-through; text-decoration-color:var(--gold); }
+  .ws-ci-box {
+    width:14px; height:14px; border:1px solid var(--line); border-radius:2px;
+    flex-shrink:0; display:flex; align-items:center; justify-content:center;
+    transition:background .2s, border-color .2s;
+  }
+  .ws-ci.ws-ck .ws-ci-box { background:var(--gold); border-color:var(--gold); }
+  .ws-ci-box svg { opacity:0; transition:opacity .15s; }
+  .ws-ci.ws-ck .ws-ci-box svg { opacity:1; }
+  .ws-ci-label { font-size:.57rem; letter-spacing:.05em; color:var(--cream); opacity:.72; flex:1; transition:opacity .3s; }
+  .ws-ci-tag   { font-size:.4rem; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; flex-shrink:0; }
+
+  /* Ideas */
+  .ws-ideas { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:.7rem; }
+  .ws-idea {
+    background:#131210; border:1px solid var(--line);
+    padding:1rem 1.1rem; position:relative; min-height:90px;
+    transition:border-color .3s;
+  }
+  .ws-idea:hover { border-color:rgba(200,169,122,.22); }
+  .ws-idea::before { content:''; position:absolute; top:0; left:0; width:3px; height:100%; }
+  .ws-ic-contenido::before { background:var(--gold); }
+  .ws-ic-viral::before     { background:#C4907A; }
+  .ws-ic-brand::before     { background:#8DA68A; }
+  .ws-ic-tecnico::before   { background:#9A8AAA; }
+  .ws-idea-cat { font-size:.4rem; letter-spacing:.17em; text-transform:uppercase; margin-bottom:.4rem; }
+  .ws-cat-contenido { color:var(--gold-lt); } .ws-cat-viral { color:#D9AA97; } .ws-cat-brand { color:#8DA68A; } .ws-cat-tecnico { color:#9A8AAA; }
+  .ws-idea-text { font-family:'Cormorant Garamond',serif; font-size:.9rem; font-style:italic; font-weight:300; color:var(--cream); opacity:.83; line-height:1.5; }
+  .ws-idea-del { position:absolute; top:.5rem; right:.6rem; width:18px; height:18px; background:none; border:none; color:var(--muted); font-size:.7rem; cursor:pointer; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .2s,color .2s; }
+  .ws-idea:hover .ws-idea-del { opacity:1; }
+  .ws-idea-del:hover { color:#C4907A; }
+  .ws-idea-add {
+    background:transparent; border:1px dashed rgba(200,169,122,.18);
+    padding:1rem 1.1rem; min-height:90px; display:flex; flex-direction:column; gap:.6rem;
+    transition:border-color .3s;
+  }
+  .ws-idea-add:hover { border-color:rgba(200,169,122,.35); }
+  .ws-idea-add select, .ws-idea-add textarea {
+    background:transparent; border:none; border-bottom:1px solid var(--line);
+    color:var(--cream); font-family:'DM Mono',monospace; font-size:.55rem; letter-spacing:.07em;
+    padding:.28rem 0; width:100%; resize:none; transition:border-color .2s;
+  }
+  .ws-idea-add textarea { font-family:'Cormorant Garamond',serif; font-size:.88rem; font-style:italic; min-height:44px; }
+  .ws-idea-add select:focus, .ws-idea-add textarea:focus { border-color:var(--gold); }
+  .ws-idea-add select option { background:#181614; color:var(--cream); }
+  .ws-btn-sm {
+    align-self:flex-start; background:none; border:1px solid var(--line); color:var(--gold);
+    font-family:'DM Mono',monospace; font-size:.45rem; letter-spacing:.17em; text-transform:uppercase;
+    padding:.3rem .7rem; cursor:pointer; transition:all .2s;
+  }
+  .ws-btn-sm:hover { border-color:var(--gold); background:rgba(200,169,122,.08); }
+
+  /* Steps */
+  .ws-steps { display:flex; flex-direction:column; gap:.45rem; }
+  .ws-step {
+    display:flex; align-items:center; gap:.9rem; background:#131210; border:1px solid var(--line);
+    padding:.8rem 1.1rem; cursor:pointer; user-select:none; transition:border-color .3s;
+  }
+  .ws-step:hover { border-color:rgba(200,169,122,.2); }
+  .ws-step.ws-step-done .ws-step-text { opacity:.32; text-decoration:line-through; text-decoration-color:#C4907A; }
+  .ws-prio { font-size:.4rem; letter-spacing:.16em; text-transform:uppercase; padding:.18rem .5rem; border-radius:20px; white-space:nowrap; flex-shrink:0; }
+  .ws-p-alta  { background:rgba(196,144,122,.11); color:#D9AA97; }
+  .ws-p-media { background:rgba(200,169,122,.09); color:var(--gold-lt); }
+  .ws-p-baja  { background:rgba(141,166,138,.09); color:#8DA68A; }
+  .ws-step-text { font-size:.6rem; letter-spacing:.05em; color:var(--cream); opacity:.78; flex:1; transition:opacity .3s; }
+  .ws-owner { font-size:.45rem; letter-spacing:.11em; color:var(--muted); flex-shrink:0; }
+  .ws-owner.oj { color:var(--gold); } .ws-owner.of { color:#D9AA97; }
+  .ws-add-step {
+    background:transparent; border:1px dashed rgba(200,169,122,.16); padding:.8rem 1.1rem;
+    display:grid; grid-template-columns:auto 1fr auto auto; gap:.7rem; align-items:center;
+    margin-top:.45rem; transition:border-color .3s;
+  }
+  .ws-add-step:focus-within { border-color:rgba(200,169,122,.32); }
+  .ws-add-step select, .ws-add-step input {
+    background:transparent; border:none; border-bottom:1px solid var(--line);
+    color:var(--cream); font-family:'DM Mono',monospace; font-size:.57rem; letter-spacing:.05em;
+    padding:.25rem 0; transition:border-color .2s;
+  }
+  .ws-add-step input { width:100%; }
+  .ws-add-step input::placeholder { color:var(--muted); }
+  .ws-add-step select:focus, .ws-add-step input:focus { border-color:var(--gold); }
+  .ws-add-step select option { background:#181614; }
+  @media(max-width:560px){
+    .ws-add-step { grid-template-columns:1fr 1fr; }
+    .ws-add-step input { grid-column:1/-1; }
+  }
+
+  /* Log */
+  .ws-log-form {
+    background:#131210; border:1px solid var(--line); padding:1.3rem;
+    display:grid; grid-template-columns:1fr 1fr; gap:.75rem; margin-bottom:.8rem;
+  }
+  @media(max-width:560px){ .ws-log-form { grid-template-columns:1fr; } }
+  .ws-lf-full { grid-column:1/-1; }
+  .ws-field { display:flex; flex-direction:column; gap:.42rem; }
+  .ws-flabel { font-size:.45rem; letter-spacing:.19em; color:var(--muted); text-transform:uppercase; }
+  .ws-finput {
+    background:transparent; border:none; border-bottom:1px solid var(--line);
+    color:var(--cream); font-family:'DM Mono',monospace; font-size:.58rem; letter-spacing:.05em;
+    padding:.35rem 0; width:100%; resize:vertical; transition:border-color .2s;
+  }
+  .ws-finput:focus { border-color:var(--gold); }
+  .ws-finput::placeholder { color:var(--muted); }
+  .ws-log-save {
+    background:var(--gold); border:none; color:var(--ink);
+    font-family:'DM Mono',monospace; font-size:.47rem; letter-spacing:.17em; text-transform:uppercase;
+    padding:.55rem 1.1rem; cursor:pointer; transition:background .2s;
+  }
+  .ws-log-save:hover { background:var(--gold-lt); }
+  .ws-log-entries { display:flex; flex-direction:column; gap:.45rem; }
+  .ws-log-entry {
+    background:#131210; border:1px solid var(--line); padding:.9rem 1.3rem;
+    display:grid; grid-template-columns:auto 1fr auto; gap:1.2rem; align-items:start;
+    transition:border-color .3s;
+  }
+  .ws-log-entry:hover { border-color:rgba(200,169,122,.18); }
+  @media(max-width:480px){ .ws-log-entry { grid-template-columns:1fr; gap:.5rem; } .ws-log-sep { display:none; } }
+  .ws-log-date { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:300; color:var(--gold); line-height:1; white-space:nowrap; }
+  .ws-log-by   { font-size:.43rem; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; margin-top:.25rem; }
+  .ws-log-sep  { width:1px; background:var(--line); align-self:stretch; }
+  .ws-log-title { font-family:'Cormorant Garamond',serif; font-size:.95rem; color:var(--cream); margin-bottom:.35rem; }
+  .ws-log-desc  { font-size:.55rem; letter-spacing:.04em; color:var(--muted); line-height:1.7; margin-bottom:.4rem; }
+  .ws-log-next  { font-size:.5rem; letter-spacing:.07em; color:#D9AA97; opacity:.8; }
+  .ws-log-next::before { content:'→ '; }
+  .ws-log-del   { background:none; border:none; color:var(--muted); font-size:.65rem; cursor:pointer; opacity:0; transition:opacity .2s,color .2s; padding:.15rem; }
+  .ws-log-entry:hover .ws-log-del { opacity:1; }
+  .ws-log-del:hover { color:#C4907A; }
+  .ws-empty { font-size:.55rem; letter-spacing:.1em; color:var(--muted); padding:1.2rem; background:#131210; border:1px dashed rgba(200,169,122,.09); text-align:center; }
+
+  /* Quote bar inside workspace */
+  .ws-quote { padding:1.6rem 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); text-align:center; margin-bottom:2rem; }
+  .ws-quote p { font-family:'Cormorant Garamond',serif; font-size:clamp(1rem,2.2vw,1.45rem); font-style:italic; font-weight:300; color:var(--cream); opacity:.65; }
+  .ws-quote span { font-size:.45rem; letter-spacing:.2em; color:var(--muted); text-transform:uppercase; display:block; margin-top:.45rem; }
 </style>
 </head>
 <body>
@@ -780,6 +1031,7 @@
   <a href="#about"    onclick="closeMenu()">El Proyecto</a>
   <a href="#services" onclick="closeMenu()">Proceso</a>
   <a href="#contact"  onclick="closeMenu()">Contacto</a>
+  <a href="#workspace" onclick="closeMenu()" style="color:var(--gold)">✦ Workspace</a>
 </div>
 
 <!-- NAV -->
@@ -790,7 +1042,7 @@
     <li><a href="#about">El Proyecto</a></li>
     <li><a href="#services">Proceso</a></li>
     <li><a href="#contact">Contacto</a></li>
-    <li><a href="time-to-work.html" style="color:var(--gold);opacity:.7">✦ Workspace</a></li>
+    <li><a href="#workspace" style="color:var(--gold);opacity:.7">✦ Workspace</a></li>
   </ul>
   <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
 </nav>
@@ -1005,6 +1257,93 @@
   <a href="mailto:hello@lara.ai" class="contact-email">hello@lara.ai</a>
 </div>
 
+<!-- WORKSPACE -->
+<section id="workspace">
+  <div class="ws-wrap">
+
+    <div class="ws-hero">
+      <h2>Time<br>to <em>Work.</em></h2>
+      <div class="ws-hero-meta">
+        <div class="ws-date" id="wsDate">—</div>
+        <div class="ws-partners">Jorge &amp; <strong>Fernanda</strong></div>
+        <div class="ws-collab-dots">
+          <div class="ws-dot ws-dot-j" title="Jorge"></div>
+          <div class="ws-dot ws-dot-f" title="Fernanda"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ws-stats">
+      <div class="ws-stat ws-gold">
+        <div class="ws-stat-label">Progreso</div>
+        <div class="ws-stat-val" id="wsStatPct">0%</div>
+        <div class="ws-stat-sub" id="wsStatSub">fases completadas</div>
+        <div class="ws-prog-bar"><div class="ws-prog-fill" id="wsProgFill" style="width:0%"></div></div>
+      </div>
+      <div class="ws-stat ws-rose">
+        <div class="ws-stat-label">Ideas</div>
+        <div class="ws-stat-val" id="wsStatIdeas">0</div>
+        <div class="ws-stat-sub">en el tablero</div>
+      </div>
+      <div class="ws-stat ws-sage">
+        <div class="ws-stat-label">Sesiones</div>
+        <div class="ws-stat-val" id="wsStatLog">0</div>
+        <div class="ws-stat-sub">registradas</div>
+      </div>
+    </div>
+
+    <div class="ws-quote" id="wsQuote">
+      <p id="wsQuoteTxt"></p><span id="wsQuoteAttr"></span>
+    </div>
+
+    <!-- Bootcamp -->
+    <div class="ws-sec-hdr"><span class="ws-eyebrow">Bootcamp · El Camino</span><div class="ws-line"></div><span class="ws-count" id="wsPhCount">0/9</span></div>
+    <div class="ws-phase-grid" id="wsPhaseGrid"></div>
+
+    <!-- Pipeline -->
+    <div class="ws-sec-hdr" style="margin-top:2.2rem"><span class="ws-eyebrow">Pipeline de Contenido</span><div class="ws-line"></div><span class="ws-count">Por post</span></div>
+    <div class="ws-pipe-cols">
+      <div class="ws-cl-wrap"><div class="ws-cl-title">Creación</div><div id="wsClCreacion"></div></div>
+      <div class="ws-cl-wrap"><div class="ws-cl-title">Publicación</div><div id="wsClPublicacion"></div></div>
+    </div>
+
+    <!-- Ideas -->
+    <div class="ws-sec-hdr"><span class="ws-eyebrow">Tablero de Ideas</span><div class="ws-line"></div><span class="ws-count" id="wsIdeasCount">0</span></div>
+    <div class="ws-ideas" id="wsIdeasBoard">
+      <div class="ws-idea-add">
+        <select id="wsIdeaCat"><option value="contenido">Contenido</option><option value="viral">Viral / Trend</option><option value="brand">Brand / Collab</option><option value="tecnico">Técnico</option></select>
+        <textarea id="wsIdeaTxt" placeholder="Escribe una idea…" rows="2"></textarea>
+        <button class="ws-btn-sm" onclick="wsAddIdea()">+ Agregar</button>
+      </div>
+    </div>
+
+    <!-- Next Steps -->
+    <div class="ws-sec-hdr"><span class="ws-eyebrow">Próximos Pasos</span><div class="ws-line"></div><span class="ws-count" id="wsStepsCount">0</span></div>
+    <div class="ws-steps" id="wsStepsList"></div>
+    <div class="ws-add-step">
+      <select id="wsStepPrio"><option value="alta">Alta</option><option value="media" selected>Media</option><option value="baja">Baja</option></select>
+      <input type="text" id="wsStepTxt" placeholder="Próximo paso…" />
+      <select id="wsStepOwner"><option value="J">Jorge</option><option value="F">Fernanda</option><option value="JF">Ambos</option></select>
+      <button class="ws-btn-sm" onclick="wsAddStep()">+ Agregar</button>
+    </div>
+
+    <!-- Log -->
+    <div class="ws-sec-hdr"><span class="ws-eyebrow">Log de Sesiones</span><div class="ws-line"></div><span class="ws-count" id="wsLogCount">0</span></div>
+    <div class="ws-log-form">
+      <div class="ws-field"><label class="ws-flabel">Título</label><input class="ws-finput" type="text" id="wsLogTitle" placeholder="Ej: Sesión Fase 8 — Video AI" /></div>
+      <div class="ws-field"><label class="ws-flabel">Por</label><input class="ws-finput" type="text" id="wsLogBy" placeholder="Jorge, Fernanda, o ambos" /></div>
+      <div class="ws-field ws-lf-full"><label class="ws-flabel">¿Qué hicimos?</label><textarea class="ws-finput" id="wsLogDesc" placeholder="Describe lo que trabajaron…" rows="2"></textarea></div>
+      <div class="ws-field ws-lf-full"><label class="ws-flabel">Siguiente paso</label><textarea class="ws-finput" id="wsLogNext" placeholder="¿Qué queda para la próxima sesión?" rows="1"></textarea></div>
+      <div class="ws-lf-full" style="display:flex;gap:.6rem;align-items:center">
+        <button class="ws-log-save" onclick="wsAddLog()">Guardar Sesión</button>
+        <span style="font-size:.45rem;letter-spacing:.1em;color:var(--muted)">Se guarda con la fecha de hoy</span>
+      </div>
+    </div>
+    <div class="ws-log-entries" id="wsLogEntries"></div>
+
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="f-logo">LARA</div>
@@ -1140,7 +1479,6 @@
     { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_010539_8cbe49c0-5fe6-40d2-b0ea-7a0fad5af42e.png', title:'NanoBanana 10' },
     { type:'photo', cat:'brand referencias', src:'CONTENT/brand/REF1 NANO PRO.jpeg',                                        title:'Golden Hour' },
     { type:'photo', cat:'brand',             src:'CONTENT/brand/REF NANO PRO - BEACH CLOTHES.jpeg',                         title:'Shore Style' },
-    { type:'photo', cat:'brand referencias', src:'CONTENT/brand/REF NANO PRO - FACE BLUE ASYMMETRICAL SHOT.png',            title:'Electric Blue' },
     { type:'photo', cat:'brand referencias', src:'CONTENT/brand/REF NANO PRO - FACE BLUE ASYMMETRICAL SHOT.png',             title:'Asymmetry' },
     { type:'photo', cat:'car',               src:'CONTENT/car/REF NANO PRO - CAR.jpeg',                                     title:'Dusk Drive' },
     { type:'photo', cat:'car',               src:'CONTENT/car/REF SEEDREAM 4.5 - CAR 2.jpeg',                               title:'Golden Ride' },
@@ -1444,6 +1782,198 @@
     document.getElementById('videoModal').classList.remove('open');
     document.body.style.overflow = '';
   });
+
+  // ══════════════════════════════════════════════════
+  // WORKSPACE
+  // ══════════════════════════════════════════════════
+  const WS_PHASES = [
+    { num:1, name:'Initiate — Tools & Setup',       status:'done',     conf:10 },
+    { num:2, name:'AI Images — Avatar Workflow',    status:'done',     conf:10 },
+    { num:3, name:'AI Videos — Cinematic Clips',    status:'done',     conf:8  },
+    { num:4, name:'Sound Effects & Editing',        status:'done',     conf:5  },
+    { num:5, name:'Character Consistency',          status:'done',     conf:7  },
+    { num:6, name:'AI Ads + UGC & Influencers',     status:'done',     conf:6  },
+    { num:7, name:'Social Media',                   status:'done',     conf:7  },
+    { num:8, name:'AI Filmmaking',                  status:'in-progress', conf:2 },
+    { num:9, name:'Clone & Scale: Automation',      status:'in-progress', conf:1 },
+  ];
+  const WS_PIPE_C = [
+    { id:'pc1', label:'Definir concepto del post',      tag:'Estrategia' },
+    { id:'pc2', label:'Generar prompt con ChatGPT',     tag:'Prompt'     },
+    { id:'pc3', label:'Crear imagen NanoBanana PRO',    tag:'Imagen'     },
+    { id:'pc4', label:'Seleccionar mejor referencia',   tag:'Curaduría'  },
+    { id:'pc5', label:'Generar variantes de escena',    tag:'Imagen'     },
+    { id:'pc6', label:'Crear video Kling / Veo 3',      tag:'Video'      },
+    { id:'pc7', label:'Añadir sonido y editar',         tag:'Audio'      },
+  ];
+  const WS_PIPE_P = [
+    { id:'pp1', label:'Revisar calidad visual',         tag:'QC'         },
+    { id:'pp2', label:'Escribir caption y hashtags',    tag:'Copy'       },
+    { id:'pp3', label:'Programar publicación',          tag:'Schedule'   },
+    { id:'pp4', label:'Responder primeros comentarios', tag:'Comunidad'  },
+    { id:'pp5', label:'Archivar en CONTENT/',           tag:'Archivo'    },
+    { id:'pp6', label:'Actualizar métricas',            tag:'Analytics'  },
+  ];
+  const WS_QUOTES = [
+    { t:'"El trabajo consistente supera al talento inconsistente."',        a:'— Tablero Lara'    },
+    { t:'"Una foto buena hoy vale más que cien perfectas mañana."',        a:'— Regla del Pipeline' },
+    { t:'"La consistencia es la estrategia más poderosa del algoritmo."',  a:'— Tablero Lara'    },
+    { t:'"Construimos a Lara. Ella trabaja por nosotras las 24 horas."',   a:'— Proyecto AIIF'   },
+    { t:'"Cada sesión que trabajamos juntas es un ladrillo en el castillo."', a:'— Jorge & Fernanda' },
+  ];
+  const WS_DEFAULT_STEPS = [
+    { prio:'alta',  text:'Completar Fase 8 — AI Filmmaking (continuar módulos)',   owner:'JF', done:false },
+    { prio:'alta',  text:'Crear primer video corto con Veo 3 para Instagram',       owner:'J',  done:false },
+    { prio:'media', text:'Definir nicho final de Lara (fitness, lifestyle, o mix)', owner:'JF', done:false },
+    { prio:'media', text:'Configurar Formspree en página web de contacto',          owner:'J',  done:false },
+    { prio:'media', text:'Publicar 3 posts con imágenes del batch NanoBanana',      owner:'F',  done:false },
+    { prio:'baja',  text:'Subir assets a Cloudinary para GitHub Pages',            owner:'J',  done:false },
+  ];
+
+  const wsS = { get:k=>{ try{return JSON.parse(localStorage.getItem('ws_'+k))}catch{return null} }, set:(k,v)=>localStorage.setItem('ws_'+k,JSON.stringify(v)) };
+  const wsHtml = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  const wsCkSVG = '<svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.4 6L8 1" stroke="#0C0B09" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  function wsInit() {
+    // date
+    document.getElementById('wsDate').textContent = new Date().toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'});
+    // quote
+    const q = WS_QUOTES[Math.floor(Math.random()*WS_QUOTES.length)];
+    document.getElementById('wsQuoteTxt').textContent = q.t;
+    document.getElementById('wsQuoteAttr').textContent = q.a;
+    wsRenderPhases(); wsRenderPipeline(); wsRenderIdeas(); wsRenderSteps(); wsRenderLog();
+  }
+
+  function wsRenderPhases() {
+    const grid = document.getElementById('wsPhaseGrid');
+    grid.innerHTML = '';
+    const saved = wsS.get('phases') || {};
+    let done = 0;
+    WS_PHASES.forEach(p => {
+      const isDone = saved[p.num] !== undefined ? saved[p.num] : p.status === 'done';
+      const isIP   = !isDone && p.status === 'in-progress';
+      if (isDone) done++;
+      const card = document.createElement('div');
+      card.className = 'ws-phase' + (isDone?' ws-done':'') + (isIP?' ws-ip':'');
+      const badge = isDone ? '<span class="ws-ph-badge ws-b-done">Completado ✓</span>'
+                  : isIP   ? '<span class="ws-ph-badge ws-b-ip">En Progreso</span>'
+                           : '<span class="ws-ph-badge ws-b-pend">Pendiente</span>';
+      const conf = isDone ? Array.from({length:10},(_,i)=>`<div class="ws-cd${i<p.conf?' on':''}"></div>`).join('') : '';
+      card.innerHTML = `<div class="ws-ph-box">${isDone?wsCkSVG:''}</div><div><div class="ws-ph-num">Fase ${p.num}</div><div class="ws-ph-name">${p.name}</div>${badge}${conf?`<div class="ws-ph-conf">${conf}</div>`:''}`;
+      card.addEventListener('click', () => {
+        const s = wsS.get('phases') || {};
+        s[p.num] = !(s[p.num] !== undefined ? s[p.num] : p.status === 'done');
+        wsS.set('phases', s);
+        wsRenderPhases();
+      });
+      grid.appendChild(card);
+    });
+    const pct = Math.round((done/9)*100);
+    document.getElementById('wsPhCount').textContent = done+'/9';
+    document.getElementById('wsStatPct').textContent = pct+'%';
+    document.getElementById('wsStatSub').textContent = done+' de 9 fases';
+    document.getElementById('wsProgFill').style.width = pct+'%';
+  }
+
+  function wsRenderPipeline() {
+    const saved = wsS.get('pipeline') || {};
+    [['wsClCreacion', WS_PIPE_C], ['wsClPublicacion', WS_PIPE_P]].forEach(([id, items]) => {
+      const el = document.getElementById(id);
+      el.innerHTML = '';
+      items.forEach(item => {
+        const ck = !!saved[item.id];
+        const d = document.createElement('div');
+        d.className = 'ws-ci' + (ck?' ws-ck':'');
+        d.innerHTML = `<div class="ws-ci-box">${ck?wsCkSVG:''}</div><span class="ws-ci-label">${item.label}</span><span class="ws-ci-tag">${item.tag}</span>`;
+        d.addEventListener('click', () => { const s=wsS.get('pipeline')||{}; s[item.id]=!s[item.id]; wsS.set('pipeline',s); wsRenderPipeline(); });
+        el.appendChild(d);
+      });
+    });
+  }
+
+  function wsRenderIdeas() {
+    const ideas = wsS.get('ideas') || [];
+    const board = document.getElementById('wsIdeasBoard');
+    board.querySelectorAll('.ws-idea').forEach(e=>e.remove());
+    const addCard = board.querySelector('.ws-idea-add');
+    ideas.forEach((idea, i) => {
+      const card = document.createElement('div');
+      card.className = `ws-idea ws-ic-${idea.cat}`;
+      card.innerHTML = `<div class="ws-idea-cat ws-cat-${idea.cat}">${idea.cat}</div><div class="ws-idea-text">${wsHtml(idea.text)}</div><button class="ws-idea-del" onclick="wsDelIdea(${i})">×</button>`;
+      board.insertBefore(card, addCard);
+    });
+    document.getElementById('wsIdeasCount').textContent = ideas.length + ' idea'+(ideas.length!==1?'s':'');
+    document.getElementById('wsStatIdeas').textContent = ideas.length;
+  }
+  function wsAddIdea() {
+    const cat = document.getElementById('wsIdeaCat').value;
+    const txt = document.getElementById('wsIdeaTxt').value.trim();
+    if (!txt) return;
+    const ideas = wsS.get('ideas') || [];
+    ideas.unshift({cat,text:txt});
+    wsS.set('ideas', ideas);
+    document.getElementById('wsIdeaTxt').value = '';
+    wsRenderIdeas();
+  }
+  function wsDelIdea(i) { const a=wsS.get('ideas')||[]; a.splice(i,1); wsS.set('ideas',a); wsRenderIdeas(); }
+
+  function wsRenderSteps() {
+    const steps = wsS.get('steps') || WS_DEFAULT_STEPS;
+    const list = document.getElementById('wsStepsList');
+    list.innerHTML = '';
+    const pend = steps.filter(s=>!s.done).length;
+    document.getElementById('wsStepsCount').textContent = pend+' pendiente'+(pend!==1?'s':'');
+    steps.forEach((s,i) => {
+      const el = document.createElement('div');
+      el.className = 'ws-step'+(s.done?' ws-step-done':'');
+      el.innerHTML = `<span class="ws-prio ws-p-${s.prio}">${s.prio}</span><span class="ws-step-text">${wsHtml(s.text)}</span><span class="ws-owner ${s.owner==='J'?'oj':s.owner==='F'?'of':''}">${s.owner}</span>`;
+      el.addEventListener('click', () => { const a=wsS.get('steps')||WS_DEFAULT_STEPS; a[i].done=!a[i].done; wsS.set('steps',a); wsRenderSteps(); });
+      list.appendChild(el);
+    });
+  }
+  function wsAddStep() {
+    const prio  = document.getElementById('wsStepPrio').value;
+    const txt   = document.getElementById('wsStepTxt').value.trim();
+    const owner = document.getElementById('wsStepOwner').value;
+    if (!txt) return;
+    const steps = wsS.get('steps') || WS_DEFAULT_STEPS;
+    steps.unshift({prio,text:txt,owner,done:false});
+    wsS.set('steps', steps);
+    document.getElementById('wsStepTxt').value = '';
+    wsRenderSteps();
+  }
+
+  function wsRenderLog() {
+    const entries = wsS.get('log') || [];
+    const cont = document.getElementById('wsLogEntries');
+    cont.innerHTML = '';
+    document.getElementById('wsLogCount').textContent = entries.length+' sesión'+(entries.length!==1?'es':'');
+    document.getElementById('wsStatLog').textContent = entries.length;
+    if (!entries.length) { cont.innerHTML='<div class="ws-empty">Aún no hay sesiones — ¡guarda la primera hoy!</div>'; return; }
+    entries.forEach((e,i) => {
+      const el = document.createElement('div');
+      el.className = 'ws-log-entry';
+      el.innerHTML = `<div><div class="ws-log-date">${e.date}</div><div class="ws-log-by">${wsHtml(e.by)}</div></div><div class="ws-log-sep"></div><div><div class="ws-log-title">${wsHtml(e.title)}</div>${e.desc?`<div class="ws-log-desc">${wsHtml(e.desc)}</div>`:''} ${e.next?`<div class="ws-log-next">${wsHtml(e.next)}</div>`:''}</div><button class="ws-log-del" onclick="wsDelLog(${i})">×</button>`;
+      cont.appendChild(el);
+    });
+  }
+  function wsAddLog() {
+    const title = document.getElementById('wsLogTitle').value.trim();
+    if (!title) return;
+    const entries = wsS.get('log') || [];
+    entries.unshift({ title, by:document.getElementById('wsLogBy').value.trim()||'Jorge & Fernanda', desc:document.getElementById('wsLogDesc').value.trim(), next:document.getElementById('wsLogNext').value.trim(), date:new Date().toLocaleDateString('es-ES',{day:'2-digit',month:'short'}), ts:Date.now() });
+    wsS.set('log', entries);
+    ['wsLogTitle','wsLogBy','wsLogDesc','wsLogNext'].forEach(id=>document.getElementById(id).value='');
+    wsRenderLog();
+  }
+  function wsDelLog(i) { const a=wsS.get('log')||[]; a.splice(i,1); wsS.set('log',a); wsRenderLog(); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key==='Enter' && e.target.id==='wsStepTxt') { e.preventDefault(); wsAddStep(); }
+    if (e.key==='Enter' && e.target.id==='wsIdeaTxt') { e.preventDefault(); wsAddIdea(); }
+  });
+
+  wsInit();
 </script>
 </body>
 </html>
