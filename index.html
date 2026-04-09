@@ -489,7 +489,7 @@
     transition: opacity .55s ease, transform .55s ease;
   }
   .g-item.show { opacity: 1; transform: translateY(0); }
-  .g-item.hide { opacity: 0; transform: scale(.96); pointer-events: none; }
+  .g-item.hide { opacity: 0; height: 0; overflow: hidden; margin-bottom: 0; padding: 0; pointer-events: none; }
   .g-item img, .g-item video { width: 100%; height: auto; display: block; transition: transform .7s cubic-bezier(.25,.46,.45,.94); }
   .g-item:hover img, .g-item:hover video { transform: scale(1.05); }
   .g-overlay {
@@ -1234,10 +1234,16 @@
       let count = 0;
       items.forEach(el => {
         const match = f === 'all' || el.dataset.cat.includes(f);
-        el.classList.toggle('hide', !match);
-        if (match) { setTimeout(() => el.classList.add('show'), count * 40); count++; }
+        if (match) {
+          el.classList.remove('hide');
+          el.classList.remove('show');
+          const c = count;
+          requestAnimationFrame(() => setTimeout(() => el.classList.add('show'), c * 35));
+          count++;
+        }
+        // non-matching items already have hide; keep it
       });
-    }, 250);
+    }, 200);
   });
 
   // Gallery IntersectionObserver
