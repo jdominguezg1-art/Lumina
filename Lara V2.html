@@ -1271,16 +1271,16 @@
 
   // ── GALLERY DATA ──
   const ITEMS = [
-    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_003100_a7ace570-9a00-4385-86a9-3459e8c8c4cf.png', title:'NanoBanana 01' },
-    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_003215_4e119d52-5ae8-4020-949c-dd7268fa6893.png', title:'NanoBanana 02' },
-    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_003305_c284dc71-090d-465a-86bd-e85fc1fffc27.png', title:'NanoBanana 03' },
-    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_003407_afd3ddbf-b902-48d6-ae94-bccacaac0464.png', title:'NanoBanana 04' },
-    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_004033_82af9cc1-4e44-44d9-b20c-91593ddc4f5f.png', title:'NanoBanana 05' },
-    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_010016_439fd8d0-2037-4fcf-ae18-499d2b4ba89d.png', title:'NanoBanana 06' },
-    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_010109_28c6d368-723a-4f77-be1b-f8b751aeeaaf.png', title:'NanoBanana 07' },
-    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_010256_1e78b903-07bf-404c-a242-b9c0bde10c3c.png', title:'NanoBanana 08' },
-    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_010350_ad33595d-6411-4baa-9a3e-b8757e7ab7e5.png', title:'NanoBanana 09' },
-    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_010539_8cbe49c0-5fe6-40d2-b0ea-7a0fad5af42e.png', title:'NanoBanana 10' },
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_003100_a7ace570-9a00-4385-86a9-3459e8c8c4cf.png', title:'Portrait 01' },
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_003215_4e119d52-5ae8-4020-949c-dd7268fa6893.png', title:'Portrait 02' },
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_003305_c284dc71-090d-465a-86bd-e85fc1fffc27.png', title:'Portrait 03' },
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_003407_afd3ddbf-b902-48d6-ae94-bccacaac0464.png', title:'Portrait 04' },
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_004033_82af9cc1-4e44-44d9-b20c-91593ddc4f5f.png', title:'Portrait 05' },
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_010016_439fd8d0-2037-4fcf-ae18-499d2b4ba89d.png', title:'Portrait 06' },
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_010109_28c6d368-723a-4f77-be1b-f8b751aeeaaf.png', title:'Portrait 07' },
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_010256_1e78b903-07bf-404c-a242-b9c0bde10c3c.png', title:'Portrait 08' },
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_010350_ad33595d-6411-4baa-9a3e-b8757e7ab7e5.png', title:'Portrait 09' },
+    { type:'photo', cat:'referencias', src:'CONTENT/hf_20260328_010539_8cbe49c0-5fe6-40d2-b0ea-7a0fad5af42e.png', title:'Portrait 10' },
     { type:'photo', cat:'brand referencias', src:'CONTENT/brand/REF1 NANO PRO.jpeg',                                        title:'Golden Hour' },
     { type:'photo', cat:'brand',             src:'CONTENT/brand/REF NANO PRO - BEACH CLOTHES.jpeg',                         title:'Shore Style' },
     { type:'photo', cat:'brand referencias', src:'CONTENT/brand/REF NANO PRO - FACE BLUE ASYMMETRICAL SHOT.png',             title:'Asymmetry' },
@@ -1587,197 +1587,6 @@
     document.body.style.overflow = '';
   });
 
-  // ══════════════════════════════════════════════════
-  // WORKSPACE
-  // ══════════════════════════════════════════════════
-  const WS_PHASES = [
-    { num:1, name:'Initiate — Tools & Setup',       status:'done',     conf:10 },
-    { num:2, name:'AI Images — Avatar Workflow',    status:'done',     conf:10 },
-    { num:3, name:'AI Videos — Cinematic Clips',    status:'done',     conf:8  },
-    { num:4, name:'Sound Effects & Editing',        status:'done',     conf:5  },
-    { num:5, name:'Character Consistency',          status:'done',     conf:7  },
-    { num:6, name:'AI Ads + UGC & Influencers',     status:'done',     conf:6  },
-    { num:7, name:'Social Media',                   status:'done',     conf:7  },
-    { num:8, name:'AI Filmmaking',                  status:'in-progress', conf:2 },
-    { num:9, name:'Clone & Scale: Automation',      status:'in-progress', conf:1 },
-  ];
-  const WS_PIPE_C = [
-    { id:'pc1', label:'Definir concepto del post',      tag:'Estrategia' },
-    { id:'pc2', label:'Generar prompt con ChatGPT',     tag:'Prompt'     },
-    { id:'pc3', label:'Crear imagen NanoBanana PRO',    tag:'Imagen'     },
-    { id:'pc4', label:'Seleccionar mejor referencia',   tag:'Curaduría'  },
-    { id:'pc5', label:'Generar variantes de escena',    tag:'Imagen'     },
-    { id:'pc6', label:'Crear video Kling / Veo 3',      tag:'Video'      },
-    { id:'pc7', label:'Añadir sonido y editar',         tag:'Audio'      },
-  ];
-  const WS_PIPE_P = [
-    { id:'pp1', label:'Revisar calidad visual',         tag:'QC'         },
-    { id:'pp2', label:'Escribir caption y hashtags',    tag:'Copy'       },
-    { id:'pp3', label:'Programar publicación',          tag:'Schedule'   },
-    { id:'pp4', label:'Responder primeros comentarios', tag:'Comunidad'  },
-    { id:'pp5', label:'Archivar en CONTENT/',           tag:'Archivo'    },
-    { id:'pp6', label:'Actualizar métricas',            tag:'Analytics'  },
-  ];
-  const WS_QUOTES = [
-    { t:'"El trabajo consistente supera al talento inconsistente."',        a:'— Tablero Lara'    },
-    { t:'"Una foto buena hoy vale más que cien perfectas mañana."',        a:'— Regla del Pipeline' },
-    { t:'"La consistencia es la estrategia más poderosa del algoritmo."',  a:'— Tablero Lara'    },
-    { t:'"Construimos a Lara. Ella trabaja por nosotras las 24 horas."',   a:'— Proyecto AIIF'   },
-    { t:'"Cada sesión que trabajamos juntas es un ladrillo en el castillo."', a:'— Jorge & Fernanda' },
-  ];
-  const WS_DEFAULT_STEPS = [
-    { prio:'alta',  text:'Completar Fase 8 — AI Filmmaking (continuar módulos)',   owner:'JF', done:false },
-    { prio:'alta',  text:'Crear primer video corto con Veo 3 para Instagram',       owner:'J',  done:false },
-    { prio:'media', text:'Definir nicho final de Lara (fitness, lifestyle, o mix)', owner:'JF', done:false },
-    { prio:'media', text:'Configurar Formspree en página web de contacto',          owner:'J',  done:false },
-    { prio:'media', text:'Publicar 3 posts con imágenes del batch NanoBanana',      owner:'F',  done:false },
-    { prio:'baja',  text:'Subir assets a Cloudinary para GitHub Pages',            owner:'J',  done:false },
-  ];
-
-  const wsS = { get:k=>{ try{return JSON.parse(localStorage.getItem('ws_'+k))}catch{return null} }, set:(k,v)=>localStorage.setItem('ws_'+k,JSON.stringify(v)) };
-  const wsHtml = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  const wsCkSVG = '<svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.4 6L8 1" stroke="#0C0B09" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-
-  function wsInit() {
-    // date
-    document.getElementById('wsDate').textContent = new Date().toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'});
-    // quote
-    const q = WS_QUOTES[Math.floor(Math.random()*WS_QUOTES.length)];
-    document.getElementById('wsQuoteTxt').textContent = q.t;
-    document.getElementById('wsQuoteAttr').textContent = q.a;
-    wsRenderPhases(); wsRenderPipeline(); wsRenderIdeas(); wsRenderSteps(); wsRenderLog();
-  }
-
-  function wsRenderPhases() {
-    const grid = document.getElementById('wsPhaseGrid');
-    grid.innerHTML = '';
-    const saved = wsS.get('phases') || {};
-    let done = 0;
-    WS_PHASES.forEach(p => {
-      const isDone = saved[p.num] !== undefined ? saved[p.num] : p.status === 'done';
-      const isIP   = !isDone && p.status === 'in-progress';
-      if (isDone) done++;
-      const card = document.createElement('div');
-      card.className = 'ws-phase' + (isDone?' ws-done':'') + (isIP?' ws-ip':'');
-      const badge = isDone ? '<span class="ws-ph-badge ws-b-done">Completado ✓</span>'
-                  : isIP   ? '<span class="ws-ph-badge ws-b-ip">En Progreso</span>'
-                           : '<span class="ws-ph-badge ws-b-pend">Pendiente</span>';
-      const conf = isDone ? Array.from({length:10},(_,i)=>`<div class="ws-cd${i<p.conf?' on':''}"></div>`).join('') : '';
-      card.innerHTML = `<div class="ws-ph-box">${isDone?wsCkSVG:''}</div><div><div class="ws-ph-num">Fase ${p.num}</div><div class="ws-ph-name">${p.name}</div>${badge}${conf?`<div class="ws-ph-conf">${conf}</div>`:''}`;
-      card.addEventListener('click', () => {
-        const s = wsS.get('phases') || {};
-        s[p.num] = !(s[p.num] !== undefined ? s[p.num] : p.status === 'done');
-        wsS.set('phases', s);
-        wsRenderPhases();
-      });
-      grid.appendChild(card);
-    });
-    const pct = Math.round((done/9)*100);
-    document.getElementById('wsPhCount').textContent = done+'/9';
-    document.getElementById('wsStatPct').textContent = pct+'%';
-    document.getElementById('wsStatSub').textContent = done+' de 9 fases';
-    document.getElementById('wsProgFill').style.width = pct+'%';
-  }
-
-  function wsRenderPipeline() {
-    const saved = wsS.get('pipeline') || {};
-    [['wsClCreacion', WS_PIPE_C], ['wsClPublicacion', WS_PIPE_P]].forEach(([id, items]) => {
-      const el = document.getElementById(id);
-      el.innerHTML = '';
-      items.forEach(item => {
-        const ck = !!saved[item.id];
-        const d = document.createElement('div');
-        d.className = 'ws-ci' + (ck?' ws-ck':'');
-        d.innerHTML = `<div class="ws-ci-box">${ck?wsCkSVG:''}</div><span class="ws-ci-label">${item.label}</span><span class="ws-ci-tag">${item.tag}</span>`;
-        d.addEventListener('click', () => { const s=wsS.get('pipeline')||{}; s[item.id]=!s[item.id]; wsS.set('pipeline',s); wsRenderPipeline(); });
-        el.appendChild(d);
-      });
-    });
-  }
-
-  function wsRenderIdeas() {
-    const ideas = wsS.get('ideas') || [];
-    const board = document.getElementById('wsIdeasBoard');
-    board.querySelectorAll('.ws-idea').forEach(e=>e.remove());
-    const addCard = board.querySelector('.ws-idea-add');
-    ideas.forEach((idea, i) => {
-      const card = document.createElement('div');
-      card.className = `ws-idea ws-ic-${idea.cat}`;
-      card.innerHTML = `<div class="ws-idea-cat ws-cat-${idea.cat}">${idea.cat}</div><div class="ws-idea-text">${wsHtml(idea.text)}</div><button class="ws-idea-del" onclick="wsDelIdea(${i})">×</button>`;
-      board.insertBefore(card, addCard);
-    });
-    document.getElementById('wsIdeasCount').textContent = ideas.length + ' idea'+(ideas.length!==1?'s':'');
-    document.getElementById('wsStatIdeas').textContent = ideas.length;
-  }
-  function wsAddIdea() {
-    const cat = document.getElementById('wsIdeaCat').value;
-    const txt = document.getElementById('wsIdeaTxt').value.trim();
-    if (!txt) return;
-    const ideas = wsS.get('ideas') || [];
-    ideas.unshift({cat,text:txt});
-    wsS.set('ideas', ideas);
-    document.getElementById('wsIdeaTxt').value = '';
-    wsRenderIdeas();
-  }
-  function wsDelIdea(i) { const a=wsS.get('ideas')||[]; a.splice(i,1); wsS.set('ideas',a); wsRenderIdeas(); }
-
-  function wsRenderSteps() {
-    const steps = wsS.get('steps') || WS_DEFAULT_STEPS;
-    const list = document.getElementById('wsStepsList');
-    list.innerHTML = '';
-    const pend = steps.filter(s=>!s.done).length;
-    document.getElementById('wsStepsCount').textContent = pend+' pendiente'+(pend!==1?'s':'');
-    steps.forEach((s,i) => {
-      const el = document.createElement('div');
-      el.className = 'ws-step'+(s.done?' ws-step-done':'');
-      el.innerHTML = `<span class="ws-prio ws-p-${s.prio}">${s.prio}</span><span class="ws-step-text">${wsHtml(s.text)}</span><span class="ws-owner ${s.owner==='J'?'oj':s.owner==='F'?'of':''}">${s.owner}</span>`;
-      el.addEventListener('click', () => { const a=wsS.get('steps')||WS_DEFAULT_STEPS; a[i].done=!a[i].done; wsS.set('steps',a); wsRenderSteps(); });
-      list.appendChild(el);
-    });
-  }
-  function wsAddStep() {
-    const prio  = document.getElementById('wsStepPrio').value;
-    const txt   = document.getElementById('wsStepTxt').value.trim();
-    const owner = document.getElementById('wsStepOwner').value;
-    if (!txt) return;
-    const steps = wsS.get('steps') || WS_DEFAULT_STEPS;
-    steps.unshift({prio,text:txt,owner,done:false});
-    wsS.set('steps', steps);
-    document.getElementById('wsStepTxt').value = '';
-    wsRenderSteps();
-  }
-
-  function wsRenderLog() {
-    const entries = wsS.get('log') || [];
-    const cont = document.getElementById('wsLogEntries');
-    cont.innerHTML = '';
-    document.getElementById('wsLogCount').textContent = entries.length+' sesión'+(entries.length!==1?'es':'');
-    document.getElementById('wsStatLog').textContent = entries.length;
-    if (!entries.length) { cont.innerHTML='<div class="ws-empty">Aún no hay sesiones — ¡guarda la primera hoy!</div>'; return; }
-    entries.forEach((e,i) => {
-      const el = document.createElement('div');
-      el.className = 'ws-log-entry';
-      el.innerHTML = `<div><div class="ws-log-date">${e.date}</div><div class="ws-log-by">${wsHtml(e.by)}</div></div><div class="ws-log-sep"></div><div><div class="ws-log-title">${wsHtml(e.title)}</div>${e.desc?`<div class="ws-log-desc">${wsHtml(e.desc)}</div>`:''} ${e.next?`<div class="ws-log-next">${wsHtml(e.next)}</div>`:''}</div><button class="ws-log-del" onclick="wsDelLog(${i})">×</button>`;
-      cont.appendChild(el);
-    });
-  }
-  function wsAddLog() {
-    const title = document.getElementById('wsLogTitle').value.trim();
-    if (!title) return;
-    const entries = wsS.get('log') || [];
-    entries.unshift({ title, by:document.getElementById('wsLogBy').value.trim()||'Jorge & Fernanda', desc:document.getElementById('wsLogDesc').value.trim(), next:document.getElementById('wsLogNext').value.trim(), date:new Date().toLocaleDateString('es-ES',{day:'2-digit',month:'short'}), ts:Date.now() });
-    wsS.set('log', entries);
-    ['wsLogTitle','wsLogBy','wsLogDesc','wsLogNext'].forEach(id=>document.getElementById(id).value='');
-    wsRenderLog();
-  }
-  function wsDelLog(i) { const a=wsS.get('log')||[]; a.splice(i,1); wsS.set('log',a); wsRenderLog(); }
-
-  document.addEventListener('keydown', e => {
-    if (e.key==='Enter' && e.target.id==='wsStepTxt') { e.preventDefault(); wsAddStep(); }
-    if (e.key==='Enter' && e.target.id==='wsIdeaTxt') { e.preventDefault(); wsAddIdea(); }
-  });
-
-  wsInit();
 </script>
 </body>
 </html>
