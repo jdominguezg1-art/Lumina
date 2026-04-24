@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lara — @babyblondie · Avatar IA</title>
-<meta name="description" content="Lara (@babyblondie) — Avatar IA. Fotos · Videos · Contenido de Marca · Colaboraciones." />
-<meta name="robots" content="noindex, nofollow" />
-<meta property="og:title" content="Lara — @babyblondie" />
-<meta property="og:description" content="Avatar IA construida con NanoBanana PRO, Kling y Veo 3." />
+<title>Lara Moneti — Model &amp; Content Creator</title>
+<meta name="description" content="Lara Moneti (@lara.moneti) — Model &amp; Content Creator. Editorial · Brand · Lifestyle · Collaborations." />
+<meta property="og:title" content="Lara Moneti — @lara.moneti" />
+<meta property="og:description" content="Model &amp; Content Creator. Editorial, brand &amp; lifestyle collaborations." />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="es_ES" />
 <meta name="theme-color" content="#0C0B09" />
@@ -1019,30 +1018,22 @@
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 
-<!-- WIP BANNER -->
-<div id="wip-banner">
-  <p><strong>Página privada · Solo para Fernanda</strong> — Lara (@babyblondie): fotos, videos y contenido de marca. Última actualización: abril 2026.</p>
-  <button onclick="document.getElementById('wip-banner').style.display='none'">Cerrar</button>
-</div>
-
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#gallery"  onclick="closeMenu()">Galería</a>
-  <a href="#about"    onclick="closeMenu()">El Proyecto</a>
-  <a href="#services" onclick="closeMenu()">Proceso</a>
-  <a href="#contact"  onclick="closeMenu()">Contacto</a>
-  <a href="#workspace" onclick="closeMenu()" style="color:var(--gold)">✦ Workspace</a>
+  <a href="#gallery"  onclick="closeMenu()">Portfolio</a>
+  <a href="#about"    onclick="closeMenu()">About</a>
+  <a href="#services" onclick="closeMenu()">Work</a>
+  <a href="#contact"  onclick="closeMenu()">Contact</a>
 </div>
 
 <!-- NAV -->
 <nav id="nav">
   <a href="#hero" class="nav-logo">LARA</a>
   <ul class="nav-links">
-    <li><a href="#gallery">Galería</a></li>
-    <li><a href="#about">El Proyecto</a></li>
-    <li><a href="#services">Proceso</a></li>
-    <li><a href="#contact">Contacto</a></li>
-    <li><a href="#workspace" style="color:var(--gold);opacity:.7">✦ Workspace</a></li>
+    <li><a href="#gallery">Portfolio</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
   <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
 </nav>
@@ -1054,7 +1045,7 @@
   </video>
   <canvas id="heroCanvas" class="hero-canvas"></canvas>
   <div class="hero-overlay"></div>
-  <div class="hero-eyebrow">Avatar IA · @babyblondie · Construida desde Cero</div>
+  <div class="hero-eyebrow">@lara.moneti · Model &amp; Content Creator · San José, CR</div>
   <h1 class="hero-title">
     <span class="title-line" id="hl1"></span>
     <span class="title-line" id="hl2"></span>
@@ -1075,12 +1066,12 @@
 <!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track">
-    <span>LARA</span><span class="dot">×</span><span>@BABYBLONDIE</span><span class="dot">×</span>
-    <span>NANOBANANA PRO</span><span class="dot">×</span><span>SEEDREAM</span><span class="dot">×</span>
-    <span>KLING</span><span class="dot">×</span><span>VEO 3</span><span class="dot">×</span><span>HECHO CON IA</span><span class="dot">×</span>
-    <span>LARA</span><span class="dot">×</span><span>AVATAR IA</span><span class="dot">×</span>
-    <span>NANOBANANA PRO</span><span class="dot">×</span><span>SEEDREAM</span><span class="dot">×</span>
-    <span>BABYBLONDIE</span><span class="dot">×</span><span>2026</span><span class="dot">×</span>
+    <span>LARA MONETI</span><span class="dot">×</span><span>@LARA.MONETI</span><span class="dot">×</span>
+    <span>EDITORIAL</span><span class="dot">×</span><span>BRAND</span><span class="dot">×</span>
+    <span>LIFESTYLE</span><span class="dot">×</span><span>TRAVEL</span><span class="dot">×</span><span>COLLABORATIONS</span><span class="dot">×</span>
+    <span>LARA MONETI</span><span class="dot">×</span><span>COSTA RICA</span><span class="dot">×</span>
+    <span>EDITORIAL</span><span class="dot">×</span><span>BRAND</span><span class="dot">×</span>
+    <span>@LARA.MONETI</span><span class="dot">×</span><span>2026</span><span class="dot">×</span>
   </div>
 </div>
 
@@ -1088,18 +1079,18 @@
 <section id="gallery">
   <div class="gal-header">
     <div>
-      <div class="section-label">Biblioteca Completa</div>
-      <h2 class="section-title">Todos los <em>Assets</em></h2>
+      <div class="section-label">Portfolio</div>
+      <h2 class="section-title">Selected <em>Work</em></h2>
     </div>
-    <div class="gal-count-display"><strong id="galCount">—</strong> assets</div>
+    <div class="gal-count-display"><strong id="galCount">—</strong> images</div>
   </div>
   <div class="gal-filter" id="galFilter">
     <button class="gal-btn active" data-f="all">All <sup id="cn-all">—</sup></button>
     <button class="gal-btn" data-f="brand">Brand <sup id="cn-brand">—</sup></button>
-    <button class="gal-btn" data-f="car">Car <sup id="cn-car">—</sup></button>
-    <button class="gal-btn" data-f="gym">Gym <sup id="cn-gym">—</sup></button>
+    <button class="gal-btn" data-f="car">Automotive <sup id="cn-car">—</sup></button>
+    <button class="gal-btn" data-f="gym">Fitness <sup id="cn-gym">—</sup></button>
     <button class="gal-btn" data-f="lifestyle">Lifestyle <sup id="cn-lifestyle">—</sup></button>
-    <button class="gal-btn" data-f="referencias">Referencias <sup id="cn-referencias">—</sup></button>
+    <button class="gal-btn" data-f="referencias">Portraits <sup id="cn-referencias">—</sup></button>
     <button class="gal-btn" data-f="travel">Travel <sup id="cn-travel">—</sup></button>
   </div>
   <div class="gal-grid" id="galGrid"></div>
@@ -1108,249 +1099,62 @@
 <!-- ABOUT -->
 <section id="about">
   <div class="about-visual" id="aboutVisual">
-    <img class="about-photo" src="CONTENT/hf_20260328_003100_a7ace570-9a00-4385-86a9-3459e8c8c4cf.png" alt="Lara — @babyblondie" />
+    <img class="about-photo" src="CONTENT/hf_20260328_003100_a7ace570-9a00-4385-86a9-3459e8c8c4cf.png" alt="Lara Moneti" />
   </div>
   <div class="about-text">
-    <div class="section-label reveal">El Proyecto</div>
-    <h2 class="section-title reveal">Construida,<br><em>no nacida.</em></h2>
+    <div class="section-label reveal">About</div>
+    <h2 class="section-title reveal">Lara<br><em>Moneti.</em></h2>
     <p class="about-body reveal">
-      Lara (@babyblondie) es un modelo 100% generado por IA — sin estudio, sin casting, sin persona real.
-      El proceso fue corto pero intensamente dedicado: semanas de formación, iteración y curación
-      comprimidas en un pipeline funcional de principio a fin.<br /><br />
-      La identidad está definida, la biblioteca de assets está lista y el pipeline aguarda —
-      preparado para ser automatizado y escalado.
+      Based in Costa Rica, working worldwide. Editorial, brand and lifestyle —
+      a soft-glam aesthetic with a quiet edge, built on instinct for light, motion and stillness.<br /><br />
+      Selective about collaborations, available for editorial shoots, brand campaigns,
+      travel content and creative partnerships. <span style="opacity:.6">// TODO_VITALS — replace placeholder stats below with Lara's real numbers.</span>
     </p>
-    <div class="about-stats reveal">
-      <div><div class="stat-n" data-target="43">0</div><div class="stat-l">Assets Creados</div></div>
-      <div><div class="stat-n" data-target="4">0</div><div class="stat-l">Herramientas IA</div></div>
-      <div><div class="stat-n" data-target="6">0</div><div class="stat-l">Categorías</div></div>
+    <div class="about-stats reveal" style="grid-template-columns:repeat(3,auto);gap:2.4rem;">
+      <div><div class="stat-n" style="font-size:1.8rem;letter-spacing:.02em">173<span style="font-size:.5em;opacity:.6"> cm</span></div><div class="stat-l">Height</div></div>
+      <div><div class="stat-n" style="font-size:1.8rem;letter-spacing:.02em">86·62·90</div><div class="stat-l">Bust · Waist · Hips</div></div>
+      <div><div class="stat-n" style="font-size:1.8rem;letter-spacing:.02em">Blue</div><div class="stat-l">Eyes</div></div>
+      <div><div class="stat-n" style="font-size:1.8rem;letter-spacing:.02em">Blonde</div><div class="stat-l">Hair</div></div>
+      <div><div class="stat-n" style="font-size:1.8rem;letter-spacing:.02em">CR</div><div class="stat-l">Based</div></div>
+      <div><div class="stat-n" style="font-size:1.8rem;letter-spacing:.02em">ES · EN · IT</div><div class="stat-l">Languages</div></div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- WORK / COLLABORATIONS -->
 <section id="services">
   <div class="services-header reveal">
     <div>
-      <div class="section-label">Cómo Fue Creada</div>
-      <h2 class="section-title">El <em>Proceso</em></h2>
+      <div class="section-label">Work</div>
+      <h2 class="section-title">Selected <em>Collaborations</em></h2>
     </div>
   </div>
   <div class="services-list">
-    <div class="svc-row reveal"><div class="svc-num">01</div><div class="svc-name">Diseño del Personaje</div><div class="svc-desc">Definí su look, edad, etnia y energía a través de referencias visuales y primeras rondas de prompting.</div></div>
-    <div class="svc-row reveal"><div class="svc-num">02</div><div class="svc-name">Consistencia de Cara</div><div class="svc-desc">NanoBanana PRO (Higgsfield AI) bloqueó una cara estable y reproducible en distintos ángulos, luces y escenas.</div></div>
-    <div class="svc-row reveal"><div class="svc-num">03</div><div class="svc-name">Construcción de Escenas</div><div class="svc-desc">SeedDream la ubicó en entornos de lifestyle, viajes, autos y marca con alta diversidad visual.</div></div>
-    <div class="svc-row reveal"><div class="svc-num">04</div><div class="svc-name">Movimiento y Video</div><div class="svc-desc">Kling y Veo 3 la trajeron a la vida — clips cinematográficos con movimiento natural y atmósfera realista.</div></div>
-    <div class="svc-row reveal"><div class="svc-num">05</div><div class="svc-name">Curación y Edición</div><div class="svc-desc">Revisé cientos de outputs, seleccioné los mejores 43 assets y los organicé por categoría.</div></div>
-    <div class="svc-row reveal"><div class="svc-num">06</div><div class="svc-name">Identidad de Marca</div><div class="svc-desc">Nombré, posicioné y empaqué el avatar — Lara / @babyblondie — como una marca de modelo IA desplegable.</div></div>
+    <div class="svc-row reveal"><div class="svc-num">01</div><div class="svc-name">Editorial</div><div class="svc-desc">Fashion stories, beauty and magazine shoots — print and digital. Studio and location.</div></div>
+    <div class="svc-row reveal"><div class="svc-num">02</div><div class="svc-name">Brand Campaigns</div><div class="svc-desc">Lookbooks, lifestyle and product campaigns for fashion, beauty, wellness and lifestyle brands.</div></div>
+    <div class="svc-row reveal"><div class="svc-num">03</div><div class="svc-name">Content &amp; UGC</div><div class="svc-desc">Short-form content, reels, vertical video and creator-led storytelling for social-first campaigns.</div></div>
+    <div class="svc-row reveal"><div class="svc-num">04</div><div class="svc-name">Travel &amp; Lifestyle</div><div class="svc-desc">Hotels, destinations, resorts and lifestyle partners — on-location content with a quiet, cinematic pace.</div></div>
+    <div class="svc-row reveal"><div class="svc-num">05</div><div class="svc-name">Events &amp; Appearances</div><div class="svc-desc">Launches, press days, hosting and brand events — selective, by invitation.</div></div>
+    <div class="svc-row reveal"><div class="svc-num">06</div><div class="svc-name">Long-Term Partnerships</div><div class="svc-desc">Ambassador programs and ongoing creative relationships with aligned brands.</div></div>
   </div>
 </section>
 
-<!-- TOOLS -->
-<section id="testimonials">
-  <div class="section-label reveal">Stack Tecnológico</div>
-  <h2 class="section-title reveal">Herramientas que <em>La Crearon</em></h2>
-  <div class="tools-grid">
-
-    <!-- NanoBanana PRO -->
-    <div class="tool-card reveal">
-      <div class="tool-logo-wrap">
-        <div class="tool-logo-icon">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="8" r="4.5" stroke="#C8A97A" stroke-width="1.2"/>
-            <path d="M5 20c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="#C8A97A" stroke-width="1.2" stroke-linecap="round"/>
-            <circle cx="12" cy="8" r="1.5" fill="#C8A97A" opacity=".5"/>
-          </svg>
-        </div>
-        <div>
-          <div class="tool-logo-name">NanoBanana PRO</div>
-          <div class="tool-logo-sub">Higgsfield AI</div>
-        </div>
-      </div>
-      <p class="tool-body">Motor principal de imágenes. El modelo ideal para consistencia de influencers IA. Establecí la cara de Lara y la reproduje de forma confiable en distintos ángulos, iluminación y escenas.</p>
-      <div class="tool-tag">Generación de Imágenes · Consistencia</div>
-    </div>
-
-    <!-- Seedream -->
-    <div class="tool-card reveal">
-      <div class="tool-logo-wrap">
-        <div class="tool-logo-icon">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9 9-4.03 9-9" stroke="#C8A97A" stroke-width="1.2" stroke-linecap="round"/>
-            <path d="M15 3.5c2.5 1 4.5 3.5 4.5 6" stroke="#C8A97A" stroke-width="1.2" stroke-linecap="round" opacity=".5"/>
-            <circle cx="12" cy="12" r="2.5" stroke="#C8A97A" stroke-width="1.2"/>
-          </svg>
-        </div>
-        <div>
-          <div class="tool-logo-name">Seedream</div>
-          <div class="tool-logo-sub">Escenas &amp; Entornos</div>
-        </div>
-      </div>
-      <p class="tool-body">Diversidad de escenas — autos, viajes, lifestyle, marca. Amplió el rango de contextos visuales de la biblioteca más allá de lo que NanoBanana PRO maneja de forma nativa.</p>
-      <div class="tool-tag">Construcción de Escenas · Diversidad</div>
-    </div>
-
-    <!-- Kling -->
-    <div class="tool-card reveal">
-      <div class="tool-logo-wrap">
-        <div class="tool-logo-icon">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="3" y="3" width="8" height="8" rx="1.5" stroke="#C8A97A" stroke-width="1.2"/>
-            <rect x="13" y="3" width="8" height="8" rx="1.5" stroke="#C8A97A" stroke-width="1.2" opacity=".5"/>
-            <rect x="3" y="13" width="8" height="8" rx="1.5" stroke="#C8A97A" stroke-width="1.2" opacity=".5"/>
-            <path d="M13 17l3-3 2 2 3-3" stroke="#C8A97A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div>
-          <div class="tool-logo-name">Kling</div>
-          <div class="tool-logo-sub">Video Generation</div>
-        </div>
-      </div>
-      <p class="tool-body">Clips cinematográficos con movimiento de cámara, detalles ambientales y atmósfera natural. Los shots estáticos se ven IA — los de Kling, no.</p>
-      <div class="tool-tag">Generación de Video · Movimiento</div>
-    </div>
-
-    <!-- Veo 3 -->
-    <div class="tool-card reveal">
-      <div class="tool-logo-wrap">
-        <div class="tool-logo-icon">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="6,4 20,12 6,20" stroke="#C8A97A" stroke-width="1.2" stroke-linejoin="round" fill="rgba(200,169,122,0.08)"/>
-            <circle cx="6" cy="12" r="2" fill="#C8A97A" opacity=".4"/>
-          </svg>
-        </div>
-        <div>
-          <div class="tool-logo-name">Veo 3</div>
-          <div class="tool-logo-sub">Google DeepMind</div>
-        </div>
-      </div>
-      <p class="tool-body">Generación de video de alta fidelidad de Google. Movimiento fluido, física realista y coherencia temporal — eleva el nivel cinematográfico del contenido.</p>
-      <div class="tool-tag">Video Avanzado · Realismo</div>
-    </div>
-
-    <!-- Claude Code -->
-    <div class="tool-card reveal" style="grid-column: 1 / -1;">
-      <div class="tool-logo-wrap">
-        <div class="tool-logo-icon" style="width:48px;height:48px;border-radius:10px;">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#C8A97A" stroke-width="1.2" stroke-linejoin="round"/>
-            <path d="M2 17l10 5 10-5" stroke="#C8A97A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M2 12l10 5 10-5" stroke="#C8A97A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/>
-          </svg>
-        </div>
-        <div>
-          <div class="tool-logo-name">Claude Code</div>
-          <div class="tool-logo-sub">Anthropic · Ingeniería IA</div>
-        </div>
-      </div>
-      <p class="tool-body" style="max-width:680px;">Todo el sitio que estás viendo — la galería, las partículas interactivas, el lightbox, el video hero, las animaciones — fue construido con Claude Code como capa de ingeniería IA. Cero código manual.</p>
-      <div class="tool-tag">Desarrollo Web · Despliegue</div>
-    </div>
-
-  </div>
-</section>
 
 <!-- CONTACT -->
 <div class="contact reveal" id="contact">
-  <p class="contact-pre">¿Trabajamos juntos?</p>
-  <h2 class="contact-heading">Fotos.<br><span>Videos.</span><br>Marca.</h2>
-  <a href="mailto:hello@lara.ai" class="contact-email">hello@lara.ai</a>
+  <p class="contact-pre">Let's work together.</p>
+  <h2 class="contact-heading">Editorial.<br><span>Brand.</span><br>Lifestyle.</h2>
+  <a href="mailto:booking@lara.moneti" class="contact-email">booking@lara.moneti</a>
 </div>
 
-<!-- WORKSPACE -->
-<section id="workspace">
-  <div class="ws-wrap">
-
-    <div class="ws-hero">
-      <h2>Time<br>to <em>Work.</em></h2>
-      <div class="ws-hero-meta">
-        <div class="ws-date" id="wsDate">—</div>
-        <div class="ws-partners">Jorge &amp; <strong>Fernanda</strong></div>
-        <div class="ws-collab-dots">
-          <div class="ws-dot ws-dot-j" title="Jorge"></div>
-          <div class="ws-dot ws-dot-f" title="Fernanda"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ws-stats">
-      <div class="ws-stat ws-gold">
-        <div class="ws-stat-label">Progreso</div>
-        <div class="ws-stat-val" id="wsStatPct">0%</div>
-        <div class="ws-stat-sub" id="wsStatSub">fases completadas</div>
-        <div class="ws-prog-bar"><div class="ws-prog-fill" id="wsProgFill" style="width:0%"></div></div>
-      </div>
-      <div class="ws-stat ws-rose">
-        <div class="ws-stat-label">Ideas</div>
-        <div class="ws-stat-val" id="wsStatIdeas">0</div>
-        <div class="ws-stat-sub">en el tablero</div>
-      </div>
-      <div class="ws-stat ws-sage">
-        <div class="ws-stat-label">Sesiones</div>
-        <div class="ws-stat-val" id="wsStatLog">0</div>
-        <div class="ws-stat-sub">registradas</div>
-      </div>
-    </div>
-
-    <div class="ws-quote" id="wsQuote">
-      <p id="wsQuoteTxt"></p><span id="wsQuoteAttr"></span>
-    </div>
-
-    <!-- Bootcamp -->
-    <div class="ws-sec-hdr"><span class="ws-eyebrow">Bootcamp · El Camino</span><div class="ws-line"></div><span class="ws-count" id="wsPhCount">0/9</span></div>
-    <div class="ws-phase-grid" id="wsPhaseGrid"></div>
-
-    <!-- Pipeline -->
-    <div class="ws-sec-hdr" style="margin-top:2.2rem"><span class="ws-eyebrow">Pipeline de Contenido</span><div class="ws-line"></div><span class="ws-count">Por post</span></div>
-    <div class="ws-pipe-cols">
-      <div class="ws-cl-wrap"><div class="ws-cl-title">Creación</div><div id="wsClCreacion"></div></div>
-      <div class="ws-cl-wrap"><div class="ws-cl-title">Publicación</div><div id="wsClPublicacion"></div></div>
-    </div>
-
-    <!-- Ideas -->
-    <div class="ws-sec-hdr"><span class="ws-eyebrow">Tablero de Ideas</span><div class="ws-line"></div><span class="ws-count" id="wsIdeasCount">0</span></div>
-    <div class="ws-ideas" id="wsIdeasBoard">
-      <div class="ws-idea-add">
-        <select id="wsIdeaCat"><option value="contenido">Contenido</option><option value="viral">Viral / Trend</option><option value="brand">Brand / Collab</option><option value="tecnico">Técnico</option></select>
-        <textarea id="wsIdeaTxt" placeholder="Escribe una idea…" rows="2"></textarea>
-        <button class="ws-btn-sm" onclick="wsAddIdea()">+ Agregar</button>
-      </div>
-    </div>
-
-    <!-- Next Steps -->
-    <div class="ws-sec-hdr"><span class="ws-eyebrow">Próximos Pasos</span><div class="ws-line"></div><span class="ws-count" id="wsStepsCount">0</span></div>
-    <div class="ws-steps" id="wsStepsList"></div>
-    <div class="ws-add-step">
-      <select id="wsStepPrio"><option value="alta">Alta</option><option value="media" selected>Media</option><option value="baja">Baja</option></select>
-      <input type="text" id="wsStepTxt" placeholder="Próximo paso…" />
-      <select id="wsStepOwner"><option value="J">Jorge</option><option value="F">Fernanda</option><option value="JF">Ambos</option></select>
-      <button class="ws-btn-sm" onclick="wsAddStep()">+ Agregar</button>
-    </div>
-
-    <!-- Log -->
-    <div class="ws-sec-hdr"><span class="ws-eyebrow">Log de Sesiones</span><div class="ws-line"></div><span class="ws-count" id="wsLogCount">0</span></div>
-    <div class="ws-log-form">
-      <div class="ws-field"><label class="ws-flabel">Título</label><input class="ws-finput" type="text" id="wsLogTitle" placeholder="Ej: Sesión Fase 8 — Video AI" /></div>
-      <div class="ws-field"><label class="ws-flabel">Por</label><input class="ws-finput" type="text" id="wsLogBy" placeholder="Jorge, Fernanda, o ambos" /></div>
-      <div class="ws-field ws-lf-full"><label class="ws-flabel">¿Qué hicimos?</label><textarea class="ws-finput" id="wsLogDesc" placeholder="Describe lo que trabajaron…" rows="2"></textarea></div>
-      <div class="ws-field ws-lf-full"><label class="ws-flabel">Siguiente paso</label><textarea class="ws-finput" id="wsLogNext" placeholder="¿Qué queda para la próxima sesión?" rows="1"></textarea></div>
-      <div class="ws-lf-full" style="display:flex;gap:.6rem;align-items:center">
-        <button class="ws-log-save" onclick="wsAddLog()">Guardar Sesión</button>
-        <span style="font-size:.45rem;letter-spacing:.1em;color:var(--muted)">Se guarda con la fecha de hoy</span>
-      </div>
-    </div>
-    <div class="ws-log-entries" id="wsLogEntries"></div>
-
-  </div>
-</section>
 
 <!-- FOOTER -->
 <footer>
   <div class="f-logo">LARA</div>
-  <span>&copy; 2026 Lara · @babyblondie — Fotos · Videos · Contenido de Marca · Colaboraciones disponibles</span>
+  <span>&copy; 2026 Lara Moneti · @lara.moneti — Editorial · Brand · Lifestyle · Collaborations</span>
   <div class="f-social">
-    <a href="https://instagram.com/babyblondie" target="_blank">Instagram</a>
-    <a href="https://tiktok.com/@babyblondie" target="_blank">TikTok</a>
+    <a href="https://instagram.com/lara.moneti" target="_blank">Instagram</a>
+    <a href="https://tiktok.com/@lara.moneti" target="_blank">TikTok</a>
   </div>
 </footer>
 
@@ -1377,9 +1181,9 @@
 <script>
   // ── ROTATING HERO PHRASES ──
   const HERO_PHRASES = [
-    { l1: 'Tu marca,',     l2: '<em class="accent-word">su cara.</em>', l3: 'Ella vende por ti.', desc: 'Un avatar 100% IA — sin estudio, sin casting, sin persona real.' },
-    { l1: 'Fotos que',     l2: '<em class="accent-word">detienen</em>', l3: 'el scroll.',          desc: 'Contenido visual que para el dedo y convierte.' },
-    { l1: 'Contenido sin', l2: '<em class="accent-word">casting,</em>', l3: 'sin límites.',        desc: 'Genera assets de modelo a escala, sin coordinaciones.' },
+    { l1: 'Editorial.',    l2: '<em class="accent-word">Brand.</em>',    l3: 'Lifestyle.',           desc: 'Based in Costa Rica. Working worldwide.' },
+    { l1: 'Quiet light,',  l2: '<em class="accent-word">soft edge.</em>',l3: 'Stories in stillness.', desc: 'Fashion, beauty and lifestyle — print, campaign, and social.' },
+    { l1: 'Model &amp;',       l2: '<em class="accent-word">Content</em>',    l3: 'Creator.',              desc: 'Selective collaborations. Open for editorial, brand and travel work.' },
   ];
   const phrase = HERO_PHRASES[Math.floor(Math.random() * HERO_PHRASES.length)];
   document.getElementById('hl1').innerHTML = phrase.l1;
